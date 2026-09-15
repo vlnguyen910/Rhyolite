@@ -1,0 +1,1 @@
+Khi mở obsidian thì import nguyên cái folder này vào làm vault 

@@ -1,0 +1,242 @@
+{
+  "main": {
+    "id": "9152e6833701f8b2",
+    "type": "split",
+    "children": [
+      {
+        "id": "057ebd0aa27a4403",
+        "type": "tabs",
+        "dimension": 30.806010928961747,
+        "children": [
+          {
+            "id": "508d2639411c3c38",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Mon hoc/PRU213 - Game Programming with C Sharp.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "PRU213 - Game Programming with C Sharp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "1cb09f63859fb099",
+        "type": "tabs",
+        "dimension": 69.19398907103826,
+        "children": [
+          {
+            "id": "6a8b8fbe43badf01",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Xem biểu đồ"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1697fc5f38b2aa8b",
+    "type": "split",
+    "children": [
+      {
+        "id": "8f9d73eee9e35bab",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3e168bfe6a0b511a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Trình duyệt tệp"
+            }
+          },
+          {
+            "id": "3d3fb79c219e9314",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Tìm kiếm"
+            }
+          },
+          {
+            "id": "7d3d88e745f3fe05",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Đánh dấu"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 247.5
+  },
+  "right": {
+    "id": "fcdacbb5ab3dfb70",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c63a9b7864d8040",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9e3a15e1d0f288fd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "CSD201 - Data Structures and Algorithm.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Liên kết đến"
+            }
+          },
+          {
+            "id": "eab19f74a8672827",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "CSD201 - Data Structures and Algorithm.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Liên kết đi ra"
+            }
+          },
+          {
+            "id": "9f82a84bd86c04b3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Thẻ"
+            }
+          },
+          {
+            "id": "83f6b2ae6cc102f2",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tất cả thuộc tính"
+            }
+          },
+          {
+            "id": "638edadd30994738",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "CSD201 - Data Structures and Algorithm.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Đề cương"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "graph:Mở xem biểu đồ": false,
+      "switcher:Mở bộ chuyển đổi nhanh": false,
+      "canvas:Tạo bảng mới": false,
+      "daily-notes:Mở ghi chú hôm nay": false,
+      "templates:Chèn mẫu": false,
+      "command-palette:Mở khay lệnh": false,
+      "bases:Tạo cơ sở mới": false
+    }
+  },
+  "active": "6a8b8fbe43badf01",
+  "lastOpenFiles": [
+    "00 - Danh mục các môn học theo kì.md",
+    "Mon hoc/DBI202 - Database Systems.md",
+    "Mon hoc/DBI202-OLD - Introduction to Databases.md",
+    "Mon hoc/SDN302 - Server-Side development with NodeJS, Express, and MongoDB.md",
+    "Mon hoc/CSI106 - Introduction to Computer Science.md",
+    "Mon hoc/COV131 - Physical Education 3.md",
+    "Mon hoc/COV121 - Physical Education 2.md",
+    "Mon hoc/CEA201 - Computer Organization and Architecture.md",
+    "Mon hoc/AIL304m - Machine Learning.md",
+    "Mon hoc/AGU301 - Advanced Game Development.md",
+    "Mon hoc/VOV134 - Physical Education 3.md",
+    "Mon hoc/WDP301 - Web Development Project.md",
+    "Mon hoc/WDU203c - UI_UX Design.md",
+    "Mon hoc/PRU221m - Học phần 4 của combo SE.md",
+    "Mon hoc/PRU213 - Game Programming with C Sharp.md",
+    "Mon hoc/PRP201c - Python programming.md",
+    "Mon hoc/PRO192c - Object Oriented Programming with Java.md",
+    "Mon hoc/JPD123 - Elementary Japanese 1-A1.2.md",
+    "Mon hoc/JIT401 - Học phần 4 của combo SE.md",
+    "Mon hoc/JIS401 - Japanese in Software.md",
+    "Mon hoc/ITE302c - Ethics in IT.md",
+    "Mon hoc/IoT102t - Internet of Thing.md",
+    "Mon hoc/IOT102 - Internet of Things.md",
+    "Mon hoc/IAO201c - Introduction to Information Assurance.md",
+    "Mon hoc/HSF302 - Working with Spring Framework.md",
+    "Mon hoc/HCM202 - Ho Chi Minh Ideology.md",
+    "Chưa đặt tên 1.canvas",
+    "Chưa đặt tên.canvas",
+    "Chưa đặt tên 2.canvas",
+    "Mon hoc"
+  ]
+}
