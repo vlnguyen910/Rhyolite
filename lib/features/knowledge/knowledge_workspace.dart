@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../data/knowledge_repository.dart';
 import '../../domain/knowledge_document.dart';
 import '../graph/local_graph_screen.dart';
+import '../graph/overview_graph_view.dart';
 import '../notes/personal_note_editor.dart';
 
 typedef NoteEditorCallback =
@@ -126,312 +127,366 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('FPTU SE Knowledge'),
-      actions: [
-        IconButton(
-          onPressed: _reload,
-          icon: const Icon(Icons.refresh),
-          tooltip: 'Đọc lại knowledge base',
-        ),
-        const SizedBox(width: 12),
-      ],
-    ),
-    body: FutureBuilder<KnowledgeSnapshot>(
-      future: _loading,
-      builder: (context, state) {
-        if (state.hasError) {
-          return Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('Không đọc được knowledge base.'),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: SelectableText('${state.error}'),
-                ),
-                FilledButton(onPressed: _reload, child: const Text('Thử lại')),
-              ],
+  Widget build(BuildContext context) => DefaultTabController(
+    length: 2,
+    child: Scaffold(
+      appBar: AppBar(
+        title: const Text('FPTU SE Knowledge'),
+        bottom: const TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.auto_stories_outlined), text: 'Thư viện'),
+            Tab(
+              key: ValueKey('overview-tab'),
+              icon: Icon(Icons.account_tree_outlined),
+              text: 'Graph tổng quan',
             ),
-          );
-        }
-        if (!state.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final snapshot = state.data!;
-        final courses =
-            snapshot.courses.where((c) => _showDemo || !c.demo).toList()
-              ..sort((a, b) {
-                final semester = a.semester!.compareTo(b.semester!);
-                return semester != 0 ? semester : a.code!.compareTo(b.code!);
-              });
-        final query = _query.trim().toLowerCase();
-        final concepts =
-            snapshot.concepts.where((c) => _showDemo || !c.demo).toList()
-              ..sort((a, b) => a.title.compareTo(b.title));
-        final notes = snapshot.notes
-          ..sort((a, b) => a.title.compareTo(b.title));
-        final pool = switch (_browseType) {
-          DocumentType.course => courses,
-          DocumentType.note => notes,
-          _ => concepts,
-        };
-        final visible = pool
-            .where(
-              (c) =>
-                  '${c.code ?? ''} ${c.title} ${c.type != DocumentType.course ? c.body : ''}'
-                      .toLowerCase()
-                      .contains(query),
-            )
-            .toList();
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-              child: Wrap(
-                spacing: 16,
-                runSpacing: 8,
-                crossAxisAlignment: WrapCrossAlignment.center,
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: _reload,
+            icon: const Icon(Icons.refresh),
+            tooltip: 'Đọc lại knowledge base',
+          ),
+          const SizedBox(width: 12),
+        ],
+      ),
+      body: FutureBuilder<KnowledgeSnapshot>(
+        future: _loading,
+        builder: (context, state) {
+          if (state.hasError) {
+            return Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    '${courses.length} môn · ${courses.map((c) => c.semester).toSet().length} học kỳ',
-                    style: Theme.of(context).textTheme.titleMedium,
+                  const Text('Không đọc được knowledge base.'),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SelectableText('${state.error}'),
                   ),
-                  const Chip(
-                    avatar: Icon(Icons.offline_bolt, size: 18),
-                    label: Text('Offline workspace'),
+                  FilledButton(
+                    onPressed: _reload,
+                    child: const Text('Thử lại'),
                   ),
-                  ActionChip(
-                    key: const ValueKey('validation-report'),
-                    avatar: const Icon(Icons.fact_check_outlined, size: 18),
-                    label: Text('${snapshot.issues.length} vấn đề dữ liệu'),
-                    onPressed: () => _showIssues(snapshot),
-                  ),
-                  Text(
-                    '${concepts.length} concept · ${notes.length} personal note',
-                  ),
-                  if (widget.repository.noteStore != null) ...[
-                    FilledButton.icon(
-                      onPressed: () => _editNote(snapshot),
-                      icon: const Icon(Icons.note_add_outlined),
-                      label: const Text('Tạo note'),
-                    ),
-                    TextButton.icon(
-                      onPressed: _showNoteFolder,
-                      icon: const Icon(Icons.folder_outlined),
-                      label: const Text('Thư mục lưu'),
-                    ),
-                  ],
                 ],
               ),
-            ),
-            Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final wide = constraints.maxWidth >= 850;
-                  void open(KnowledgeDocument document) {
-                    if (wide) {
-                      setState(() => _selected = document);
-                    } else {
-                      Navigator.push(
+            );
+          }
+          if (!state.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final snapshot = state.data!;
+          final courses =
+              snapshot.courses.where((c) => _showDemo || !c.demo).toList()
+                ..sort((a, b) {
+                  final semester = a.semester!.compareTo(b.semester!);
+                  return semester != 0 ? semester : a.code!.compareTo(b.code!);
+                });
+          final query = _query.trim().toLowerCase();
+          final concepts =
+              snapshot.concepts.where((c) => _showDemo || !c.demo).toList()
+                ..sort((a, b) => a.title.compareTo(b.title));
+          final notes = snapshot.notes
+            ..sort((a, b) => a.title.compareTo(b.title));
+          final pool = switch (_browseType) {
+            DocumentType.course => courses,
+            DocumentType.note => notes,
+            _ => concepts,
+          };
+          final visible = pool
+              .where(
+                (c) =>
+                    '${c.code ?? ''} ${c.title} ${c.type != DocumentType.course ? c.body : ''}'
+                        .toLowerCase()
+                        .contains(query),
+              )
+              .toList();
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+                child: Wrap(
+                  spacing: 16,
+                  runSpacing: 8,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      '${courses.length} môn · ${courses.map((c) => c.semester).toSet().length} học kỳ',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const Chip(
+                      avatar: Icon(Icons.offline_bolt, size: 18),
+                      label: Text('Offline workspace'),
+                    ),
+                    ActionChip(
+                      key: const ValueKey('validation-report'),
+                      avatar: const Icon(Icons.fact_check_outlined, size: 18),
+                      label: Text('${snapshot.issues.length} vấn đề dữ liệu'),
+                      onPressed: () => _showIssues(snapshot),
+                    ),
+                    Text(
+                      '${concepts.length} concept · ${notes.length} personal note',
+                    ),
+                    if (widget.repository.noteStore != null) ...[
+                      FilledButton.icon(
+                        onPressed: () => _editNote(snapshot),
+                        icon: const Icon(Icons.note_add_outlined),
+                        label: const Text('Tạo note'),
+                      ),
+                      TextButton.icon(
+                        onPressed: _showNoteFolder,
+                        icon: const Icon(Icons.folder_outlined),
+                        label: const Text('Thư mục lưu'),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final wide = constraints.maxWidth >= 850;
+                        void open(KnowledgeDocument document) {
+                          if (wide) {
+                            setState(() => _selected = document);
+                          } else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                builder: (_) => _DocumentRoute(
+                                  document: document,
+                                  snapshot: snapshot,
+                                  updates: _updates,
+                                  editNote: widget.repository.noteStore == null
+                                      ? null
+                                      : _editNote,
+                                  includeDemo: _showDemo,
+                                ),
+                              ),
+                            );
+                          }
+                        }
+
+                        final courseList = Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                              child: SegmentedButton<DocumentType>(
+                                segments: const [
+                                  ButtonSegment(
+                                    value: DocumentType.course,
+                                    label: Text('Môn học'),
+                                    icon: Icon(Icons.school_outlined),
+                                  ),
+                                  ButtonSegment(
+                                    value: DocumentType.concept,
+                                    label: Text('Concept'),
+                                    icon: Icon(Icons.lightbulb_outline),
+                                  ),
+                                  ButtonSegment(
+                                    value: DocumentType.note,
+                                    label: Text('My Notes'),
+                                    icon: Icon(Icons.edit_note),
+                                  ),
+                                ],
+                                selected: {_browseType},
+                                onSelectionChanged: (selection) => setState(() {
+                                  _browseType = selection.single;
+                                  _query = '';
+                                  _search.clear();
+                                  _selected = null;
+                                }),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: TextField(
+                                controller: _search,
+                                onChanged: (value) =>
+                                    setState(() => _query = value),
+                                decoration: InputDecoration(
+                                  labelText: _browseType == DocumentType.course
+                                      ? 'Tìm môn học'
+                                      : _browseType == DocumentType.note
+                                      ? 'Tìm personal note'
+                                      : 'Tìm concept',
+                                  hintText: _browseType == DocumentType.course
+                                      ? 'Mã môn hoặc tên môn'
+                                      : 'Tên hoặc nội dung Markdown',
+                                  prefixIcon: const Icon(Icons.search),
+                                  border: const OutlineInputBorder(),
+                                ),
+                              ),
+                            ),
+                            SwitchListTile(
+                              dense: true,
+                              title: const Text('Hiện dữ liệu demo'),
+                              value: _showDemo,
+                              onChanged: (value) =>
+                                  setState(() => _showDemo = value),
+                            ),
+                            Expanded(
+                              child: visible.isEmpty
+                                  ? Center(
+                                      child: Text(
+                                        _browseType == DocumentType.course
+                                            ? 'Không có môn học phù hợp.'
+                                            : _browseType == DocumentType.note
+                                            ? 'Chưa có note. Bấm Tạo note để bắt đầu.'
+                                            : 'Chưa có concept phù hợp.',
+                                      ),
+                                    )
+                                  : ListView.builder(
+                                      itemCount: visible.length,
+                                      itemBuilder: (context, index) {
+                                        final course = visible[index];
+                                        final first =
+                                            index == 0 ||
+                                            visible[index - 1].semester !=
+                                                course.semester;
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            if (first &&
+                                                _browseType ==
+                                                    DocumentType.course)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                      20,
+                                                      16,
+                                                      16,
+                                                      6,
+                                                    ),
+                                                child: Text(
+                                                  'HỌC KỲ ${course.semester}',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                ),
+                                              ),
+                                            ListTile(
+                                              selected:
+                                                  _selected?.id == course.id,
+                                              selectedTileColor: Theme.of(
+                                                context,
+                                              ).colorScheme.primaryContainer,
+                                              title: Text(
+                                                course.code ?? course.title,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              subtitle: Text(
+                                                course.type ==
+                                                        DocumentType.course
+                                                    ? course.title
+                                                    : course.type ==
+                                                          DocumentType.note
+                                                    ? 'Ghi chú cá nhân · ${course.links.toSet().length} liên kết'
+                                                    : '${course.sources.length} nguồn · ${snapshot.coursesFor(course).length} môn liên quan',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              trailing: const Icon(
+                                                Icons.chevron_right,
+                                                size: 18,
+                                              ),
+                                              onTap: () => open(course),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                            ),
+                          ],
+                        );
+                        if (!wide) return courseList;
+                        return Row(
+                          children: [
+                            SizedBox(width: 330, child: courseList),
+                            const VerticalDivider(width: 1),
+                            Expanded(
+                              child: _selected == null
+                                  ? const Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.auto_stories_outlined,
+                                            size: 56,
+                                          ),
+                                          SizedBox(height: 16),
+                                          Text(
+                                            'Khám phá kiến thức SE',
+                                            style: TextStyle(fontSize: 24),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(
+                                            'Chọn một môn để đọc syllabus và các liên kết.',
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : DocumentDetail(
+                                      key: ValueKey(_selected!.id),
+                                      document: _selected!,
+                                      snapshot: snapshot,
+                                      onOpen: open,
+                                      onCreateNote:
+                                          widget.repository.noteStore == null
+                                          ? null
+                                          : () => _editNote(
+                                              snapshot,
+                                              linked: _selected,
+                                            ),
+                                      onEditNote:
+                                          widget.repository.noteStore == null
+                                          ? null
+                                          : () => _editNote(
+                                              snapshot,
+                                              original: _selected,
+                                            ),
+                                      includeDemo: _showDemo,
+                                    ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    OverviewGraphView(
+                      snapshot: snapshot,
+                      includeDemo: _showDemo,
+                      onDemoChanged: (value) =>
+                          setState(() => _showDemo = value),
+                      onOpen: (document) => Navigator.push(
                         context,
                         MaterialPageRoute<void>(
                           builder: (_) => _DocumentRoute(
                             document: document,
                             snapshot: snapshot,
                             updates: _updates,
+                            includeDemo: _showDemo,
                             editNote: widget.repository.noteStore == null
                                 ? null
                                 : _editNote,
-                            includeDemo: _showDemo,
-                          ),
-                        ),
-                      );
-                    }
-                  }
-
-                  final courseList = Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                        child: SegmentedButton<DocumentType>(
-                          segments: const [
-                            ButtonSegment(
-                              value: DocumentType.course,
-                              label: Text('Môn học'),
-                              icon: Icon(Icons.school_outlined),
-                            ),
-                            ButtonSegment(
-                              value: DocumentType.concept,
-                              label: Text('Concept'),
-                              icon: Icon(Icons.lightbulb_outline),
-                            ),
-                            ButtonSegment(
-                              value: DocumentType.note,
-                              label: Text('My Notes'),
-                              icon: Icon(Icons.edit_note),
-                            ),
-                          ],
-                          selected: {_browseType},
-                          onSelectionChanged: (selection) => setState(() {
-                            _browseType = selection.single;
-                            _query = '';
-                            _search.clear();
-                            _selected = null;
-                          }),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: TextField(
-                          controller: _search,
-                          onChanged: (value) => setState(() => _query = value),
-                          decoration: InputDecoration(
-                            labelText: _browseType == DocumentType.course
-                                ? 'Tìm môn học'
-                                : _browseType == DocumentType.note
-                                ? 'Tìm personal note'
-                                : 'Tìm concept',
-                            hintText: _browseType == DocumentType.course
-                                ? 'Mã môn hoặc tên môn'
-                                : 'Tên hoặc nội dung Markdown',
-                            prefixIcon: const Icon(Icons.search),
-                            border: const OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      SwitchListTile(
-                        dense: true,
-                        title: const Text('Hiện dữ liệu demo'),
-                        value: _showDemo,
-                        onChanged: (value) => setState(() => _showDemo = value),
-                      ),
-                      Expanded(
-                        child: visible.isEmpty
-                            ? Center(
-                                child: Text(
-                                  _browseType == DocumentType.course
-                                      ? 'Không có môn học phù hợp.'
-                                      : _browseType == DocumentType.note
-                                      ? 'Chưa có note. Bấm Tạo note để bắt đầu.'
-                                      : 'Chưa có concept phù hợp.',
-                                ),
-                              )
-                            : ListView.builder(
-                                itemCount: visible.length,
-                                itemBuilder: (context, index) {
-                                  final course = visible[index];
-                                  final first =
-                                      index == 0 ||
-                                      visible[index - 1].semester !=
-                                          course.semester;
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.stretch,
-                                    children: [
-                                      if (first &&
-                                          _browseType == DocumentType.course)
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                            20,
-                                            16,
-                                            16,
-                                            6,
-                                          ),
-                                          child: Text(
-                                            'HỌC KỲ ${course.semester}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge,
-                                          ),
-                                        ),
-                                      ListTile(
-                                        selected: _selected?.id == course.id,
-                                        selectedTileColor: Theme.of(context)
-                                            .colorScheme
-                                            .primaryContainer,
-                                        title: Text(
-                                          course.code ?? course.title,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        subtitle: Text(
-                                          course.type == DocumentType.course
-                                              ? course.title
-                                              : course.type == DocumentType.note
-                                              ? 'Ghi chú cá nhân · ${course.links.toSet().length} liên kết'
-                                              : '${course.sources.length} nguồn · ${snapshot.coursesFor(course).length} môn liên quan',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        trailing: const Icon(
-                                          Icons.chevron_right,
-                                          size: 18,
-                                        ),
-                                        onTap: () => open(course),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                      ),
-                    ],
-                  );
-                  if (!wide) return courseList;
-                  return Row(
-                    children: [
-                      SizedBox(width: 330, child: courseList),
-                      const VerticalDivider(width: 1),
-                      Expanded(
-                        child: _selected == null
-                            ? const Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.auto_stories_outlined, size: 56),
-                                    SizedBox(height: 16),
-                                    Text(
-                                      'Khám phá kiến thức SE',
-                                      style: TextStyle(fontSize: 24),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      'Chọn một môn để đọc syllabus và các liên kết.',
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : DocumentDetail(
-                                key: ValueKey(_selected!.id),
-                                document: _selected!,
-                                snapshot: snapshot,
-                                onOpen: open,
-                                onCreateNote:
-                                    widget.repository.noteStore == null
-                                    ? null
-                                    : () => _editNote(
-                                        snapshot,
-                                        linked: _selected,
-                                      ),
-                                onEditNote: widget.repository.noteStore == null
-                                    ? null
-                                    : () => _editNote(
-                                        snapshot,
-                                        original: _selected,
-                                      ),
-                                includeDemo: _showDemo,
-                              ),
-                      ),
-                    ],
-                  );
-                },
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     ),
   );
 

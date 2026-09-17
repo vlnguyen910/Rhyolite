@@ -30,6 +30,8 @@ Windows platform files are included, but the Windows build has not been verified
 - Four initial sourced PRM393 concepts: Dart, Flutter, Future/async-await and state management.
 - My Notes: create/edit Markdown, live preview, course/concept links, local persistence,
   title/content search, backlinks and graph navigation.
+- Overview Graph tab: all courses in semester columns, routed prerequisite wires,
+  focus highlighting, node search and optional concepts/personal notes/demo data.
 
 The imported dataset contains 76 course documents across 9 semester groups,
 including alternative course versions and combinations. It is not presented as
@@ -50,7 +52,9 @@ Bundled Markdown + user-owned Markdown notes
 - `knowledge/courses/`, `knowledge/concepts/`: demo content and sourced concept notes.
 - `lib/domain/knowledge_document.dart`: shared models, link resolution and reverse queries.
 - `lib/domain/knowledge_graph.dart`: typed edges, deduplication and depth-one graph queries.
+- `lib/domain/overview_graph_layout.dart`: deterministic semester ordering and wire routes.
 - `lib/features/graph/local_graph_screen.dart`: deterministic graph layout and interactive rendering.
+- `lib/features/graph/overview_graph_view.dart`: full-network tab, filters and focus interaction.
 - `lib/data/markdown_adapter.dart`: normalization of legacy and demo schemas.
 - `lib/data/knowledge_repository.dart`: asset loading and cross-file validation.
 - `lib/data/personal_note_store.dart`: personal Markdown storage and guarded replacement.
@@ -89,6 +93,8 @@ flutter build linux
 
 Tests cover malformed data, link resolution, duplicate identity, prerequisite
 direction, the full dataset, actual asset loading and responsive UI navigation.
+Overview tests also check row ordering, cycles, non-overlapping nodes, routes
+avoiding node interiors, filters, search, focus, pan/zoom and detail navigation.
 
 Manual walkthrough:
 
@@ -153,6 +159,36 @@ Replace the example source with an actual reference. Alternatively a course's
 `concepts` property can list concept IDs. Either direction builds the same
 course-to-concept edge; entering both does not create duplicates. Invalid target
 types are reported by validation. Generic wikilinks never imply a prerequisite.
+
+## Overview Graph
+
+Open the **Graph tổng quan** tab to see all 76 non-demo courses and 59 prerequisite
+edges. Courses remain in their dataset semester columns, including isolated courses
+and alternative versions. This is a map of the imported dataset, not one verified
+mandatory curriculum. The initial view fits the whole map; zoom for readable labels.
+
+Rows are reordered to reduce crossings between neighboring columns. Longer wires
+travel above the columns, with separate tracks and ports, avoiding intermediate
+course boxes. Thin light casing separates crossing wires. A dense full map can still
+have crossings; it does not promise a crossing-free layout.
+
+Click a node to select it. **Chỉ dây liên quan** hides unrelated wires by default
+while unrelated nodes dim. **Bỏ chọn** restores the network. Search by code/title
+to jump to a node; **Đến node** centers it at readable scale. **Mở chi tiết** or a
+double-click opens its document, where the local graph is still available.
+Pan by dragging, zoom by scrolling/buttons, and use **Vừa khung** to see the map.
+Tabs change by clicking their labels so horizontal graph drags stay pan gestures.
+
+Concepts and My Notes are initially hidden. Enable their filters to add dedicated
+columns and their topic/reference edges; standalone notes/concepts also remain
+visible. Demo is shared with the library toggle. Reference hubs are excluded.
+Filters omit edges with hidden endpoints. Course-to-course generic references
+are omitted in this overview; prerequisite edges retain their original direction.
+
+Manual overview check: find PRM393, inspect its highlighted PRO192 prerequisite,
+enable Concept, inspect its four topic links, open its detail and return. Enable
+My Notes after saving a linked note. Resize, pan and switch between tabs; selection
+should persist. The view updates when notes are saved/reloaded.
 
 ## Personal notes
 

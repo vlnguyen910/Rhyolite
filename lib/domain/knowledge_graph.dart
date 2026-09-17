@@ -9,6 +9,12 @@ class KnowledgeEdge {
   final GraphRelation relation;
 }
 
+class OverviewKnowledgeGraph {
+  const OverviewKnowledgeGraph(this.nodes, this.edges);
+  final List<KnowledgeDocument> nodes;
+  final List<KnowledgeEdge> edges;
+}
+
 class LocalKnowledgeGraph {
   const LocalKnowledgeGraph({
     required this.focus,
@@ -30,6 +36,43 @@ class KnowledgeGraphService {
   final KnowledgeSnapshot snapshot;
   final List<KnowledgeEdge> _edges = [];
   List<KnowledgeEdge> get edges => List.unmodifiable(_edges);
+
+  OverviewKnowledgeGraph overviewGraph({
+    bool includeConcepts = false,
+    bool includeNotes = false,
+    bool includeDemo = false,
+  }) {
+    final nodes =
+        snapshot.documents
+            .where(
+              (document) =>
+                  (includeDemo || !document.demo) &&
+                  switch (document.type) {
+                    DocumentType.course => true,
+                    DocumentType.concept => includeConcepts,
+                    DocumentType.note => includeNotes,
+                    DocumentType.reference => false,
+                  },
+            )
+            .toList()
+          ..sort((a, b) => a.id.compareTo(b.id));
+    final ids = nodes.map((node) => node.id).toSet();
+    final visibleEdges = _edges
+        .where(
+          (edge) =>
+              ids.contains(edge.sourceId) &&
+              ids.contains(edge.targetId) &&
+              (edge.relation != GraphRelation.related ||
+                  snapshot.resolve(edge.sourceId)!.type !=
+                      DocumentType.course ||
+                  snapshot.resolve(edge.targetId)!.type != DocumentType.course),
+        )
+        .toList();
+    return OverviewKnowledgeGraph(
+      List.unmodifiable(nodes),
+      List.unmodifiable(visibleEdges),
+    );
+  }
 
   void _build() {
     final seen = <String>{};
