@@ -8,6 +8,15 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../data/knowledge_repository.dart';
 import '../../domain/knowledge_document.dart';
 import '../graph/local_graph_screen.dart';
+import '../notes/personal_note_editor.dart';
+
+typedef NoteEditorCallback =
+    Future<({KnowledgeDocument document, KnowledgeSnapshot snapshot})?>
+    Function(
+      KnowledgeSnapshot snapshot, {
+      KnowledgeDocument? original,
+      KnowledgeDocument? linked,
+    });
 
 class KnowledgeWorkspace extends StatefulWidget {
   const KnowledgeWorkspace({super.key, required this.repository});
@@ -23,10 +32,12 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   bool _showDemo = false;
   DocumentType _browseType = DocumentType.course;
   final _search = TextEditingController();
+  final _updates = ValueNotifier<KnowledgeSnapshot?>(null);
 
   @override
   void dispose() {
     _search.dispose();
+    _updates.dispose();
     super.dispose();
   }
 
@@ -37,9 +48,82 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   }
 
   void _reload() => setState(() {
+    _updates.value = null;
     _selected = null;
     _loading = widget.repository.load();
   });
+
+  Future<({KnowledgeDocument document, KnowledgeSnapshot snapshot})?> _editNote(
+    KnowledgeSnapshot snapshot, {
+    KnowledgeDocument? original,
+    KnowledgeDocument? linked,
+  }) async {
+    final store = widget.repository.noteStore;
+    if (store == null) return null;
+    final saved = await Navigator.push<KnowledgeDocument>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PersonalNoteEditor(
+          store: store,
+          snapshot: snapshot,
+          original: original,
+          linked: linked,
+        ),
+      ),
+    );
+    if (saved == null || !mounted) return null;
+    try {
+      final updated = await widget.repository.load();
+      if (!mounted) return null;
+      _updates.value = updated;
+      setState(() {
+        _loading = Future.value(updated);
+        _selected = updated.resolve(saved.id) ?? saved;
+        _browseType = DocumentType.note;
+        _query = '';
+        _search.clear();
+      });
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Đã lưu personal note.')));
+      return (document: _selected!, snapshot: updated);
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'File note đã lưu, nhưng chưa tải lại được danh sách: $error',
+            ),
+          ),
+        );
+      }
+      return null;
+    }
+  }
+
+  Future<void> _showNoteFolder() async {
+    try {
+      final directory = await widget.repository.noteStore!.notesDirectory;
+      if (!mounted) return;
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Thư mục My Notes'),
+          content: SelectableText(directory.path),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Đóng'),
+            ),
+          ],
+        ),
+      );
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('$error')));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -86,11 +170,17 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
         final concepts =
             snapshot.concepts.where((c) => _showDemo || !c.demo).toList()
               ..sort((a, b) => a.title.compareTo(b.title));
-        final pool = _browseType == DocumentType.course ? courses : concepts;
+        final notes = snapshot.notes
+          ..sort((a, b) => a.title.compareTo(b.title));
+        final pool = switch (_browseType) {
+          DocumentType.course => courses,
+          DocumentType.note => notes,
+          _ => concepts,
+        };
         final visible = pool
             .where(
               (c) =>
-                  '${c.code ?? ''} ${c.title} ${c.type == DocumentType.concept ? c.body : ''}'
+                  '${c.code ?? ''} ${c.title} ${c.type != DocumentType.course ? c.body : ''}'
                       .toLowerCase()
                       .contains(query),
             )
@@ -118,7 +208,21 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                     label: Text('${snapshot.issues.length} vấn đề dữ liệu'),
                     onPressed: () => _showIssues(snapshot),
                   ),
-                  Text('${concepts.length} concept'),
+                  Text(
+                    '${concepts.length} concept · ${notes.length} personal note',
+                  ),
+                  if (widget.repository.noteStore != null) ...[
+                    FilledButton.icon(
+                      onPressed: () => _editNote(snapshot),
+                      icon: const Icon(Icons.note_add_outlined),
+                      label: const Text('Tạo note'),
+                    ),
+                    TextButton.icon(
+                      onPressed: _showNoteFolder,
+                      icon: const Icon(Icons.folder_outlined),
+                      label: const Text('Thư mục lưu'),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -136,6 +240,10 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                           builder: (_) => _DocumentRoute(
                             document: document,
                             snapshot: snapshot,
+                            updates: _updates,
+                            editNote: widget.repository.noteStore == null
+                                ? null
+                                : _editNote,
                             includeDemo: _showDemo,
                           ),
                         ),
@@ -159,6 +267,11 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                               label: Text('Concept'),
                               icon: Icon(Icons.lightbulb_outline),
                             ),
+                            ButtonSegment(
+                              value: DocumentType.note,
+                              label: Text('My Notes'),
+                              icon: Icon(Icons.edit_note),
+                            ),
                           ],
                           selected: {_browseType},
                           onSelectionChanged: (selection) => setState(() {
@@ -177,10 +290,12 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                           decoration: InputDecoration(
                             labelText: _browseType == DocumentType.course
                                 ? 'Tìm môn học'
+                                : _browseType == DocumentType.note
+                                ? 'Tìm personal note'
                                 : 'Tìm concept',
                             hintText: _browseType == DocumentType.course
                                 ? 'Mã môn hoặc tên môn'
-                                : 'Tên hoặc nội dung concept',
+                                : 'Tên hoặc nội dung Markdown',
                             prefixIcon: const Icon(Icons.search),
                             border: const OutlineInputBorder(),
                           ),
@@ -198,6 +313,8 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                 child: Text(
                                   _browseType == DocumentType.course
                                       ? 'Không có môn học phù hợp.'
+                                      : _browseType == DocumentType.note
+                                      ? 'Chưa có note. Bấm Tạo note để bắt đầu.'
                                       : 'Chưa có concept phù hợp.',
                                 ),
                               )
@@ -243,6 +360,8 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                         subtitle: Text(
                                           course.type == DocumentType.course
                                               ? course.title
+                                              : course.type == DocumentType.note
+                                              ? 'Ghi chú cá nhân · ${course.links.toSet().length} liên kết'
                                               : '${course.sources.length} nguồn · ${snapshot.coursesFor(course).length} môn liên quan',
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -289,6 +408,19 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                 document: _selected!,
                                 snapshot: snapshot,
                                 onOpen: open,
+                                onCreateNote:
+                                    widget.repository.noteStore == null
+                                    ? null
+                                    : () => _editNote(
+                                        snapshot,
+                                        linked: _selected,
+                                      ),
+                                onEditNote: widget.repository.noteStore == null
+                                    ? null
+                                    : () => _editNote(
+                                        snapshot,
+                                        original: _selected,
+                                      ),
                                 includeDemo: _showDemo,
                               ),
                       ),
@@ -338,34 +470,74 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   );
 }
 
-class _DocumentRoute extends StatelessWidget {
+class _DocumentRoute extends StatefulWidget {
   const _DocumentRoute({
     required this.document,
     required this.snapshot,
+    required this.updates,
     this.includeDemo = false,
+    this.editNote,
   });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
   final bool includeDemo;
+  final NoteEditorCallback? editNote;
+  final ValueNotifier<KnowledgeSnapshot?> updates;
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(document.code ?? document.title)),
-    body: DocumentDetail(
-      document: document,
-      snapshot: snapshot,
-      includeDemo: includeDemo,
-      onOpen: (next) => Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (_) => _DocumentRoute(
-            document: next,
-            snapshot: snapshot,
-            includeDemo: includeDemo,
-          ),
-        ),
-      ),
-    ),
-  );
+  State<_DocumentRoute> createState() => _DocumentRouteState();
+}
+
+class _DocumentRouteState extends State<_DocumentRoute> {
+  late KnowledgeDocument _document = widget.document;
+  late KnowledgeSnapshot _snapshot = widget.snapshot;
+
+  Future<void> _edit({bool existing = false}) async {
+    final result = await widget.editNote!(
+      _snapshot,
+      original: existing ? _document : null,
+      linked: existing ? null : _document,
+    );
+    if (result != null && mounted) {
+      setState(() {
+        _document = result.document;
+        _snapshot = result.snapshot;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      ValueListenableBuilder<KnowledgeSnapshot?>(
+        valueListenable: widget.updates,
+        builder: (context, updated, _) {
+          _snapshot = updated ?? _snapshot;
+          _document = _snapshot.resolve(_document.id) ?? _document;
+          return Scaffold(
+            appBar: AppBar(title: Text(_document.code ?? _document.title)),
+            body: DocumentDetail(
+              document: _document,
+              snapshot: _snapshot,
+              includeDemo: widget.includeDemo,
+              onCreateNote: widget.editNote == null ? null : () => _edit(),
+              onEditNote: widget.editNote == null
+                  ? null
+                  : () => _edit(existing: true),
+              onOpen: (next) => Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (_) => _DocumentRoute(
+                    document: next,
+                    snapshot: _snapshot,
+                    updates: widget.updates,
+                    includeDemo: widget.includeDemo,
+                    editNote: widget.editNote,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      );
 }
 
 class DocumentDetail extends StatelessWidget {
@@ -375,11 +547,15 @@ class DocumentDetail extends StatelessWidget {
     required this.snapshot,
     required this.onOpen,
     this.includeDemo = false,
+    this.onCreateNote,
+    this.onEditNote,
   });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
   final ValueChanged<KnowledgeDocument> onOpen;
   final bool includeDemo;
+  final VoidCallback? onCreateNote;
+  final VoidCallback? onEditNote;
 
   @override
   Widget build(BuildContext context) {
@@ -406,6 +582,24 @@ class DocumentDetail extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: [
+              if (document.type == DocumentType.note)
+                const Chip(
+                  avatar: Icon(Icons.edit_note, size: 18),
+                  label: Text('Ghi chú cá nhân'),
+                ),
+              if (document.type != DocumentType.reference &&
+                  onCreateNote != null)
+                ActionChip(
+                  avatar: const Icon(Icons.note_add_outlined, size: 18),
+                  label: const Text('Ghi chú về mục này'),
+                  onPressed: onCreateNote,
+                ),
+              if (document.type == DocumentType.note && onEditNote != null)
+                ActionChip(
+                  avatar: const Icon(Icons.edit_outlined, size: 18),
+                  label: const Text('Sửa note'),
+                  onPressed: onEditNote,
+                ),
               if (document.semester != null)
                 Chip(label: Text('Học kỳ ${document.semester}')),
               if (document.syllabusId != null)
@@ -515,6 +709,30 @@ class DocumentDetail extends StatelessWidget {
               'Chưa có concept liên quan.',
             ),
           ],
+          if (document.type == DocumentType.note)
+            _relations(
+              context,
+              'Kiến thức được liên kết',
+              document.links
+                  .map(
+                    (link) => snapshot.resolve(link, fromPath: document.path),
+                  )
+                  .whereType<KnowledgeDocument>()
+                  .where(
+                    (node) =>
+                        node.id != document.id && (includeDemo || !node.demo),
+                  )
+                  .toSet()
+                  .toList(),
+              'Chưa có liên kết. Bạn có thể thêm trong editor.',
+            ),
+          if (document.type != DocumentType.reference)
+            _relations(
+              context,
+              'Personal notes liên quan',
+              snapshot.notesFor(document),
+              'Chưa có ghi chú cá nhân liên kết tới mục này.',
+            ),
           if (issues.isNotEmpty)
             ExpansionTile(
               tilePadding: EdgeInsets.zero,

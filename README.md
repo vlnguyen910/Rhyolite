@@ -28,6 +28,8 @@ Windows platform files are included, but the Windows build has not been verified
 - Local graph with typed arrows, reference links, pan/zoom, fit-to-view and clickable nodes.
 - Concept browser with title/content search, related concepts and course navigation.
 - Four initial sourced PRM393 concepts: Dart, Flutter, Future/async-await and state management.
+- My Notes: create/edit Markdown, live preview, course/concept links, local persistence,
+  title/content search, backlinks and graph navigation.
 
 The imported dataset contains 76 course documents across 9 semester groups,
 including alternative course versions and combinations. It is not presented as
@@ -36,21 +38,23 @@ one verified mandatory curriculum for every student.
 ## Data pipeline
 
 ```text
-Bundled Markdown
+Bundled Markdown + user-owned Markdown notes
   → MarkdownAdapter
   → KnowledgeDocument
   → KnowledgeSnapshot + validation issues
-  → Course browser and detail view
+  → Browsers, document details and local graph
 ```
 
 - `knowledge/Mon hoc/`: the original Obsidian syllabus dataset, preserved.
 - `knowledge/`: the Obsidian course hub and resource notes.
-- `knowledge/courses/`, `knowledge/concepts/`: explicitly marked demo content.
+- `knowledge/courses/`, `knowledge/concepts/`: demo content and sourced concept notes.
 - `lib/domain/knowledge_document.dart`: shared models, link resolution and reverse queries.
 - `lib/domain/knowledge_graph.dart`: typed edges, deduplication and depth-one graph queries.
 - `lib/features/graph/local_graph_screen.dart`: deterministic graph layout and interactive rendering.
 - `lib/data/markdown_adapter.dart`: normalization of legacy and demo schemas.
 - `lib/data/knowledge_repository.dart`: asset loading and cross-file validation.
+- `lib/data/personal_note_store.dart`: personal Markdown storage and guarded replacement.
+- `lib/features/notes/personal_note_editor.dart`: editor, preview and unsaved-change handling.
 - `lib/features/knowledge/knowledge_workspace.dart`: browser, detail and diagnostics UI.
 
 The adapter maps `course_code` to a canonical `course:<code>` ID, converts
@@ -101,7 +105,8 @@ Manual walkthrough:
 
 This milestone reads bundled assets. Changes to Markdown require rebuilding or
 restarting through Flutter's development runner so the asset bundle is updated.
-The refresh button reloads the bundle; it does not scan an external vault.
+The refresh button reloads the bundle and personal notes; it does not scan an
+arbitrary external Obsidian vault.
 
 For existing-format course files, supply `course_code`, `semester`, an H1 title,
 the original syllabus body and its source URL. For demo-schema files, use `id`,
@@ -109,7 +114,7 @@ the original syllabus body and its source URL. For demo-schema files, use `id`,
 Declare each new asset subdirectory in `pubspec.yaml`, then run the checks.
 
 Keep source Markdown under Git and make a separate backup of personal vaults.
-The app currently does not edit files or provide sync. Generated build output and
+The app edits personal notes and does not provide sync. Generated build output and
 `.dart_tool` are ignored and can be recreated; they are not knowledge backups.
 
 ## Explore concepts and graph
@@ -149,7 +154,51 @@ Replace the example source with an actual reference. Alternatively a course's
 course-to-concept edge; entering both does not create duplicates. Invalid target
 types are reported by validation. Generic wikilinks never imply a prerequisite.
 
-Next milestone: persistent personal notes. AI integration, cloud sync and accounts
-remain outside this milestone.
+## Personal notes
+
+Choose **Tạo note** to write a standalone note, or **Ghi chú về mục này** from a
+course/concept to start with that link. Enter a title and Markdown, add links with
+the picker or `[[concept:flutter|Flutter]]`, then press **Lưu note** or `Ctrl+S`.
+Wide editors show a live preview beside the text; narrow windows offer a preview
+toggle. Preview displays wikilink labels; the saved reader opens their targets.
+Use **My Notes** to search titles and body text, then **Sửa note** to edit.
+Linked documents show backlinks under **Personal notes liên quan**. Note nodes
+are purple in the graph and their dashed reference edges imply no prerequisites.
+
+Files live in the platform's application support directory, in `notes/`.
+Use **Thư mục lưu** in the workspace to see the actual path. On Linux this is
+normally `~/.local/share/com.example.rhyolite/notes/` (XDG settings can change it).
+They are separate from bundled assets and Git, and survive app restarts/rebuilds.
+Back up this directory yourself before reinstalling/moving machines.
+
+Each note gets a stable `note:<random-id>` and `<random-id>.md` filename, so title
+changes and duplicate titles do not break ID links. Supported frontmatter:
+
+```yaml
+id: "note:<32-character-hex-id>"
+type: note
+title: "My learning notes"
+related: ["course:PRM393", "concept:flutter"]
+```
+
+The editor writes these fields and the Markdown body; arbitrary additional
+frontmatter is not preserved on edit. Renaming files or changing IDs externally
+is unsupported. Malformed/unreadable notes appear in validation without blocking
+the bundled course browser.
+
+Saving flushes a temporary file before replacement and keeps the previous version
+in `.md.bak`. If the target is missing after an interrupted replacement, loading
+restores that backup. The store refuses to overwrite a note changed/deleted
+outside the editor. A failed save keeps the draft visible and offers a copy button;
+navigation prompts before discarding unsaved edits. Cancelable app-exit requests
+also prompt, but force quit/power loss can discard unsaved drafts. There is no
+autosave or cloud backup; click **Lưu note** before closing.
+
+Manual note check: create a note from PRM393, link Flutter, save, search a word in
+the body in My Notes, inspect both backlinks and graph, edit its title, close the
+app and reopen it. The same note and links should remain.
+
+Next milestone: demo preparation and platform QA. AI integration, cloud sync and
+accounts remain outside this milestone.
 
 See `docs/README.md` for the original planning and architecture documents.

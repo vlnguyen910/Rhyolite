@@ -1,4 +1,4 @@
-enum DocumentType { course, concept, reference }
+enum DocumentType { course, concept, note, reference }
 
 /// Normalized data shared by the UI, search and future graph features.
 class KnowledgeDocument {
@@ -18,6 +18,7 @@ class KnowledgeDocument {
     this.conceptTargets = const [],
     this.courseTargets = const [],
     this.links = const [],
+    this.relatedTargets = const [],
     this.sources = const [],
   });
 
@@ -37,6 +38,7 @@ class KnowledgeDocument {
   final List<String> conceptTargets;
   final List<String> courseTargets;
   final List<String> links;
+  final List<String> relatedTargets;
   final List<String> sources;
 }
 
@@ -62,6 +64,20 @@ class KnowledgeSnapshot {
 
   List<KnowledgeDocument> get concepts => documents
       .where((document) => document.type == DocumentType.concept)
+      .toList();
+
+  List<KnowledgeDocument> get notes => documents
+      .where((document) => document.type == DocumentType.note)
+      .toList();
+
+  List<KnowledgeDocument> notesFor(KnowledgeDocument document) => notes
+      .where(
+        (note) =>
+            note.id != document.id &&
+            note.links.any(
+              (link) => resolve(link, fromPath: note.path)?.id == document.id,
+            ),
+      )
       .toList();
 
   List<KnowledgeDocument> conceptsFor(KnowledgeDocument course) => concepts

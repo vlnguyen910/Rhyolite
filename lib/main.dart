@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'data/knowledge_repository.dart';
+import 'data/personal_note_store.dart';
 import 'features/knowledge/knowledge_workspace.dart';
 
 void main() => runApp(const RhyoliteApp());
 
 class RhyoliteApp extends StatelessWidget {
-  const RhyoliteApp({super.key, this.repository = const KnowledgeRepository()});
+  const RhyoliteApp({
+    super.key,
+    this.repository = const KnowledgeRepository(noteStore: PersonalNoteStore()),
+  });
   final KnowledgeRepository repository;
 
   @override

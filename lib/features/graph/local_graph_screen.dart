@@ -201,7 +201,7 @@ class _LocalGraphScreenState extends State<LocalGraphScreen> {
                   '${_graph.omittedCount} node khác chưa được vẽ; xem danh sách liên quan ở trang chi tiết.',
                 ),
               if (_graph.nodes.length == 1)
-                const Text('Chưa có liên kết course/concept để khám phá.'),
+                const Text('Chưa có liên kết kiến thức để khám phá.'),
               const Text(
                 'Kéo để di chuyển, cuộn để zoom, click node để mở nội dung. Điều kiện AND/OR xem trong syllabus.',
                 textAlign: TextAlign.center,
@@ -228,7 +228,12 @@ class _GraphNode extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final concept = document.type == DocumentType.concept;
-    final color = concept ? const Color(0xffb96516) : const Color(0xff2767b0);
+    final note = document.type == DocumentType.note;
+    final color = note
+        ? const Color(0xff7955b0)
+        : concept
+        ? const Color(0xffb96516)
+        : const Color(0xff2767b0);
     return Tooltip(
       message: document.title,
       child: Material(
@@ -250,15 +255,27 @@ class _GraphNode extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  document.code ?? document.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
+                Flexible(
+                  child: Text(
+                    document.code ?? document.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      height: 1.2,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${focused ? 'Đang xem · ' : ''}${concept ? 'Concept' : 'Môn học'}${document.demo ? ' · DEMO' : ''}',
+                  '${focused ? 'Đang xem · ' : ''}${note
+                      ? 'Personal note'
+                      : concept
+                      ? 'Concept'
+                      : 'Môn học'}${document.demo ? ' · DEMO' : ''}',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 11, color: color),
                 ),
               ],

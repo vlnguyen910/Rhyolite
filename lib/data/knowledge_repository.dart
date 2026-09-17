@@ -2,9 +2,11 @@ import 'package:flutter/services.dart';
 
 import '../domain/knowledge_document.dart';
 import 'markdown_adapter.dart';
+import 'personal_note_store.dart';
 
 class KnowledgeRepository {
-  const KnowledgeRepository();
+  const KnowledgeRepository({this.noteStore});
+  final PersonalNoteStore? noteStore;
 
   Future<KnowledgeSnapshot> load({AssetBundle? bundle}) async {
     final assets = bundle ?? rootBundle;
@@ -34,6 +36,11 @@ class KnowledgeRepository {
           ),
         );
       }
+    }
+    if (noteStore != null) {
+      final personal = await noteStore!.load();
+      sourceFiles.addAll(personal.files);
+      issues.addAll(personal.issues);
     }
     final snapshot = build(sourceFiles);
     return KnowledgeSnapshot(

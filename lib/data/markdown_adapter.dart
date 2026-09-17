@@ -28,6 +28,8 @@ class MarkdownAdapter {
         ? DocumentType.course
         : metadata['type'] == 'concept'
         ? DocumentType.concept
+        : metadata['type'] == 'note'
+        ? DocumentType.note
         : DocumentType.reference;
     if (legacyCourse && metadata.isEmpty) {
       throw const FormatException('Môn học thiếu frontmatter');
@@ -112,6 +114,7 @@ class MarkdownAdapter {
         ..._list(metadata['related'], 'related'),
         ..._list(metadata['courses'], 'courses'),
       ]),
+      relatedTargets: List.unmodifiable(_list(metadata['related'], 'related')),
       sources: List.unmodifiable(sources),
     );
   }
