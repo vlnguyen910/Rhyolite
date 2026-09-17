@@ -15,6 +15,8 @@ class KnowledgeDocument {
     this.demo = false,
     this.prerequisiteText,
     this.prerequisiteTargets = const [],
+    this.conceptTargets = const [],
+    this.courseTargets = const [],
     this.links = const [],
     this.sources = const [],
   });
@@ -32,6 +34,8 @@ class KnowledgeDocument {
   // Original syllabus condition: preserves OR, cohort and credit constraints.
   final String? prerequisiteText;
   final List<String> prerequisiteTargets;
+  final List<String> conceptTargets;
+  final List<String> courseTargets;
   final List<String> links;
   final List<String> sources;
 }
@@ -55,6 +59,25 @@ class KnowledgeSnapshot {
   List<KnowledgeDocument> get courses => documents
       .where((document) => document.type == DocumentType.course)
       .toList();
+
+  List<KnowledgeDocument> get concepts => documents
+      .where((document) => document.type == DocumentType.concept)
+      .toList();
+
+  List<KnowledgeDocument> conceptsFor(KnowledgeDocument course) => concepts
+      .where(
+        (concept) =>
+            course.conceptTargets.any(
+              (target) => resolve(target, fromPath: course.path) == concept,
+            ) ||
+            concept.courseTargets.any(
+              (target) => resolve(target, fromPath: concept.path) == course,
+            ),
+      )
+      .toList();
+
+  List<KnowledgeDocument> coursesFor(KnowledgeDocument concept) =>
+      courses.where((course) => conceptsFor(course).contains(concept)).toList();
 
   /// Resolve IDs, Obsidian paths and unique basenames, including dots in names.
   /// Relative paths are resolved against the current document first.

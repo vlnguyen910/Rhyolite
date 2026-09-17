@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../data/knowledge_repository.dart';
 import '../../domain/knowledge_document.dart';
+import '../graph/local_graph_screen.dart';
 
 class KnowledgeWorkspace extends StatefulWidget {
   const KnowledgeWorkspace({super.key, required this.repository});
@@ -20,6 +21,14 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   KnowledgeDocument? _selected;
   String _query = '';
   bool _showDemo = false;
+  DocumentType _browseType = DocumentType.course;
+  final _search = TextEditingController();
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -74,8 +83,17 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                 return semester != 0 ? semester : a.code!.compareTo(b.code!);
               });
         final query = _query.trim().toLowerCase();
-        final visible = courses
-            .where((c) => '${c.code} ${c.title}'.toLowerCase().contains(query))
+        final concepts =
+            snapshot.concepts.where((c) => _showDemo || !c.demo).toList()
+              ..sort((a, b) => a.title.compareTo(b.title));
+        final pool = _browseType == DocumentType.course ? courses : concepts;
+        final visible = pool
+            .where(
+              (c) =>
+                  '${c.code ?? ''} ${c.title} ${c.type == DocumentType.concept ? c.body : ''}'
+                      .toLowerCase()
+                      .contains(query),
+            )
             .toList();
         return Column(
           children: [
@@ -95,10 +113,12 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                     label: Text('Offline workspace'),
                   ),
                   ActionChip(
+                    key: const ValueKey('validation-report'),
                     avatar: const Icon(Icons.fact_check_outlined, size: 18),
                     label: Text('${snapshot.issues.length} vấn đề dữ liệu'),
                     onPressed: () => _showIssues(snapshot),
                   ),
+                  Text('${concepts.length} concept'),
                 ],
               ),
             ),
@@ -116,6 +136,7 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                           builder: (_) => _DocumentRoute(
                             document: document,
                             snapshot: snapshot,
+                            includeDemo: _showDemo,
                           ),
                         ),
                       );
@@ -125,14 +146,43 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                   final courseList = Column(
                     children: [
                       Padding(
+                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                        child: SegmentedButton<DocumentType>(
+                          segments: const [
+                            ButtonSegment(
+                              value: DocumentType.course,
+                              label: Text('Môn học'),
+                              icon: Icon(Icons.school_outlined),
+                            ),
+                            ButtonSegment(
+                              value: DocumentType.concept,
+                              label: Text('Concept'),
+                              icon: Icon(Icons.lightbulb_outline),
+                            ),
+                          ],
+                          selected: {_browseType},
+                          onSelectionChanged: (selection) => setState(() {
+                            _browseType = selection.single;
+                            _query = '';
+                            _search.clear();
+                            _selected = null;
+                          }),
+                        ),
+                      ),
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: TextField(
+                          controller: _search,
                           onChanged: (value) => setState(() => _query = value),
-                          decoration: const InputDecoration(
-                            labelText: 'Tìm môn học',
-                            hintText: 'Mã môn hoặc tên môn',
-                            prefixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(),
+                          decoration: InputDecoration(
+                            labelText: _browseType == DocumentType.course
+                                ? 'Tìm môn học'
+                                : 'Tìm concept',
+                            hintText: _browseType == DocumentType.course
+                                ? 'Mã môn hoặc tên môn'
+                                : 'Tên hoặc nội dung concept',
+                            prefixIcon: const Icon(Icons.search),
+                            border: const OutlineInputBorder(),
                           ),
                         ),
                       ),
@@ -144,8 +194,12 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                       ),
                       Expanded(
                         child: visible.isEmpty
-                            ? const Center(
-                                child: Text('Không có môn học phù hợp.'),
+                            ? Center(
+                                child: Text(
+                                  _browseType == DocumentType.course
+                                      ? 'Không có môn học phù hợp.'
+                                      : 'Chưa có concept phù hợp.',
+                                ),
                               )
                             : ListView.builder(
                                 itemCount: visible.length,
@@ -159,7 +213,8 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.stretch,
                                     children: [
-                                      if (first)
+                                      if (first &&
+                                          _browseType == DocumentType.course)
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                             20,
@@ -180,13 +235,15 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                             .colorScheme
                                             .primaryContainer,
                                         title: Text(
-                                          course.code!,
+                                          course.code ?? course.title,
                                           style: const TextStyle(
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                         subtitle: Text(
-                                          course.title,
+                                          course.type == DocumentType.course
+                                              ? course.title
+                                              : '${course.sources.length} nguồn · ${snapshot.coursesFor(course).length} môn liên quan',
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -232,6 +289,7 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                 document: _selected!,
                                 snapshot: snapshot,
                                 onOpen: open,
+                                includeDemo: _showDemo,
                               ),
                       ),
                     ],
@@ -281,19 +339,29 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
 }
 
 class _DocumentRoute extends StatelessWidget {
-  const _DocumentRoute({required this.document, required this.snapshot});
+  const _DocumentRoute({
+    required this.document,
+    required this.snapshot,
+    this.includeDemo = false,
+  });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
+  final bool includeDemo;
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(title: Text(document.code ?? document.title)),
     body: DocumentDetail(
       document: document,
       snapshot: snapshot,
+      includeDemo: includeDemo,
       onOpen: (next) => Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (_) => _DocumentRoute(document: next, snapshot: snapshot),
+          builder: (_) => _DocumentRoute(
+            document: next,
+            snapshot: snapshot,
+            includeDemo: includeDemo,
+          ),
         ),
       ),
     ),
@@ -306,10 +374,12 @@ class DocumentDetail extends StatelessWidget {
     required this.document,
     required this.snapshot,
     required this.onOpen,
+    this.includeDemo = false,
   });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
   final ValueChanged<KnowledgeDocument> onOpen;
+  final bool includeDemo;
 
   @override
   Widget build(BuildContext context) {
@@ -342,6 +412,25 @@ class DocumentDetail extends StatelessWidget {
                 Chip(label: Text('Syllabus ${document.syllabusId}')),
               if (document.demo)
                 const Chip(label: Text('DEMO · dữ liệu minh họa')),
+              if (document.type != DocumentType.reference)
+                ActionChip(
+                  avatar: const Icon(Icons.hub_outlined, size: 18),
+                  label: const Text('Graph cục bộ'),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (graphContext) => LocalGraphScreen(
+                        snapshot: snapshot,
+                        focus: document,
+                        includeDemo: includeDemo,
+                        onOpen: (node) {
+                          Navigator.pop(graphContext);
+                          onOpen(node);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
           const SizedBox(height: 16),
@@ -370,6 +459,15 @@ class DocumentDetail extends StatelessWidget {
           if (document.type == DocumentType.course) ...[
             _relations(
               context,
+              'Concept trong syllabus',
+              snapshot
+                  .conceptsFor(document)
+                  .where((c) => includeDemo || document.demo || !c.demo)
+                  .toList(),
+              'Chưa có concept note được liên kết với môn này.',
+            ),
+            _relations(
+              context,
               'Môn tiên quyết có liên kết',
               snapshot.prerequisites(document),
               'Chưa có liên kết môn tiên quyết trong dataset.',
@@ -388,6 +486,35 @@ class DocumentDetail extends StatelessWidget {
               ),
             ),
           ],
+          if (document.type == DocumentType.concept) ...[
+            _relations(
+              context,
+              'Môn học liên quan',
+              snapshot
+                  .coursesFor(document)
+                  .where((c) => includeDemo || document.demo || !c.demo)
+                  .toList(),
+              'Chưa liên kết với môn học.',
+            ),
+            _relations(
+              context,
+              'Concept liên quan',
+              document.links
+                  .map(
+                    (link) => snapshot.resolve(link, fromPath: document.path),
+                  )
+                  .whereType<KnowledgeDocument>()
+                  .where(
+                    (node) =>
+                        node.type == DocumentType.concept &&
+                        node.id != document.id &&
+                        (includeDemo || document.demo || !node.demo),
+                  )
+                  .toSet()
+                  .toList(),
+              'Chưa có concept liên quan.',
+            ),
+          ],
           if (issues.isNotEmpty)
             ExpansionTile(
               tilePadding: EdgeInsets.zero,
@@ -404,7 +531,9 @@ class DocumentDetail extends StatelessWidget {
             ),
           const SizedBox(height: 16),
           Text(
-            'Nguồn syllabus',
+            document.type == DocumentType.course
+                ? 'Nguồn syllabus'
+                : 'Nguồn tham khảo',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           if (document.sources.isEmpty)
@@ -437,7 +566,9 @@ class DocumentDetail extends StatelessWidget {
                   key: PageStorageKey('${document.id}:reader-scroll'),
                   scrollDirection: Axis.horizontal,
                   child: SizedBox(
-                    width: math.max(960, constraints.maxWidth),
+                    width: document.type == DocumentType.course
+                        ? math.max(960, constraints.maxWidth)
+                        : constraints.maxWidth,
                     child: MarkdownBody(
                       selectable: true,
                       data: _readableMarkdown(),

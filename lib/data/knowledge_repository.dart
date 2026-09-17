@@ -100,6 +100,8 @@ class KnowledgeRepository {
       for (final target in {
         ...document.links,
         ...document.prerequisiteTargets,
+        ...document.conceptTargets,
+        ...document.courseTargets,
       }) {
         if (snapshot.resolve(target, fromPath: document.path) == null) {
           issues.add(
@@ -109,6 +111,24 @@ class KnowledgeRepository {
               IssueSeverity.warning,
             ),
           );
+        }
+      }
+      for (final relationship in [
+        (document.conceptTargets, DocumentType.concept, 'concepts'),
+        (document.courseTargets, DocumentType.course, 'courses'),
+        (document.prerequisiteTargets, DocumentType.course, 'prerequisites'),
+      ]) {
+        for (final target in relationship.$1) {
+          final resolved = snapshot.resolve(target, fromPath: document.path);
+          if (resolved != null && resolved.type != relationship.$2) {
+            issues.add(
+              ValidationIssue(
+                document.path,
+                '${relationship.$3} tham chiếu sai loại node: $target',
+                IssueSeverity.warning,
+              ),
+            );
+          }
         }
       }
       if (document.type != DocumentType.course || document.demo) continue;

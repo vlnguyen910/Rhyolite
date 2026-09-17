@@ -25,6 +25,9 @@ Windows platform files are included, but the Windows build has not been verified
 - Validation report with paths and error/warning severity.
 - Demo data hidden by default and available through a toggle.
 - Responsive layout: two panes on desktop, separate detail route in narrow windows.
+- Local graph with typed arrows, reference links, pan/zoom, fit-to-view and clickable nodes.
+- Concept browser with title/content search, related concepts and course navigation.
+- Four initial sourced PRM393 concepts: Dart, Flutter, Future/async-await and state management.
 
 The imported dataset contains 76 course documents across 9 semester groups,
 including alternative course versions and combinations. It is not presented as
@@ -44,6 +47,8 @@ Bundled Markdown
 - `knowledge/`: the Obsidian course hub and resource notes.
 - `knowledge/courses/`, `knowledge/concepts/`: explicitly marked demo content.
 - `lib/domain/knowledge_document.dart`: shared models, link resolution and reverse queries.
+- `lib/domain/knowledge_graph.dart`: typed edges, deduplication and depth-one graph queries.
+- `lib/features/graph/local_graph_screen.dart`: deterministic graph layout and interactive rendering.
 - `lib/data/markdown_adapter.dart`: normalization of legacy and demo schemas.
 - `lib/data/knowledge_repository.dart`: asset loading and cross-file validation.
 - `lib/features/knowledge/knowledge_workspace.dart`: browser, detail and diagnostics UI.
@@ -107,7 +112,44 @@ Keep source Markdown under Git and make a separate backup of personal vaults.
 The app currently does not edit files or provide sync. Generated build output and
 `.dart_tool` are ignored and can be recreated; they are not knowledge backups.
 
-Next milestones: concept exploration, graph visualization and persistent personal
-notes. AI, cloud sync and accounts remain outside this milestone.
+## Explore concepts and graph
+
+Search `PRM393`, open it, then choose **Graph cục bộ**. Its local graph contains
+PRO192 and the four initial concepts. Drag the background to pan, scroll or use
+the zoom buttons, and use **Vừa khung** to reset the view. Clicking a node closes
+the graph and opens that document. Graphs are available from concept details too.
+
+Blue arrows mean `A requires B`, with the arrow pointing from A to B. Orange
+arrows point from a course to a linked syllabus concept. Dashed gray lines are
+undirected references. The reverse view of a prerequisite is computed, not stored
+as another fact. Reference hubs are omitted to keep local graphs useful.
+The view is depth one and capped at 24 nodes including the focus. If neighbors
+are omitted, their count is shown; full relation lists remain in document details.
+
+Select **Concept** in the browser to search concept titles and Markdown content.
+Demo concepts remain hidden unless the demo toggle is enabled. The new notes are
+AI-authored initial summaries for group review, with official technical sources
+and local PRM393 CLO references. They do not claim personal mastery or substitute
+for an independently verified syllabus.
+
+To associate a concept with a course without editing the original syllabus, use:
+
+```yaml
+id: "concept:my-topic"
+type: concept
+title: "My Topic"
+courses: ["course:PRM393"]
+related: ["concept:dart"]
+sources: ["https://example.com/verified-source"]
+demo: false
+```
+
+Replace the example source with an actual reference. Alternatively a course's
+`concepts` property can list concept IDs. Either direction builds the same
+course-to-concept edge; entering both does not create duplicates. Invalid target
+types are reported by validation. Generic wikilinks never imply a prerequisite.
+
+Next milestone: persistent personal notes. AI integration, cloud sync and accounts
+remain outside this milestone.
 
 See `docs/README.md` for the original planning and architecture documents.

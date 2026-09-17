@@ -62,7 +62,11 @@ class MarkdownAdapter {
     }
     final id =
         _text(metadata['id'], 'id') ??
-        (type == DocumentType.course ? 'course:$code' : 'reference:$path');
+        (type == DocumentType.course
+            ? 'course:$code'
+            : type == DocumentType.concept
+            ? 'concept:${path.split('/').last.replaceFirst(RegExp(r'\.md$'), '')}'
+            : 'reference:$path');
     final sources = <String>{..._list(metadata['sources'], 'sources')};
     for (final match in RegExp(
       r'https://flm\.fpt\.edu\.vn/[^\s)<>|]+',
@@ -98,10 +102,15 @@ class MarkdownAdapter {
         ..._list(metadata['prerequisites'], 'prerequisites'),
         ...wikilinks(prerequisiteSection),
       ]),
+      conceptTargets: List.unmodifiable(
+        _list(metadata['concepts'], 'concepts'),
+      ),
+      courseTargets: List.unmodifiable(_list(metadata['courses'], 'courses')),
       links: List.unmodifiable([
         ...wikilinks(body),
         ..._list(metadata['concepts'], 'concepts'),
         ..._list(metadata['related'], 'related'),
+        ..._list(metadata['courses'], 'courses'),
       ]),
       sources: List.unmodifiable(sources),
     );

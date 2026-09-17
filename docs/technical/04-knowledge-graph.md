@@ -1,5 +1,37 @@
 # Knowledge Graph
 
+## Trạng thái implementation Lab 1
+
+Code hiện tại nằm ở `lib/domain/knowledge_graph.dart` và
+`lib/features/graph/local_graph_screen.dart`. Graph được sinh trong bộ nhớ từ
+`KnowledgeSnapshot`, không ghi ngược vào vault và không có database graph riêng.
+
+Ba relation đã triển khai:
+
+| Relation | Chiều / ý nghĩa |
+| --- | --- |
+| `prerequisite` | `A → B`: A tham chiếu B là môn cần trước. Giữ riêng điều kiện nguyên văn để không mất AND/OR. |
+| `topic` | `course → concept`: từ `course.concepts` hoặc `concept.courses`. Hai cách khai báo cùng fact được deduplicate. |
+| `related` | Liên kết tham khảo không định hướng giữa course/concept; không tự suy thành prerequisite. |
+
+Ví dụ đúng chiều implementation: `PRM393 → PRO192` với relation `prerequisite`.
+Môn học dùng tiếp PRO192 được tìm bằng truy vấn ngược, không nhập thêm cạnh
+`foundation_for`. Wikilink ngược trong phần “Mon hoc nang cao” không tạo thêm
+cạnh tham khảo khi cặp node đã có relation định kiểu.
+
+UI có local graph độ sâu 1, tối đa 24 node gồm focus; hub/reference không được vẽ.
+Các node còn lại vẫn có trong dữ liệu và số bị lược được hiển thị. Layout theo
+lane cố định; `CustomPainter` vẽ cạnh và `InteractiveViewer` xử lý pan/zoom.
+Click node mở trang nội dung; nút “Vừa khung” khôi phục view.
+
+Concept exploration hỗ trợ tìm tên/nội dung, course liên quan và concept liên quan.
+Bốn note PRM393 ban đầu có nguồn, đánh dấu là bản khởi đầu AI biên soạn để review;
+không được coi là bằng chứng người học đã hiểu hoặc là toàn bộ topics của môn.
+Syllabus gốc được giữ nguyên.
+
+Các phần bên dưới là thiết kế ban đầu và hướng mở rộng; các relation khác,
+global graph, lưu index và path query chưa đều được triển khai.
+
 ## 1. Mục đích
 
 Knowledge Graph trả lời:
@@ -32,17 +64,12 @@ Stretch:
 ## 4. Example
 
 ```text
-Programming Fundamentals
-        │
-        │ prerequisite
-        ▼
-Data Structures and Algorithms
-        │
-        ├── teaches ──> Tree
-        ├── teaches ──> Graph
-        ├── teaches ──> Sorting
-        │
-        └── foundation_for ──> Software Development
+PRM393
+  ├── prerequisite ──> PRO192
+  ├── topic ──> Dart
+  ├── topic ──> Flutter
+  ├── topic ──> Future và async/await
+  └── topic ──> State management
 ```
 
 ## 5. Relationship Rule
