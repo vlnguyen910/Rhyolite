@@ -49,6 +49,28 @@ File comparison is optimistic, not a cross-process transaction lock. Concurrent
 external edits during the write itself are outside this MVP; use one editor/app
 instance at a time for a given note.
 
+## Deletion
+
+The note detail exposes **Xóa note** with a confirmation naming the note. The
+store validates identity, file type and unchanged source before deletion. It
+creates a unique `notes/.trash/<token>-<suffix>/` directory, moves `.md.bak`
+there first, then moves the current `.md`. Removing the backup first prevents
+startup recovery from resurrecting an intentionally deleted note. If the note
+move fails, the backup is moved back; archive failures keep the current note.
+If backup rollback also fails, its data remains in the trash directory and the
+operation reports an error. An interruption before the final note move leaves
+the current note live; an interruption after it leaves both versions archived.
+
+Trash directories are excluded from indexing. There is no restore, trash browser
+or automatic purge UI yet. Manual recovery can move the archived `.md` back to
+`notes/` with its original filename, then refresh; keep its ID unchanged.
+File checks remain optimistic rather than a cross-process lock.
+
+Successful deletion reloads library, backlinks and overview graph, clears a
+deleted selection and closes the initiating detail route. Older stacked routes
+to the same deleted note show a missing-note message. Incoming links remain in
+other documents and validation reports missing targets; no other note is edited.
+
 ## UI updates and checks
 
 After a successful save the workspace reloads the combined snapshot and selects

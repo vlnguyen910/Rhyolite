@@ -34,6 +34,7 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
   DocumentType _browseType = DocumentType.course;
   final _search = TextEditingController();
   final _updates = ValueNotifier<KnowledgeSnapshot?>(null);
+  final _deletingNotes = <String>{};
 
   @override
   void dispose() {
@@ -98,6 +99,71 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
         );
       }
       return null;
+    }
+  }
+
+  Future<bool> _deleteNote(KnowledgeDocument note) async {
+    final store = widget.repository.noteStore;
+    if (store == null || !_deletingNotes.add(note.id)) return false;
+    setState(() {});
+    try {
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder: (dialogContext) => AlertDialog(
+          title: const Text('Xóa note?'),
+          content: Text(
+            'Bạn muốn xóa “${note.title}”?\n\n'
+            'Note sẽ được chuyển vào thùng rác nội bộ. '
+            'App chưa có giao diện khôi phục. Các liên kết tới note này sẽ không còn đích.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: const Text('Hủy'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              child: const Text('Xóa'),
+            ),
+          ],
+        ),
+      );
+      if (confirmed != true || !mounted) return false;
+      await store.delete(note);
+      if (!mounted) return true;
+      try {
+        final updated = await widget.repository.load();
+        if (!mounted) return true;
+        _updates.value = updated;
+        setState(() {
+          _loading = Future.value(updated);
+          if (_selected?.id == note.id) _selected = null;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Đã chuyển note vào thùng rác nội bộ.')),
+        );
+      } catch (error) {
+        if (!mounted) return true;
+        _reload();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Note đã xóa, nhưng chưa tải lại được danh sách: $error',
+            ),
+          ),
+        );
+      }
+      return true;
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Không xóa được note: $error')));
+      }
+      return false;
+    } finally {
+      _deletingNotes.remove(note.id);
+      if (mounted) setState(() {});
     }
   }
 
@@ -260,6 +326,10 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                   document: document,
                                   snapshot: snapshot,
                                   updates: _updates,
+                                  deleteNote:
+                                      widget.repository.noteStore == null
+                                      ? null
+                                      : _deleteNote,
                                   editNote: widget.repository.noteStore == null
                                       ? null
                                       : _editNote,
@@ -454,6 +524,13 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                                               original: _selected,
                                             ),
                                       includeDemo: _showDemo,
+                                      onDeleteNote:
+                                          widget.repository.noteStore == null
+                                          ? null
+                                          : () => _deleteNote(_selected!),
+                                      deletingNote: _deletingNotes.contains(
+                                        _selected!.id,
+                                      ),
                                     ),
                             ),
                           ],
@@ -472,6 +549,9 @@ class _KnowledgeWorkspaceState extends State<KnowledgeWorkspace> {
                             document: document,
                             snapshot: snapshot,
                             updates: _updates,
+                            deleteNote: widget.repository.noteStore == null
+                                ? null
+                                : _deleteNote,
                             includeDemo: _showDemo,
                             editNote: widget.repository.noteStore == null
                                 ? null
@@ -532,11 +612,13 @@ class _DocumentRoute extends StatefulWidget {
     required this.updates,
     this.includeDemo = false,
     this.editNote,
+    this.deleteNote,
   });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
   final bool includeDemo;
   final NoteEditorCallback? editNote;
+  final Future<bool> Function(KnowledgeDocument)? deleteNote;
   final ValueNotifier<KnowledgeSnapshot?> updates;
   @override
   State<_DocumentRoute> createState() => _DocumentRouteState();
@@ -545,6 +627,16 @@ class _DocumentRoute extends StatefulWidget {
 class _DocumentRouteState extends State<_DocumentRoute> {
   late KnowledgeDocument _document = widget.document;
   late KnowledgeSnapshot _snapshot = widget.snapshot;
+  bool _deleting = false;
+
+  Future<void> _delete() async {
+    if (_deleting) return;
+    setState(() => _deleting = true);
+    final deleted = await widget.deleteNote!(_document);
+    if (!mounted) return;
+    setState(() => _deleting = false);
+    if (deleted) Navigator.pop(context);
+  }
 
   Future<void> _edit({bool existing = false}) async {
     final result = await widget.editNote!(
@@ -566,6 +658,15 @@ class _DocumentRouteState extends State<_DocumentRoute> {
         valueListenable: widget.updates,
         builder: (context, updated, _) {
           _snapshot = updated ?? _snapshot;
+          if (_document.type == DocumentType.note &&
+              _snapshot.resolve(_document.id) == null) {
+            return Scaffold(
+              appBar: AppBar(title: const Text('Note không còn tồn tại')),
+              body: const Center(
+                child: Text('Note này đã bị xóa hoặc không còn trong dữ liệu.'),
+              ),
+            );
+          }
           _document = _snapshot.resolve(_document.id) ?? _document;
           return Scaffold(
             appBar: AppBar(title: Text(_document.code ?? _document.title)),
@@ -573,6 +674,8 @@ class _DocumentRouteState extends State<_DocumentRoute> {
               document: _document,
               snapshot: _snapshot,
               includeDemo: widget.includeDemo,
+              onDeleteNote: widget.deleteNote == null ? null : _delete,
+              deletingNote: _deleting,
               onCreateNote: widget.editNote == null ? null : () => _edit(),
               onEditNote: widget.editNote == null
                   ? null
@@ -586,6 +689,7 @@ class _DocumentRouteState extends State<_DocumentRoute> {
                     updates: widget.updates,
                     includeDemo: widget.includeDemo,
                     editNote: widget.editNote,
+                    deleteNote: widget.deleteNote,
                   ),
                 ),
               ),
@@ -604,6 +708,8 @@ class DocumentDetail extends StatelessWidget {
     this.includeDemo = false,
     this.onCreateNote,
     this.onEditNote,
+    this.onDeleteNote,
+    this.deletingNote = false,
   });
   final KnowledgeDocument document;
   final KnowledgeSnapshot snapshot;
@@ -611,6 +717,8 @@ class DocumentDetail extends StatelessWidget {
   final bool includeDemo;
   final VoidCallback? onCreateNote;
   final VoidCallback? onEditNote;
+  final VoidCallback? onDeleteNote;
+  final bool deletingNote;
 
   @override
   Widget build(BuildContext context) {
@@ -654,6 +762,16 @@ class DocumentDetail extends StatelessWidget {
                   avatar: const Icon(Icons.edit_outlined, size: 18),
                   label: const Text('Sửa note'),
                   onPressed: onEditNote,
+                ),
+              if (document.type == DocumentType.note && onDeleteNote != null)
+                ActionChip(
+                  key: const ValueKey('delete-note'),
+                  avatar: Icon(
+                    Icons.delete_outline,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  label: Text(deletingNote ? 'Đang xóa…' : 'Xóa note'),
+                  onPressed: deletingNote ? null : onDeleteNote,
                 ),
               if (document.semester != null)
                 Chip(label: Text('Học kỳ ${document.semester}')),
@@ -790,6 +908,7 @@ class DocumentDetail extends StatelessWidget {
             ),
           if (issues.isNotEmpty)
             ExpansionTile(
+              key: PageStorageKey('${document.id}:issues'),
               tilePadding: EdgeInsets.zero,
               title: Text('${issues.length} vấn đề dữ liệu cần review'),
               children: issues
@@ -873,12 +992,15 @@ class DocumentDetail extends StatelessWidget {
             ],
           ),
           ExpansionTile(
+            key: PageStorageKey('${document.id}:raw-markdown'),
             tilePadding: EdgeInsets.zero,
             title: const Text('Xem Markdown gốc'),
             children: [
               Align(
                 alignment: Alignment.centerLeft,
                 child: SelectableText(
+                  // Its internal scroll offset must not share the tile's bool state.
+                  key: PageStorageKey('${document.id}:raw-markdown-text'),
                   document.sourceMarkdown,
                   style: const TextStyle(fontFamily: 'monospace'),
                 ),

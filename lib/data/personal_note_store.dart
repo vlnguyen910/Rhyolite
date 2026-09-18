@@ -98,6 +98,55 @@ class PersonalNoteStore {
     }
   }
 
+  /// Archive the backup first so load() cannot resurrect a deleted note.
+  Future<void> delete(KnowledgeDocument original) async {
+    _checkIdentity(original);
+    final folder = await notesDirectory;
+    final name = p.basename(original.path);
+    final target = File(p.join(folder.path, name));
+    final backup = File('${target.path}.bak');
+    if (await FileSystemEntity.type(target.path, followLinks: false) !=
+            FileSystemEntityType.file ||
+        await target.readAsString() != original.sourceMarkdown) {
+      throw const FileSystemException(
+        'Note đã thay đổi hoặc bị xóa bên ngoài app. Hãy tải lại trước khi xóa.',
+      );
+    }
+    final backupType = await FileSystemEntity.type(
+      backup.path,
+      followLinks: false,
+    );
+    if (backupType != FileSystemEntityType.notFound &&
+        backupType != FileSystemEntityType.file) {
+      throw const FileSystemException(
+        'Backup của note không phải file hợp lệ.',
+      );
+    }
+    final trashRoot = Directory(p.join(folder.path, '.trash'));
+    await trashRoot.create(recursive: true);
+    final trash = await trashRoot.createTemp('${name.substring(0, 32)}-');
+    final archivedBackup = p.join(trash.path, '$name.bak');
+    var backupMoved = false;
+    try {
+      if (backupType == FileSystemEntityType.file) {
+        await moveToTrash(backup, archivedBackup);
+        backupMoved = true;
+      }
+      // This rename commits the deletion; no throwing operations follow it.
+      await moveToTrash(target, p.join(trash.path, name));
+    } catch (_) {
+      if (backupMoved) {
+        await File(archivedBackup).rename(backup.path);
+      }
+      rethrow;
+    }
+  }
+
+  /// Separate for injecting filesystem failures in tests.
+  Future<void> moveToTrash(File source, String destination) async {
+    await source.rename(destination);
+  }
+
   Future<KnowledgeDocument> save({
     required String title,
     required String body,

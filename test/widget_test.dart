@@ -36,6 +36,65 @@ class SnapshotRepository extends KnowledgeRepository {
 }
 
 void main() {
+  testWidgets(
+    'Raw Markdown can reopen and switch documents without storage collisions',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(1280, 1000));
+      addTearDown(() => tester.binding.setSurfaceSize(null));
+      await tester.pumpWidget(RhyoliteApp(repository: FixtureRepository()));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Concept'));
+      await tester.pumpAndSettle();
+
+      for (final title in ['Dart', 'Flutter', 'Dart']) {
+        await tester.tap(find.widgetWithText(ListTile, title));
+        await tester.pumpAndSettle();
+        final raw = find.text('Xem Markdown gốc');
+        final rawText = find.byKey(
+          PageStorageKey('concept:${title.toLowerCase()}:raw-markdown-text'),
+        );
+        if (rawText.evaluate().isNotEmpty) {
+          await tester.ensureVisible(raw);
+          await tester.tap(raw);
+          await tester.pumpAndSettle();
+          expect(tester.takeException(), isNull);
+        }
+        for (var toggle = 0; toggle < 3; toggle++) {
+          await tester.ensureVisible(raw);
+          await tester.tap(raw);
+          await tester.pumpAndSettle();
+          expect(tester.takeException(), isNull);
+        }
+        expect(rawText, findsOneWidget);
+        expect(
+          tester.widget<SelectableText>(rawText).data,
+          contains('id: concept:${title.toLowerCase()}'),
+        );
+      }
+    },
+  );
+
+  testWidgets('Issue expansion cannot overwrite the detail scroll offset', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 1000));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(RhyoliteApp(repository: FixtureRepository()));
+    await tester.pumpAndSettle();
+    for (final code in ['PRM393', 'PRO192', 'PRM393']) {
+      await tester.tap(find.widgetWithText(ListTile, code));
+      await tester.pumpAndSettle();
+      final issues = find.byKey(PageStorageKey('course:$code:issues'));
+      expect(issues, findsOneWidget);
+      await tester.ensureVisible(issues);
+      await tester.tap(
+        find.descendant(of: issues, matching: find.byType(ListTile)).first,
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    }
+  });
+
   testWidgets('Graph zoom controls and node tap navigate to concept content', (
     tester,
   ) async {

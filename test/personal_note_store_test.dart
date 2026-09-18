@@ -14,6 +14,20 @@ class FailingStore extends PersonalNoteStore {
       throw const FileSystemException('Simulated disk failure');
 }
 
+class FailingDeleteStore extends PersonalNoteStore {
+  FailingDeleteStore(Directory directory, {required this.failBackup})
+    : super(directory: directory);
+  final bool failBackup;
+
+  @override
+  Future<void> moveToTrash(File source, String destination) async {
+    if (source.path.endsWith('.bak') == failBackup) {
+      throw const FileSystemException('Simulated archive failure');
+    }
+    await super.moveToTrash(source, destination);
+  }
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   late Directory directory;
@@ -23,6 +37,121 @@ void main() {
     store = PersonalNoteStore(directory: directory);
   });
   tearDown(() async => directory.delete(recursive: true));
+
+  test(
+    'Delete archives note and backup without restoring on reopening',
+    () async {
+      final first = await store.save(
+        title: 'Original',
+        body: 'Old',
+        related: [],
+      );
+      final note = await store.save(
+        title: 'Revised',
+        body: 'New',
+        related: [],
+        original: first,
+      );
+      final survivor = await store.save(
+        title: 'Keep',
+        body: 'See [[${note.id}]]',
+        related: [note.id],
+      );
+      await store.delete(note);
+      final reopened = await PersonalNoteStore(directory: directory).load();
+      expect(reopened.files.keys, [survivor.path]);
+      expect(reopened.issues, isEmpty);
+      final archived = Directory(p.join(directory.path, '.trash'))
+          .listSync(recursive: true)
+          .whereType<File>()
+          .toList();
+      expect(archived.length, 2);
+      expect(
+        await archived
+            .singleWhere((file) => file.path.endsWith('.md'))
+            .readAsString(),
+        note.sourceMarkdown,
+      );
+      expect(
+        await archived
+            .singleWhere((file) => file.path.endsWith('.bak'))
+            .readAsString(),
+        first.sourceMarkdown,
+      );
+      final snapshot = const KnowledgeRepository().build(reopened.files);
+      expect(snapshot.resolve(note.id), isNull);
+      expect(
+        snapshot.resolve(survivor.id)!.sourceMarkdown,
+        survivor.sourceMarkdown,
+      );
+      expect(
+        snapshot.issues.any((issue) => issue.message.contains(note.id)),
+        isTrue,
+      );
+      expect(
+        KnowledgeGraphService(snapshot)
+            .overviewGraph(includeNotes: true)
+            .nodes
+            .any((node) => node.id == note.id),
+        isFalse,
+      );
+    },
+  );
+
+  test(
+    'Delete without backup and refusal of foreign or externally changed notes',
+    () async {
+      final note = await store.save(title: 'Single', body: 'Safe', related: []);
+      const foreign = KnowledgeDocument(
+        id: 'note:outside',
+        type: DocumentType.note,
+        title: 'Bad',
+        path: 'notes/../../outside.md',
+        body: '',
+        sourceMarkdown: '',
+      );
+      await expectLater(store.delete(foreign), throwsFormatException);
+      final target = File(p.join(directory.path, p.basename(note.path)));
+      await target.writeAsString('${note.sourceMarkdown}\nExternal');
+      await expectLater(
+        store.delete(note),
+        throwsA(isA<FileSystemException>()),
+      );
+      expect(await target.readAsString(), contains('External'));
+      await target.writeAsString(note.sourceMarkdown);
+      await store.delete(note);
+      expect((await store.load()).files, isEmpty);
+      await expectLater(
+        store.delete(note),
+        throwsA(isA<FileSystemException>()),
+      );
+    },
+  );
+
+  test(
+    'Archive failures preserve live note and roll back its backup',
+    () async {
+      final first = await store.save(title: 'Old', body: 'Old', related: []);
+      final note = await store.save(
+        title: 'New',
+        body: 'New',
+        related: [],
+        original: first,
+      );
+      for (final failBackup in [true, false]) {
+        await expectLater(
+          FailingDeleteStore(directory, failBackup: failBackup).delete(note),
+          throwsA(isA<FileSystemException>()),
+        );
+        expect((await store.load()).files[note.path], note.sourceMarkdown);
+        expect(
+          await File(p.join(directory.path, '${p.basename(note.path)}.bak'))
+              .readAsString(),
+          first.sourceMarkdown,
+        );
+      }
+    },
+  );
 
   test(
     'Notes persist on reopening, preserve YAML characters and use stable IDs',

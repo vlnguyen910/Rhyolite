@@ -14,6 +14,12 @@ class MemoryNoteStore extends PersonalNoteStore {
   final files = <String, String>{};
   bool fail = false;
   @override
+  Future<void> delete(KnowledgeDocument original) async {
+    if (fail) throw const FileSystemException('Disk unavailable');
+    files.remove(original.path);
+  }
+
+  @override
   Future<KnowledgeDocument> save({
     required String title,
     required String body,
@@ -57,6 +63,129 @@ void main() {
     );
     await tester.pumpAndSettle();
   }
+
+  testWidgets(
+    'Delete confirmation cancels, reports failure, then removes note and graph links',
+    (tester) async {
+      final store = MemoryNoteStore();
+      final note = await store.save(
+        title: 'Delete me',
+        body: 'Draft',
+        related: ['course:PRM393'],
+      );
+      await start(tester, store);
+      await tester.tap(find.text('My Notes'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ListTile, note.title));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('delete-note')));
+      await tester.pumpAndSettle();
+      expect(find.text('Xóa note?'), findsOneWidget);
+      expect(find.textContaining('“Delete me”'), findsOneWidget);
+      await tester.tap(find.widgetWithText(TextButton, 'Hủy'));
+      await tester.pumpAndSettle();
+      expect(store.files[note.path], note.sourceMarkdown);
+      expect(find.widgetWithText(ListTile, note.title), findsOneWidget);
+
+      store.fail = true;
+      await tester.tap(find.byKey(const ValueKey('delete-note')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Xóa'));
+      await tester.pumpAndSettle();
+      expect(find.textContaining('Không xóa được note:'), findsOneWidget);
+      expect(store.files[note.path], note.sourceMarkdown);
+      expect(find.byKey(const ValueKey('delete-note')), findsOneWidget);
+
+      store.fail = false;
+      await tester.tap(find.byKey(const ValueKey('delete-note')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Xóa'));
+      await tester.pumpAndSettle();
+      expect(store.files, isEmpty);
+      expect(find.widgetWithText(ListTile, note.title), findsNothing);
+      expect(find.byKey(const ValueKey('delete-note')), findsNothing);
+      await tester.tap(find.text('Môn học'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ListTile, 'PRM393'));
+      await tester.pumpAndSettle();
+      expect(find.widgetWithText(ActionChip, note.title), findsNothing);
+      await tester.tap(find.text('Graph cục bộ'));
+      await tester.pumpAndSettle();
+      expect(find.byKey(ValueKey('graph-node:${note.id}')), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets('Deleting from a narrow detail route returns to My Notes', (
+    tester,
+  ) async {
+    final store = MemoryNoteStore();
+    final note = await store.save(
+      title: 'Narrow note',
+      body: 'Safe',
+      related: [],
+    );
+    await start(tester, store, narrow: true);
+    await tester.tap(find.text('My Notes'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(ListTile, note.title));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('delete-note')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FilledButton, 'Xóa'));
+    await tester.pumpAndSettle();
+    expect(store.files, isEmpty);
+    expect(find.text('My Notes'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.byKey(const ValueKey('delete-note')), findsNothing);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets(
+    'Deletion updates overview and nested routes referencing the same note',
+    (tester) async {
+      final store = MemoryNoteStore();
+      final note = await store.save(
+        title: 'Graph note',
+        body: 'Linked',
+        related: ['course:PRM393'],
+      );
+      await start(tester, store);
+      await tester.tap(find.text('Graph tổng quan'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('overview-notes')));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+        find.byKey(const ValueKey('overview-search')),
+        note.title,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(ValueKey('overview-result:${note.id}')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('overview-open')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(ActionChip, 'PRM393'));
+      await tester.pumpAndSettle();
+      final backlink = find.widgetWithText(ActionChip, note.title);
+      await tester.ensureVisible(backlink);
+      await tester.tap(backlink);
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('delete-note')));
+      await tester.pumpAndSettle();
+      await tester.tap(find.widgetWithText(FilledButton, 'Xóa'));
+      await tester.pumpAndSettle();
+      expect(find.widgetWithText(ActionChip, note.title), findsNothing);
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+      expect(find.text('Note không còn tồn tại'), findsOneWidget);
+      expect(find.byKey(const ValueKey('delete-note')), findsNothing);
+      await tester.pageBack();
+      await tester.pumpAndSettle();
+      expect(find.byKey(ValueKey('overview-node:${note.id}')), findsNothing);
+      expect(find.byKey(const ValueKey('overview-selection')), findsNothing);
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets(
     'Create linked note, preview, search body, edit via Ctrl+S, and reopen app',

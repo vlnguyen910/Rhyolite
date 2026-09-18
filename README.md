@@ -28,7 +28,7 @@ Windows platform files are included, but the Windows build has not been verified
 - Local graph with typed arrows, reference links, pan/zoom, fit-to-view and clickable nodes.
 - Concept browser with title/content search, related concepts and course navigation.
 - Four initial sourced PRM393 concepts: Dart, Flutter, Future/async-await and state management.
-- My Notes: create/edit Markdown, live preview, course/concept links, local persistence,
+- My Notes: create/edit/delete Markdown, live preview, course/concept links, local persistence,
   title/content search, backlinks and graph navigation.
 - Overview Graph tab: all courses in semester columns, routed prerequisite wires,
   focus highlighting, node search and optional concepts/personal notes/demo data.
@@ -198,6 +198,11 @@ the picker or `[[concept:flutter|Flutter]]`, then press **Lưu note** or `Ctrl+S
 Wide editors show a live preview beside the text; narrow windows offer a preview
 toggle. Preview displays wikilink labels; the saved reader opens their targets.
 Use **My Notes** to search titles and body text, then **Sửa note** to edit.
+Choose **Xóa note** in its detail and confirm to remove it from the library and
+graphs. Its file and previous-version backup move into a unique subdirectory of
+`notes/.trash/`; they are not indexed or automatically restored. There is no trash
+browser/restore button yet. Other notes retain their links to the deleted ID;
+validation reports those missing targets. Failed deletion reports an error.
 Linked documents show backlinks under **Personal notes liên quan**. Note nodes
 are purple in the graph and their dashed reference edges imply no prerequisites.
 
