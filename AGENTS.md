@@ -1,26 +1,35 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
+## Project Overview
 
-- `docs/` contains the numbered product, requirements, architecture, privacy, scope, milestone, acceptance, and decision documents. Start with [`docs/00-README.md`](docs/00-README.md).
-- `knowledge/` is the course-content source used as an Obsidian vault. Course notes are under `knowledge/Mon hoc/`; keep curriculum structure (future JSON) separate from course Markdown.
-- `build/` and `.dart_tool/` are generated Flutter/Dart artifacts; do not edit them by hand or commit regenerated output unless a task explicitly requires it.
-- Application source, tests, and asset manifests are not present yet. The planned application is Flutter desktop using MVVM.
+Rhyolite is the planned **FPTU SE Personalized Study Assistant**: a local-first desktop application for exploring FPT University Software Engineering curricula, course relationships, transcripts, academic analysis, AI chat, and personalized study strategies. This repository is currently documentation-only.
+
+## Project Structure
+
+- `docs/` contains numbered product, requirements, architecture, privacy, milestone, acceptance, and decision documents. Start with [`docs/00-README.md`](docs/00-README.md).
+- `knowledge/` is the Obsidian-compatible course-content vault. Course notes are under `knowledge/Mon hoc/`; working material is under `knowledge/New Knowledge/`.
+- Course Markdown is the source of truth; curriculum structure is separate JSON.
+- `build/` and `.dart_tool/` are generated Flutter/Dart artifacts; do not edit or commit them by hand.
+- `lib/`, `test/`, and application assets are not present yet.
+
+## Architecture & Tech Stack
+
+The client is planned as a **Flutter desktop application written in Dart**, using MVVM:
+
+`View → ViewModel → Application/Service layer → Knowledge, Transcript, and AI services → Local storage / bundled knowledge`
+
+Markdown and curriculum JSON are bundled inputs. Transcript parsing is local, and curriculum, course information, search, and local transcript features must work offline. Browser-extension transcript import communicates through localhost and requires preview plus user confirmation. The local database, graph engine, AI provider, API-key strategy, and localhost transport remain `TBD`; consult `docs/10-decision-log.md` before choosing one.
 
 ## Build, Test, and Development Commands
 
-There is currently no committed package manifest or automated build/test command. For documentation-only changes, review the affected Markdown directly and check links and headings. Once the Flutter shell is added, document the project’s canonical commands here (typically `flutter pub get`, `flutter analyze`, `flutter test`, and `flutter run -d <device>`).
+No package manifest or commands are committed yet. For documentation changes, review links, headings, code blocks, and consistency with the decision log. Once the Flutter shell exists, use `flutter pub get`, `flutter analyze`, `flutter test`, and `flutter run -d <device>`.
 
-## Coding Style & Naming Conventions
+## Coding, Testing, and Review
 
-Use Markdown with one clear H1 per document, descriptive H2/H3 headings, short paragraphs, and fenced diagrams/examples where useful. Preserve the numbered naming pattern in `docs/` (for example, `07-mvp-scope.md`). Course files should retain their official course code and readable title, such as `knowledge/Mon hoc/FER202 - Front-End web development with React.md`.
+Use one clear H1 per Markdown file, clear H2/H3 headings, short paragraphs, and fenced diagrams. Preserve numbered document names (for example, `07-mvp-scope.md`) and course filenames containing the official course code. Future Dart code should use `dart format` and Flutter linting; add unit tests for loaders, parsers, matching, and services plus widget tests for key flows. Use the `*_test.dart` naming convention.
 
-Treat course Markdown as the knowledge source of truth and curriculum data as JSON. Derived indexes, graph caches, parsed models, and retrieval data must be rebuildable. Do not turn a `TBD` item into an implementation assumption without recording a decision.
+Commits should follow the concise prefixes already present in history, such as `docs:` and `feat:`, with an imperative summary. Pull requests should explain scope and decisions, link relevant issues or documents, list validation performed, and include screenshots for UI changes.
 
-## Testing Guidelines
+## Data Safety
 
-No test framework or coverage threshold is configured yet. Validate documentation changes by checking internal links, code blocks, and consistency with `docs/10-decision-log.md`. Future Flutter changes should add unit tests for loaders, parsers, matching, and services, plus widget tests for important flows.
-
-## Documentation and Data Safety
-
-Keep personal or uploaded transcript data out of the repository. Before changing product behavior, consult the decision log and privacy policy; update the relevant specification when a previously open decision is resolved.
+Do not commit personal transcripts or uploaded student data. Preserve the local-first privacy model. Before changing product behavior, read the privacy policy and decision log, and update the relevant specification when a `TBD` decision is resolved.
