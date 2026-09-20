@@ -141,6 +141,20 @@ class KnowledgeGraphService {
             return aId.compareTo(bId);
           });
     final neighbors = <String, KnowledgeDocument>{};
+    final linkedNotes = snapshot.notes
+        .where(
+          (note) => note.links.any(
+            (link) =>
+                snapshot.resolve(link, fromPath: note.path)?.id == focus.id,
+          ),
+        )
+        .toList()
+      ..sort((a, b) => a.title.compareTo(b.title));
+    for (final note in linkedNotes) {
+      if (includeDemo || focus.demo || !note.demo) {
+        neighbors[note.id] = note;
+      }
+    }
     for (final edge in adjacent) {
       final id = edge.sourceId == focus.id ? edge.targetId : edge.sourceId;
       final node = byId[id];

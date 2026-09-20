@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import '../../domain/knowledge_document.dart';
 import '../../domain/knowledge_graph.dart';
 
-const _nodeSize = Size(200, 84);
+const _courseNodeSize = Size(190, 190);
+const _smallNodeSize = Size(104, 104);
 const _edgeColors = {
   GraphRelation.prerequisite: Color(0xff2767b0),
   GraphRelation.topic: Color(0xffb96516),
@@ -172,8 +173,11 @@ class _LocalGraphScreenState extends State<LocalGraphScreen> {
                             Positioned(
                               left: _layout.positions[node.id]!.dx,
                               top: _layout.positions[node.id]!.dy,
-                              width: _nodeSize.width,
-                              height: _nodeSize.height,
+                              width: _nodeSizeFor(node, _graph.focus.id).width,
+                              height: _nodeSizeFor(
+                                node,
+                                _graph.focus.id,
+                              ).height,
                               child: _GraphNode(
                                 document: node,
                                 focused: node.id == _graph.focus.id,
@@ -203,7 +207,7 @@ class _LocalGraphScreenState extends State<LocalGraphScreen> {
               if (_graph.nodes.length == 1)
                 const Text('Chưa có liên kết kiến thức để khám phá.'),
               const Text(
-                'Kéo để di chuyển, cuộn để zoom, click node để mở nội dung. Điều kiện AND/OR xem trong syllabus.',
+                'Môn học ở giữa · concept, môn liên quan và note ở xung quanh. Click node để mở nội dung.',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.blueGrey, fontSize: 12),
               ),
@@ -238,8 +242,7 @@ class _GraphNode extends StatelessWidget {
       message: document.title,
       child: Material(
         color: focused ? const Color(0xffd9eee7) : Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+        shape: CircleBorder(
           side: BorderSide(
             color: focused ? const Color(0xff136f63) : color,
             width: focused ? 3 : 1.5,
@@ -247,13 +250,15 @@ class _GraphNode extends StatelessWidget {
         ),
         child: InkWell(
           key: ValueKey('graph-node:${document.id}'),
-          borderRadius: BorderRadius.circular(12),
+          customBorder: const CircleBorder(),
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(focused ? 28 : 12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: focused
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.start,
               children: [
                 Flexible(
                   child: Text(
@@ -287,44 +292,24 @@ class _GraphNode extends StatelessWidget {
   }
 }
 
-/// Stable four-lane layout, avoiding force simulation and frame-by-frame work.
+Size _nodeSizeFor(KnowledgeDocument document, String focusId) =>
+    document.id == focusId ? _courseNodeSize : _smallNodeSize;
+
+/// Stable radial layout with the selected course at the center.
 class _GraphLayout {
   _GraphLayout(LocalKnowledgeGraph graph) {
-    final lanes = List.generate(4, (_) => <KnowledgeDocument>[]);
-    for (final node in graph.nodes.skip(1)) {
-      final edge = graph.edges.firstWhere(
-        (edge) => edge.sourceId == node.id || edge.targetId == node.id,
-      );
-      final lane = switch (edge.relation) {
-        GraphRelation.prerequisite => edge.sourceId == graph.focus.id ? 0 : 1,
-        GraphRelation.topic => 2,
-        GraphRelation.related => 3,
-      };
-      lanes[lane].add(node);
-    }
-    final width = math.max(
-      1040.0,
-      math.max(lanes[2].length, lanes[3].length) * 224.0 + 80,
-    );
-    final height = math.max(
-      640.0,
-      math.max(lanes[0].length, lanes[1].length) * 112.0 + 260,
-    );
+    final neighbors = graph.nodes.skip(1).toList();
+    final radius = math.max(280.0, neighbors.length * 38.0);
+    final width = math.max(760.0, radius * 2 + 260);
+    final height = math.max(680.0, radius * 2 + 260);
     size = Size(width, height);
-    positions[graph.focus.id] = Offset(width / 2 - 100, height / 2 - 42);
-    for (var lane = 0; lane < 4; lane++) {
-      final nodes = lanes[lane];
-      for (var index = 0; index < nodes.length; index++) {
-        positions[nodes[index].id] = lane < 2
-            ? Offset(
-                lane == 0 ? 40 : width - 240,
-                (height - nodes.length * 112) / 2 + index * 112,
-              )
-            : Offset(
-                (width - nodes.length * 224) / 2 + index * 224 + 12,
-                lane == 2 ? height - 124 : 40,
-              );
-      }
+    final center = Offset(width / 2, height / 2);
+    positions[graph.focus.id] = center - _centerOf(_courseNodeSize);
+    for (var index = 0; index < neighbors.length; index++) {
+      final angle = -math.pi / 2 + (math.pi * 2 * index / neighbors.length);
+      final nodeCenter =
+          center + Offset(math.cos(angle), math.sin(angle)) * radius;
+      positions[neighbors[index].id] = nodeCenter - _centerOf(_smallNodeSize);
     }
   }
   late final Size size;
@@ -339,9 +324,18 @@ class _GraphPainter extends CustomPainter {
 
   Offset _border(Offset center, Offset other) {
     final delta = other - center;
+    final isFocus =
+        center ==
+        layout.positions[graph.focus.id]! + _centerOf(_courseNodeSize);
+    final halfWidth = isFocus
+        ? _courseNodeSize.width / 2
+        : _smallNodeSize.width / 2;
+    final halfHeight = isFocus
+        ? _courseNodeSize.height / 2
+        : _smallNodeSize.height / 2;
     final ratio = math.min(
-      104 / math.max(delta.dx.abs(), 0.001),
-      46 / math.max(delta.dy.abs(), 0.001),
+      halfWidth / math.max(delta.dx.abs(), 0.001),
+      halfHeight / math.max(delta.dy.abs(), 0.001),
     );
     return center + delta * ratio;
   }
@@ -349,8 +343,12 @@ class _GraphPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final edge in graph.edges) {
-      final a = layout.positions[edge.sourceId]! + const Offset(100, 42);
-      final b = layout.positions[edge.targetId]! + const Offset(100, 42);
+      final a =
+          layout.positions[edge.sourceId]! +
+          _centerOf(_nodeSizeForId(edge.sourceId));
+      final b =
+          layout.positions[edge.targetId]! +
+          _centerOf(_nodeSizeForId(edge.targetId));
       final start = _border(a, b);
       final end = _border(b, a);
       final delta = end - start;
@@ -378,30 +376,11 @@ class _GraphPainter extends CustomPainter {
           );
         }
       }
-      final label = TextPainter(
-        text: TextSpan(
-          text: _edgeLabels[edge.relation],
-          style: labelStyle.copyWith(
-            color: paint.color,
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      final midpoint = (start + end) / 2;
-      final rect = Rect.fromCenter(
-        center: midpoint,
-        width: label.width + 12,
-        height: label.height + 6,
-      );
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, const Radius.circular(4)),
-        Paint()..color = const Color(0xffedf2f5),
-      );
-      label.paint(canvas, midpoint - Offset(label.width / 2, label.height / 2));
     }
   }
+
+  Size _nodeSizeForId(String id) =>
+      id == graph.focus.id ? _courseNodeSize : _smallNodeSize;
 
   @override
   bool shouldRepaint(covariant _GraphPainter oldDelegate) =>
@@ -409,3 +388,5 @@ class _GraphPainter extends CustomPainter {
       oldDelegate.layout != layout ||
       oldDelegate.labelStyle != labelStyle;
 }
+
+Offset _centerOf(Size size) => Offset(size.width / 2, size.height / 2);
