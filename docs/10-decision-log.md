@@ -54,6 +54,9 @@
 | D-048 | Extension localhost transport chưa quyết định. |
 | D-049 | Desktop phải preview transcript và user confirm trước import. |
 | D-050 | AI consent: giải thích dữ liệu → consent một lần → có thể revoke trong Settings. |
+| D-051 | Main UI dùng dashboard-first; curriculum semester board là page riêng và curriculum graph được mở từ dashboard/semester board. |
+| D-052 | Curriculum graph dùng quan hệ prerequisite/dependent; Course Detail graph bổ sung syllabus-topic và personal-note nodes. |
+| D-053 | Course Q&A cơ bản có thể trả lời local từ bundled curriculum/syllabus và cite syllabus; cloud AI dành cho truy vấn sâu hoặc personalization sau khi provider/consent được cấu hình. |
 
 ## Open decisions
 
@@ -68,8 +71,6 @@
 | T-007 | Browser Extension target browser. |
 | T-008 | Localhost transport protocol. |
 | T-009 | File format cho transcript upload fallback. |
-| T-010 | Knowledge Graph relation types. |
-| T-011 | Curriculum UI layout. |
 | T-012 | Knowledge update mechanism. |
 | T-013 | RAG implementation không dùng vector DB. |
 | T-014 | GPA/average formula. |

@@ -94,8 +94,6 @@ Không block việc viết spec, nhưng block implementation tương ứng:
 - Browser target.
 - Localhost transport protocol.
 - Transcript fallback file formats.
-- Graph relation types.
-- Curriculum UI layout.
 - Knowledge update mechanism.
 - RAG implementation without vector DB.
 - GPA formula.

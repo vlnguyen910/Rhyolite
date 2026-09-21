@@ -61,9 +61,17 @@ Knowledge Graph không phải main navigation feature.
 
 Graph được hiển thị như một phần phụ trong Course Detail.
 
+Course Detail graph biểu diễn course đang chọn, prerequisite/dependent course,
+syllabus topic và personal note. Curriculum overview graph được truy cập từ
+dashboard hoặc curriculum page và không chiếm một main navigation destination.
+
 ### PR-GRAPH-02 — Relation types
 
-Các relation type cụ thể trong MVP: `TBD`.
+Các relation type trong MVP:
+
+- `prerequisite`: course tiên quyết dẫn tới course phụ thuộc.
+- `syllabus-topic`: course dẫn tới module/topic trích từ syllabus.
+- `personal-note`: course dẫn tới note do sinh viên tạo.
 
 ## 5. Transcript import
 
@@ -167,6 +175,12 @@ Phân tích prerequisite liên quan tới course hoặc course sắp học.
 Tạo Study Strategy có cấu trúc.
 
 ## 8. AI Chatbot
+
+### PR-AI-00 — Local course Q&A
+
+Các câu hỏi cơ bản về course/curriculum có thể được trả lời offline trực tiếp từ
+bundled Markdown và curriculum JSON. Câu trả lời phải chỉ ra syllabus source khi
+có. Tính năng này không gửi academic data tới cloud AI.
 
 ### PR-AI-01 — Knowledge boundary
 

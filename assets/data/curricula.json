@@ -1,0 +1,4010 @@
+{
+  "schemaVersion": 1,
+  "source": "knowledge/New Knowledge/_Du lieu/curriculum-mapping.csv",
+  "curricula": [
+    {
+      "code": "BIT_SE_K19B",
+      "courses": [
+        {
+          "code": "COV111",
+          "name": "Chess 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/COV111 - Chess 1.md"
+        },
+        {
+          "code": "DBA103",
+          "name": "Nhạc cụ truyền thống - Đàn Bầu",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md"
+        },
+        {
+          "code": "DNG103",
+          "name": "Nhạc cụ truyền thống-Đàn nguyệt",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md"
+        },
+        {
+          "code": "DNH103",
+          "name": "Nhạc cụ truyền thống- Đàn Nhị",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md"
+        },
+        {
+          "code": "DSA103",
+          "name": "Nhạc cụ truyền thống- Sáo trúc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md"
+        },
+        {
+          "code": "DTB103",
+          "name": "Nhạc cụ truyền thống- Đàn Tỳ bà",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md"
+        },
+        {
+          "code": "DTR103",
+          "name": "Nhạc cụ truyền thống-Đàn Tranh",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md"
+        },
+        {
+          "code": "OTP101",
+          "name": "Định hướng và Rèn luyện tập trung",
+          "semester": 0,
+          "groupCodes": [
+            "OTP101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md"
+        },
+        {
+          "code": "PEN",
+          "name": "Tiếng Anh chuẩn bị",
+          "semester": 0,
+          "groupCodes": [
+            "PEN"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PEN - Tiếng Anh chuẩn bị.md"
+        },
+        {
+          "code": "TRG103",
+          "name": "Nhạc cụ truyền thống -Trống dân tộc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md"
+        },
+        {
+          "code": "VOV114",
+          "name": "Vovinam 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/VOV114 - Vovinam 1.md"
+        },
+        {
+          "code": "CEA201",
+          "name": "Tổ chức và Kiến trúc máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CEA201"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md"
+        },
+        {
+          "code": "COV121",
+          "name": "Chess 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "COV111"
+          ],
+          "notePath": "Mon hoc/COV121 - Chess 2.md"
+        },
+        {
+          "code": "CSI106",
+          "name": "Nhập môn khoa học máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CSI106"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CSI106 - Nhập môn khoa học máy tính.md"
+        },
+        {
+          "code": "MAE101",
+          "name": "Toán cho ngành kỹ thuật",
+          "semester": 1,
+          "groupCodes": [
+            "MAE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md"
+        },
+        {
+          "code": "PRF192",
+          "name": "Cơ sở lập trình",
+          "semester": 1,
+          "groupCodes": [
+            "PRF192"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRF192 - Cơ sở lập trình.md"
+        },
+        {
+          "code": "SSL101c",
+          "name": "Kỹ năng học tập ở Đại học",
+          "semester": 1,
+          "groupCodes": [
+            "SSL101c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md"
+        },
+        {
+          "code": "VOV124",
+          "name": "Vovinam 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "VOV114"
+          ],
+          "notePath": "Mon hoc/VOV124 - Vovinam 2.md"
+        },
+        {
+          "code": "COV131",
+          "name": "Chess 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "COV121"
+          ],
+          "notePath": "Mon hoc/COV131 - Chess 3.md"
+        },
+        {
+          "code": "MAD101",
+          "name": "Toán rời rạc",
+          "semester": 2,
+          "groupCodes": [
+            "MAD101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAD101 - Toán rời rạc.md"
+        },
+        {
+          "code": "NWC204",
+          "name": "Mạng máy tính",
+          "semester": 2,
+          "groupCodes": [
+            "NWC204"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/NWC204 - Mạng máy tính.md"
+        },
+        {
+          "code": "OSG202",
+          "name": "Hệ điều hành",
+          "semester": 2,
+          "groupCodes": [
+            "OSG202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OSG202 - Hệ điều hành.md"
+        },
+        {
+          "code": "PRO192",
+          "name": "Lập trình hướng đối tượng",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192 - Lập trình hướng đối tượng.md"
+        },
+        {
+          "code": "PRO192c",
+          "name": "Lập trình hướng đối tượng với Java",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md"
+        },
+        {
+          "code": "SSG104",
+          "name": "Kỹ năng giao tiếp và cộng tác",
+          "semester": 2,
+          "groupCodes": [
+            "SSG104"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSG104 - Kỹ năng giao tiếp và cộng tác.md"
+        },
+        {
+          "code": "VOV134",
+          "name": "Vovinam 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "VOV124"
+          ],
+          "notePath": "Mon hoc/VOV134 - Vovinam 3.md"
+        },
+        {
+          "code": "CSD201",
+          "name": "Cấu trúc dữ liệu và giải thuật",
+          "semester": 3,
+          "groupCodes": [
+            "CSD201"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md"
+        },
+        {
+          "code": "DBI202",
+          "name": "Các hệ cơ sở dữ liệu",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md"
+        },
+        {
+          "code": "DBI202-OLD",
+          "name": "Database Systems",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202-OLD - Database Systems.md"
+        },
+        {
+          "code": "JPD113",
+          "name": "Tiếng Nhật sơ cấp 1-A1.1",
+          "semester": 3,
+          "groupCodes": [
+            "JPD113"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md"
+        },
+        {
+          "code": "LAB211",
+          "name": "Thực hành OOP với Java",
+          "semester": 3,
+          "groupCodes": [
+            "LAB211"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/LAB211 - Thực hành OOP với Java.md"
+        },
+        {
+          "code": "WED201c",
+          "name": "Thiết kế web",
+          "semester": 3,
+          "groupCodes": [
+            "WED201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WED201c - Thiết kế web.md"
+        },
+        {
+          "code": "IOT102",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IOT102 - Internet vạn vật.md"
+        },
+        {
+          "code": "IoT102t",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IoT102t - Internet vạn vật.md"
+        },
+        {
+          "code": "JPD123",
+          "name": "Tiếng Nhật sơ cấp 1-A1.2",
+          "semester": 4,
+          "groupCodes": [
+            "JPD123"
+          ],
+          "prerequisiteCodes": [
+            "JPD113"
+          ],
+          "notePath": "Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md"
+        },
+        {
+          "code": "MAS291",
+          "name": "Xác suất thống kê",
+          "semester": 4,
+          "groupCodes": [
+            "MAS291"
+          ],
+          "prerequisiteCodes": [
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MAS291 - Xác suất thống kê.md"
+        },
+        {
+          "code": "PRJ301",
+          "name": "Phát triển ứng dụng Java web",
+          "semester": 4,
+          "groupCodes": [
+            "PRJ301"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md"
+        },
+        {
+          "code": "SWE201c",
+          "name": "Nhập môn kỹ thuật phần mềm",
+          "semester": 4,
+          "groupCodes": [
+            "SWE201c"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWE201c - Nhập môn kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "ECI101",
+          "name": "Nhập môn các linh kiện và mạch điện tử",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md"
+        },
+        {
+          "code": "FER202",
+          "name": "Phát triển web Front-End với React",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "WED201c"
+          ],
+          "notePath": "Mon hoc/FER202 - Phát triển web Front-End với React.md"
+        },
+        {
+          "code": "FGU301",
+          "name": "Phát triển game cơ bản",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/FGU301 - Phát triển game cơ bản.md"
+        },
+        {
+          "code": "HSF302",
+          "name": "Làm việc với Spring Framework",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301"
+          ],
+          "notePath": "Mon hoc/HSF302 - Làm việc với Spring Framework.md"
+        },
+        {
+          "code": "IAO201c",
+          "name": "Nhập môn an toàn thông tin",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IAO201c - Nhập môn an toàn thông tin.md"
+        },
+        {
+          "code": "JPD133",
+          "name": "Tiếng Nhật sơ cấp 1-A1 - A2",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "JPD123"
+          ],
+          "notePath": "Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md"
+        },
+        {
+          "code": "PDS301m",
+          "name": "Lập trình Python cho khoa học dữ liệu ứng dụng",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "MAS291"
+          ],
+          "notePath": "Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md"
+        },
+        {
+          "code": "PRN212",
+          "name": "Lập trình ứng dụng đa nền tảng cơ bản với .NET",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192",
+            "DBI202"
+          ],
+          "notePath": "Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md"
+        },
+        {
+          "code": "PRP201c",
+          "name": "Lập trình Python",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRP201c - Lập trình Python.md"
+        },
+        {
+          "code": "SWP391",
+          "name": "Dự án phát triển phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWP391"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301",
+            "SWE201c",
+            "SWE202c",
+            "LAB211"
+          ],
+          "notePath": "Mon hoc/SWP391 - Dự án phát triển phần mềm.md"
+        },
+        {
+          "code": "SWR302",
+          "name": "Yêu cầu phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWR302"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWR302 - Yêu cầu phần mềm.md"
+        },
+        {
+          "code": "SWT301",
+          "name": "Kiểm thử phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWT301"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWT301 - Kiểm thử phần mềm.md"
+        },
+        {
+          "code": "WDU203c",
+          "name": "Thiết kế trải nghiệm người dùng",
+          "semester": 5,
+          "groupCodes": [
+            "WDU203c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md"
+        },
+        {
+          "code": "ENW493c",
+          "name": "Phương pháp nghiên cứu và kỹ năng viết học thuật",
+          "semester": 6,
+          "groupCodes": [
+            "ENW493c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md"
+        },
+        {
+          "code": "OJT202",
+          "name": "Đào tạo trong môi trường thực tế",
+          "semester": 6,
+          "groupCodes": [
+            "OJT202"
+          ],
+          "prerequisiteCodes": [
+            "JPD133"
+          ],
+          "notePath": "Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md"
+        },
+        {
+          "code": "AGU301",
+          "name": "Phát triển game nâng cao",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FGU301"
+          ],
+          "notePath": "Mon hoc/AGU301 - Phát triển game nâng cao.md"
+        },
+        {
+          "code": "AIL304m",
+          "name": "Học máy",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "MAS291",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/AIL304m - Học máy.md"
+        },
+        {
+          "code": "DBM301",
+          "name": "Khai phá dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBM301 - Khai phá dữ liệu.md"
+        },
+        {
+          "code": "DCD301",
+          "name": "Thiết kế vi mạch số",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "ECI101"
+          ],
+          "notePath": "Mon hoc/DCD301 - Thiết kế vi mạch số.md"
+        },
+        {
+          "code": "DHV301",
+          "name": "Xử lý và Trực quan hóa Dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m"
+          ],
+          "notePath": "Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md"
+        },
+        {
+          "code": "EXE101",
+          "name": "Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1",
+          "semester": 7,
+          "groupCodes": [
+            "EXE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md"
+        },
+        {
+          "code": "GDC301",
+          "name": "Thiết kế game cơ bản - Từ ý tưởng đến thực hiện",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md"
+        },
+        {
+          "code": "JPD316",
+          "name": "Tiếng Nhật trung cấp 1-B1 - B2",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md"
+        },
+        {
+          "code": "KOR311",
+          "name": "Hàn ngữ trung cấp 1",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md"
+        },
+        {
+          "code": "MDS301",
+          "name": "Học máy trong khoa học dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md"
+        },
+        {
+          "code": "MIP201",
+          "name": "Lập trình vi điều khiển",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/MIP201 - Lập trình vi điều khiển.md"
+        },
+        {
+          "code": "MMA301",
+          "name": "Phát triển ứng dụng di động đa nền tảng",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FER202"
+          ],
+          "notePath": "Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md"
+        },
+        {
+          "code": "PMG201c",
+          "name": "Quản trị dự án",
+          "semester": 7,
+          "groupCodes": [
+            "PMG201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PMG201c - Quản trị dự án.md"
+        },
+        {
+          "code": "PRN222",
+          "name": "Lập trình ứng dụng đa nền tảng nâng cao với .NET",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRN212"
+          ],
+          "notePath": "Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md"
+        },
+        {
+          "code": "PRU213",
+          "name": "Lập trình Game với C Sharp",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRU213 - Lập trình Game với C Sharp.md"
+        },
+        {
+          "code": "SBA301",
+          "name": "Tích hợp ứng dụng trang đơn với Spring Boot",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "HSF302"
+          ],
+          "notePath": "Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md"
+        },
+        {
+          "code": "SDN302",
+          "name": "Phát triển Server-Side với NodeJS, Express và MongoDB",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "FER202"
+          ],
+          "notePath": "Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+        },
+        {
+          "code": "SWD392",
+          "name": "Kiến trúc và thiết kế phần mềm",
+          "semester": 7,
+          "groupCodes": [
+            "SWD392"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md"
+        },
+        {
+          "code": "EXE201",
+          "name": "Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2",
+          "semester": 8,
+          "groupCodes": [
+            "EXE201"
+          ],
+          "prerequisiteCodes": [
+            "EXE101"
+          ],
+          "notePath": "Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md"
+        },
+        {
+          "code": "ITE302c",
+          "name": "Đạo đức trong CNTT",
+          "semester": 8,
+          "groupCodes": [
+            "ITE302c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ITE302c - Đạo đức trong CNTT.md"
+        },
+        {
+          "code": "JIS401",
+          "name": "Tiếng Nhật CNTT trong ngành phần mềm",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md"
+        },
+        {
+          "code": "JIT401",
+          "name": "Tiếng Nhật công nghệ thông tin",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md"
+        },
+        {
+          "code": "MLN111",
+          "name": "Triết học Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN111"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN111 - Triết học Mác - Lê-nin.md"
+        },
+        {
+          "code": "MLN122",
+          "name": "Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN122"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md"
+        },
+        {
+          "code": "PRM393",
+          "name": "Lập trình di động",
+          "semester": 8,
+          "groupCodes": [
+            "PRM393"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRM393 - Lập trình di động.md"
+        },
+        {
+          "code": "EXE402",
+          "name": "Dự án khởi nghiệp tốt nghiệp",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "EXE201",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md"
+        },
+        {
+          "code": "GRC490",
+          "name": "Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "HCM202",
+          "name": "Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh",
+          "semester": 9,
+          "groupCodes": [
+            "HCM202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md"
+        },
+        {
+          "code": "MLN131",
+          "name": "Scientific socialism - Chủ nghĩa xã hội khoa học",
+          "semester": 9,
+          "groupCodes": [
+            "MLN131"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md"
+        },
+        {
+          "code": "PIT490",
+          "name": "Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md"
+        },
+        {
+          "code": "SEP490",
+          "name": "Đồ án tốt nghiệp KTPM",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md"
+        },
+        {
+          "code": "SET490",
+          "name": "Khóa luận tốt nghiệp Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "VNR202",
+          "name": "History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam",
+          "semester": 9,
+          "groupCodes": [
+            "VNR202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md"
+        }
+      ]
+    },
+    {
+      "code": "BIT_SE_K19D_K20A",
+      "courses": [
+        {
+          "code": "COV111",
+          "name": "Chess 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/COV111 - Chess 1.md"
+        },
+        {
+          "code": "DBA103",
+          "name": "Nhạc cụ truyền thống - Đàn Bầu",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md"
+        },
+        {
+          "code": "DNG103",
+          "name": "Nhạc cụ truyền thống-Đàn nguyệt",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md"
+        },
+        {
+          "code": "DNH103",
+          "name": "Nhạc cụ truyền thống- Đàn Nhị",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md"
+        },
+        {
+          "code": "DSA103",
+          "name": "Nhạc cụ truyền thống- Sáo trúc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md"
+        },
+        {
+          "code": "DTB103",
+          "name": "Nhạc cụ truyền thống- Đàn Tỳ bà",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md"
+        },
+        {
+          "code": "DTR103",
+          "name": "Nhạc cụ truyền thống-Đàn Tranh",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md"
+        },
+        {
+          "code": "OTP101",
+          "name": "Định hướng và Rèn luyện tập trung",
+          "semester": 0,
+          "groupCodes": [
+            "OTP101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md"
+        },
+        {
+          "code": "PEN",
+          "name": "Tiếng Anh chuẩn bị",
+          "semester": 0,
+          "groupCodes": [
+            "PEN"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PEN - Tiếng Anh chuẩn bị.md"
+        },
+        {
+          "code": "TRG103",
+          "name": "Nhạc cụ truyền thống -Trống dân tộc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md"
+        },
+        {
+          "code": "VOV114",
+          "name": "Vovinam 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/VOV114 - Vovinam 1.md"
+        },
+        {
+          "code": "CEA201",
+          "name": "Tổ chức và Kiến trúc máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CEA201"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md"
+        },
+        {
+          "code": "COV121",
+          "name": "Chess 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "COV111"
+          ],
+          "notePath": "Mon hoc/COV121 - Chess 2.md"
+        },
+        {
+          "code": "CSI106",
+          "name": "Nhập môn khoa học máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CSI106"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CSI106 - Nhập môn khoa học máy tính.md"
+        },
+        {
+          "code": "MAE101",
+          "name": "Toán cho ngành kỹ thuật",
+          "semester": 1,
+          "groupCodes": [
+            "MAE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md"
+        },
+        {
+          "code": "PRF192",
+          "name": "Cơ sở lập trình",
+          "semester": 1,
+          "groupCodes": [
+            "PRF192"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRF192 - Cơ sở lập trình.md"
+        },
+        {
+          "code": "SSL101c",
+          "name": "Kỹ năng học tập ở Đại học",
+          "semester": 1,
+          "groupCodes": [
+            "SSL101c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md"
+        },
+        {
+          "code": "VOV124",
+          "name": "Vovinam 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "VOV114"
+          ],
+          "notePath": "Mon hoc/VOV124 - Vovinam 2.md"
+        },
+        {
+          "code": "COV131",
+          "name": "Chess 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "COV121"
+          ],
+          "notePath": "Mon hoc/COV131 - Chess 3.md"
+        },
+        {
+          "code": "MAD101",
+          "name": "Toán rời rạc",
+          "semester": 2,
+          "groupCodes": [
+            "MAD101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAD101 - Toán rời rạc.md"
+        },
+        {
+          "code": "NWC204",
+          "name": "Mạng máy tính",
+          "semester": 2,
+          "groupCodes": [
+            "NWC204"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/NWC204 - Mạng máy tính.md"
+        },
+        {
+          "code": "OSG202",
+          "name": "Hệ điều hành",
+          "semester": 2,
+          "groupCodes": [
+            "OSG202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OSG202 - Hệ điều hành.md"
+        },
+        {
+          "code": "PRO192",
+          "name": "Lập trình hướng đối tượng",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192 - Lập trình hướng đối tượng.md"
+        },
+        {
+          "code": "PRO192c",
+          "name": "Lập trình hướng đối tượng với Java",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md"
+        },
+        {
+          "code": "VOV134",
+          "name": "Vovinam 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "VOV124"
+          ],
+          "notePath": "Mon hoc/VOV134 - Vovinam 3.md"
+        },
+        {
+          "code": "WED201c",
+          "name": "Thiết kế web",
+          "semester": 2,
+          "groupCodes": [
+            "WED201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WED201c - Thiết kế web.md"
+        },
+        {
+          "code": "CSD201",
+          "name": "Cấu trúc dữ liệu và giải thuật",
+          "semester": 3,
+          "groupCodes": [
+            "CSD201"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md"
+        },
+        {
+          "code": "DBI202",
+          "name": "Các hệ cơ sở dữ liệu",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md"
+        },
+        {
+          "code": "DBI202-OLD",
+          "name": "Database Systems",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202-OLD - Database Systems.md"
+        },
+        {
+          "code": "JPD113",
+          "name": "Tiếng Nhật sơ cấp 1-A1.1",
+          "semester": 3,
+          "groupCodes": [
+            "JPD113"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md"
+        },
+        {
+          "code": "LAB211",
+          "name": "Thực hành OOP với Java",
+          "semester": 3,
+          "groupCodes": [
+            "LAB211"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/LAB211 - Thực hành OOP với Java.md"
+        },
+        {
+          "code": "MAS291",
+          "name": "Xác suất thống kê",
+          "semester": 3,
+          "groupCodes": [
+            "MAS291"
+          ],
+          "prerequisiteCodes": [
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MAS291 - Xác suất thống kê.md"
+        },
+        {
+          "code": "IOT102",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IOT102 - Internet vạn vật.md"
+        },
+        {
+          "code": "IoT102t",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IoT102t - Internet vạn vật.md"
+        },
+        {
+          "code": "JPD123",
+          "name": "Tiếng Nhật sơ cấp 1-A1.2",
+          "semester": 4,
+          "groupCodes": [
+            "JPD123"
+          ],
+          "prerequisiteCodes": [
+            "JPD113"
+          ],
+          "notePath": "Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md"
+        },
+        {
+          "code": "PRJ301",
+          "name": "Phát triển ứng dụng Java web",
+          "semester": 4,
+          "groupCodes": [
+            "PRJ301"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md"
+        },
+        {
+          "code": "SSG104",
+          "name": "Kỹ năng giao tiếp và cộng tác",
+          "semester": 4,
+          "groupCodes": [
+            "SSG104"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSG104 - Kỹ năng giao tiếp và cộng tác.md"
+        },
+        {
+          "code": "SWE202c",
+          "name": "Nhập môn kỹ thuật phần mềm",
+          "semester": 4,
+          "groupCodes": [
+            "SWE202c"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "ECI101",
+          "name": "Nhập môn các linh kiện và mạch điện tử",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md"
+        },
+        {
+          "code": "FER202",
+          "name": "Phát triển web Front-End với React",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "WED201c"
+          ],
+          "notePath": "Mon hoc/FER202 - Phát triển web Front-End với React.md"
+        },
+        {
+          "code": "FGU301",
+          "name": "Phát triển game cơ bản",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/FGU301 - Phát triển game cơ bản.md"
+        },
+        {
+          "code": "HSF302",
+          "name": "Làm việc với Spring Framework",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301"
+          ],
+          "notePath": "Mon hoc/HSF302 - Làm việc với Spring Framework.md"
+        },
+        {
+          "code": "IAO201c",
+          "name": "Nhập môn an toàn thông tin",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IAO201c - Nhập môn an toàn thông tin.md"
+        },
+        {
+          "code": "JPD133",
+          "name": "Tiếng Nhật sơ cấp 1-A1 - A2",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "JPD123"
+          ],
+          "notePath": "Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md"
+        },
+        {
+          "code": "PDS301m",
+          "name": "Lập trình Python cho khoa học dữ liệu ứng dụng",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "MAS291"
+          ],
+          "notePath": "Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md"
+        },
+        {
+          "code": "PRN212",
+          "name": "Lập trình ứng dụng đa nền tảng cơ bản với .NET",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192",
+            "DBI202"
+          ],
+          "notePath": "Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md"
+        },
+        {
+          "code": "PRP201c",
+          "name": "Lập trình Python",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRP201c - Lập trình Python.md"
+        },
+        {
+          "code": "SWP391",
+          "name": "Dự án phát triển phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWP391"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301",
+            "SWE201c",
+            "SWE202c",
+            "LAB211"
+          ],
+          "notePath": "Mon hoc/SWP391 - Dự án phát triển phần mềm.md"
+        },
+        {
+          "code": "SWR302",
+          "name": "Yêu cầu phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWR302"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWR302 - Yêu cầu phần mềm.md"
+        },
+        {
+          "code": "SWT301",
+          "name": "Kiểm thử phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWT301"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWT301 - Kiểm thử phần mềm.md"
+        },
+        {
+          "code": "WDU203c",
+          "name": "Thiết kế trải nghiệm người dùng",
+          "semester": 5,
+          "groupCodes": [
+            "WDU203c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md"
+        },
+        {
+          "code": "ENW493c",
+          "name": "Phương pháp nghiên cứu và kỹ năng viết học thuật",
+          "semester": 6,
+          "groupCodes": [
+            "ENW493c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md"
+        },
+        {
+          "code": "OJT202",
+          "name": "Đào tạo trong môi trường thực tế",
+          "semester": 6,
+          "groupCodes": [
+            "OJT202"
+          ],
+          "prerequisiteCodes": [
+            "JPD133"
+          ],
+          "notePath": "Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md"
+        },
+        {
+          "code": "AGU301",
+          "name": "Phát triển game nâng cao",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FGU301"
+          ],
+          "notePath": "Mon hoc/AGU301 - Phát triển game nâng cao.md"
+        },
+        {
+          "code": "AIL304m",
+          "name": "Học máy",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "MAS291",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/AIL304m - Học máy.md"
+        },
+        {
+          "code": "DBM301",
+          "name": "Khai phá dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBM301 - Khai phá dữ liệu.md"
+        },
+        {
+          "code": "DCD301",
+          "name": "Thiết kế vi mạch số",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "ECI101"
+          ],
+          "notePath": "Mon hoc/DCD301 - Thiết kế vi mạch số.md"
+        },
+        {
+          "code": "DHV301",
+          "name": "Xử lý và Trực quan hóa Dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m"
+          ],
+          "notePath": "Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md"
+        },
+        {
+          "code": "EXE101",
+          "name": "Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1",
+          "semester": 7,
+          "groupCodes": [
+            "EXE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md"
+        },
+        {
+          "code": "GDC301",
+          "name": "Thiết kế game cơ bản - Từ ý tưởng đến thực hiện",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md"
+        },
+        {
+          "code": "JPD316",
+          "name": "Tiếng Nhật trung cấp 1-B1 - B2",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md"
+        },
+        {
+          "code": "KOR311",
+          "name": "Hàn ngữ trung cấp 1",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md"
+        },
+        {
+          "code": "MDS301",
+          "name": "Học máy trong khoa học dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md"
+        },
+        {
+          "code": "MIP201",
+          "name": "Lập trình vi điều khiển",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/MIP201 - Lập trình vi điều khiển.md"
+        },
+        {
+          "code": "MMA301",
+          "name": "Phát triển ứng dụng di động đa nền tảng",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FER202"
+          ],
+          "notePath": "Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md"
+        },
+        {
+          "code": "PMG201c",
+          "name": "Quản trị dự án",
+          "semester": 7,
+          "groupCodes": [
+            "PMG201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PMG201c - Quản trị dự án.md"
+        },
+        {
+          "code": "PRN222",
+          "name": "Lập trình ứng dụng đa nền tảng nâng cao với .NET",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRN212"
+          ],
+          "notePath": "Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md"
+        },
+        {
+          "code": "PRU213",
+          "name": "Lập trình Game với C Sharp",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRU213 - Lập trình Game với C Sharp.md"
+        },
+        {
+          "code": "SBA301",
+          "name": "Tích hợp ứng dụng trang đơn với Spring Boot",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "HSF302"
+          ],
+          "notePath": "Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md"
+        },
+        {
+          "code": "SDN302",
+          "name": "Phát triển Server-Side với NodeJS, Express và MongoDB",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "FER202"
+          ],
+          "notePath": "Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+        },
+        {
+          "code": "SWD392",
+          "name": "Kiến trúc và thiết kế phần mềm",
+          "semester": 7,
+          "groupCodes": [
+            "SWD392"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md"
+        },
+        {
+          "code": "EXE201",
+          "name": "Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2",
+          "semester": 8,
+          "groupCodes": [
+            "EXE201"
+          ],
+          "prerequisiteCodes": [
+            "EXE101"
+          ],
+          "notePath": "Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md"
+        },
+        {
+          "code": "ITE302c",
+          "name": "Đạo đức trong CNTT",
+          "semester": 8,
+          "groupCodes": [
+            "ITE302c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ITE302c - Đạo đức trong CNTT.md"
+        },
+        {
+          "code": "JIS401",
+          "name": "Tiếng Nhật CNTT trong ngành phần mềm",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md"
+        },
+        {
+          "code": "JIT401",
+          "name": "Tiếng Nhật công nghệ thông tin",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md"
+        },
+        {
+          "code": "MLN111",
+          "name": "Triết học Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN111"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN111 - Triết học Mác - Lê-nin.md"
+        },
+        {
+          "code": "MLN122",
+          "name": "Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN122"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md"
+        },
+        {
+          "code": "PRM393",
+          "name": "Lập trình di động",
+          "semester": 8,
+          "groupCodes": [
+            "PRM393"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRM393 - Lập trình di động.md"
+        },
+        {
+          "code": "EXE402",
+          "name": "Dự án khởi nghiệp tốt nghiệp",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "EXE201",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md"
+        },
+        {
+          "code": "GRC490",
+          "name": "Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "HCM202",
+          "name": "Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh",
+          "semester": 9,
+          "groupCodes": [
+            "HCM202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md"
+        },
+        {
+          "code": "MLN131",
+          "name": "Scientific socialism - Chủ nghĩa xã hội khoa học",
+          "semester": 9,
+          "groupCodes": [
+            "MLN131"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md"
+        },
+        {
+          "code": "PIT490",
+          "name": "Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md"
+        },
+        {
+          "code": "SEP490",
+          "name": "Đồ án tốt nghiệp KTPM",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md"
+        },
+        {
+          "code": "SET490",
+          "name": "Khóa luận tốt nghiệp Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "VNR202",
+          "name": "History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam",
+          "semester": 9,
+          "groupCodes": [
+            "VNR202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md"
+        }
+      ]
+    },
+    {
+      "code": "BIT_SE_K20B",
+      "courses": [
+        {
+          "code": "COV111",
+          "name": "Chess 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/COV111 - Chess 1.md"
+        },
+        {
+          "code": "DBA103",
+          "name": "Nhạc cụ truyền thống - Đàn Bầu",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md"
+        },
+        {
+          "code": "DNG103",
+          "name": "Nhạc cụ truyền thống-Đàn nguyệt",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md"
+        },
+        {
+          "code": "DNH103",
+          "name": "Nhạc cụ truyền thống- Đàn Nhị",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md"
+        },
+        {
+          "code": "DSA103",
+          "name": "Nhạc cụ truyền thống- Sáo trúc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md"
+        },
+        {
+          "code": "DTB103",
+          "name": "Nhạc cụ truyền thống- Đàn Tỳ bà",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md"
+        },
+        {
+          "code": "DTR103",
+          "name": "Nhạc cụ truyền thống-Đàn Tranh",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md"
+        },
+        {
+          "code": "OTP101",
+          "name": "Định hướng và Rèn luyện tập trung",
+          "semester": 0,
+          "groupCodes": [
+            "OTP101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md"
+        },
+        {
+          "code": "PEN",
+          "name": "Tiếng Anh chuẩn bị",
+          "semester": 0,
+          "groupCodes": [
+            "PEN"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PEN - Tiếng Anh chuẩn bị.md"
+        },
+        {
+          "code": "TRG103",
+          "name": "Nhạc cụ truyền thống -Trống dân tộc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md"
+        },
+        {
+          "code": "VOV114",
+          "name": "Vovinam 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/VOV114 - Vovinam 1.md"
+        },
+        {
+          "code": "CEA201",
+          "name": "Tổ chức và Kiến trúc máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CEA201"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md"
+        },
+        {
+          "code": "COV121",
+          "name": "Chess 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "COV111"
+          ],
+          "notePath": "Mon hoc/COV121 - Chess 2.md"
+        },
+        {
+          "code": "CSI106",
+          "name": "Nhập môn khoa học máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CSI106"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CSI106 - Nhập môn khoa học máy tính.md"
+        },
+        {
+          "code": "MAE101",
+          "name": "Toán cho ngành kỹ thuật",
+          "semester": 1,
+          "groupCodes": [
+            "MAE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md"
+        },
+        {
+          "code": "PRF192",
+          "name": "Cơ sở lập trình",
+          "semester": 1,
+          "groupCodes": [
+            "PRF192"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRF192 - Cơ sở lập trình.md"
+        },
+        {
+          "code": "SSL101c",
+          "name": "Kỹ năng học tập ở Đại học",
+          "semester": 1,
+          "groupCodes": [
+            "SSL101c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md"
+        },
+        {
+          "code": "VOV124",
+          "name": "Vovinam 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "VOV114"
+          ],
+          "notePath": "Mon hoc/VOV124 - Vovinam 2.md"
+        },
+        {
+          "code": "COV131",
+          "name": "Chess 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "COV121"
+          ],
+          "notePath": "Mon hoc/COV131 - Chess 3.md"
+        },
+        {
+          "code": "MAD101",
+          "name": "Toán rời rạc",
+          "semester": 2,
+          "groupCodes": [
+            "MAD101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAD101 - Toán rời rạc.md"
+        },
+        {
+          "code": "NWC204",
+          "name": "Mạng máy tính",
+          "semester": 2,
+          "groupCodes": [
+            "NWC204"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/NWC204 - Mạng máy tính.md"
+        },
+        {
+          "code": "OSG202",
+          "name": "Hệ điều hành",
+          "semester": 2,
+          "groupCodes": [
+            "OSG202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OSG202 - Hệ điều hành.md"
+        },
+        {
+          "code": "PRO192",
+          "name": "Lập trình hướng đối tượng",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192 - Lập trình hướng đối tượng.md"
+        },
+        {
+          "code": "PRO192c",
+          "name": "Lập trình hướng đối tượng với Java",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md"
+        },
+        {
+          "code": "VOV134",
+          "name": "Vovinam 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "VOV124"
+          ],
+          "notePath": "Mon hoc/VOV134 - Vovinam 3.md"
+        },
+        {
+          "code": "WED201c",
+          "name": "Thiết kế web",
+          "semester": 2,
+          "groupCodes": [
+            "WED201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WED201c - Thiết kế web.md"
+        },
+        {
+          "code": "DBI202",
+          "name": "Các hệ cơ sở dữ liệu",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md"
+        },
+        {
+          "code": "DBI202-OLD",
+          "name": "Database Systems",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202-OLD - Database Systems.md"
+        },
+        {
+          "code": "JPD113",
+          "name": "Tiếng Nhật sơ cấp 1-A1.1",
+          "semester": 3,
+          "groupCodes": [
+            "JPD113"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md"
+        },
+        {
+          "code": "LAB211",
+          "name": "Thực hành OOP với Java",
+          "semester": 3,
+          "groupCodes": [
+            "LAB211"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/LAB211 - Thực hành OOP với Java.md"
+        },
+        {
+          "code": "MAS291",
+          "name": "Xác suất thống kê",
+          "semester": 3,
+          "groupCodes": [
+            "MAS291"
+          ],
+          "prerequisiteCodes": [
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MAS291 - Xác suất thống kê.md"
+        },
+        {
+          "code": "SWE202c",
+          "name": "Nhập môn kỹ thuật phần mềm",
+          "semester": 3,
+          "groupCodes": [
+            "SWE202c"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "CSD201",
+          "name": "Cấu trúc dữ liệu và giải thuật",
+          "semester": 4,
+          "groupCodes": [
+            "CSD201"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md"
+        },
+        {
+          "code": "IOT102",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IOT102 - Internet vạn vật.md"
+        },
+        {
+          "code": "IoT102t",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IoT102t - Internet vạn vật.md"
+        },
+        {
+          "code": "JPD123",
+          "name": "Tiếng Nhật sơ cấp 1-A1.2",
+          "semester": 4,
+          "groupCodes": [
+            "JPD123"
+          ],
+          "prerequisiteCodes": [
+            "JPD113"
+          ],
+          "notePath": "Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md"
+        },
+        {
+          "code": "PRJ301",
+          "name": "Phát triển ứng dụng Java web",
+          "semester": 4,
+          "groupCodes": [
+            "PRJ301"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md"
+        },
+        {
+          "code": "SWR302",
+          "name": "Yêu cầu phần mềm",
+          "semester": 4,
+          "groupCodes": [
+            "SWR302"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWR302 - Yêu cầu phần mềm.md"
+        },
+        {
+          "code": "ECI101",
+          "name": "Nhập môn các linh kiện và mạch điện tử",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md"
+        },
+        {
+          "code": "FER202",
+          "name": "Phát triển web Front-End với React",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "WED201c"
+          ],
+          "notePath": "Mon hoc/FER202 - Phát triển web Front-End với React.md"
+        },
+        {
+          "code": "FGU301",
+          "name": "Phát triển game cơ bản",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/FGU301 - Phát triển game cơ bản.md"
+        },
+        {
+          "code": "HSF302",
+          "name": "Làm việc với Spring Framework",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301"
+          ],
+          "notePath": "Mon hoc/HSF302 - Làm việc với Spring Framework.md"
+        },
+        {
+          "code": "JPD133",
+          "name": "Tiếng Nhật sơ cấp 1-A1 - A2",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "JPD123"
+          ],
+          "notePath": "Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md"
+        },
+        {
+          "code": "PDS301m",
+          "name": "Lập trình Python cho khoa học dữ liệu ứng dụng",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "MAS291"
+          ],
+          "notePath": "Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md"
+        },
+        {
+          "code": "PRN212",
+          "name": "Lập trình ứng dụng đa nền tảng cơ bản với .NET",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192",
+            "DBI202"
+          ],
+          "notePath": "Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md"
+        },
+        {
+          "code": "PRP201c",
+          "name": "Lập trình Python",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRP201c - Lập trình Python.md"
+        },
+        {
+          "code": "SSG105",
+          "name": "Kỹ năng giao tiếp và cộng tác",
+          "semester": 5,
+          "groupCodes": [
+            "SSG105"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSG105 - Kỹ năng giao tiếp và cộng tác.md"
+        },
+        {
+          "code": "SWP391",
+          "name": "Dự án phát triển phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWP391"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301",
+            "SWE201c",
+            "SWE202c",
+            "LAB211"
+          ],
+          "notePath": "Mon hoc/SWP391 - Dự án phát triển phần mềm.md"
+        },
+        {
+          "code": "SWT301",
+          "name": "Kiểm thử phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWT301"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWT301 - Kiểm thử phần mềm.md"
+        },
+        {
+          "code": "WDU203c",
+          "name": "Thiết kế trải nghiệm người dùng",
+          "semester": 5,
+          "groupCodes": [
+            "WDU203c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md"
+        },
+        {
+          "code": "ENW493c",
+          "name": "Phương pháp nghiên cứu và kỹ năng viết học thuật",
+          "semester": 6,
+          "groupCodes": [
+            "ENW493c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md"
+        },
+        {
+          "code": "OJT202",
+          "name": "Đào tạo trong môi trường thực tế",
+          "semester": 6,
+          "groupCodes": [
+            "OJT202"
+          ],
+          "prerequisiteCodes": [
+            "JPD133"
+          ],
+          "notePath": "Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md"
+        },
+        {
+          "code": "AGU301",
+          "name": "Phát triển game nâng cao",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FGU301"
+          ],
+          "notePath": "Mon hoc/AGU301 - Phát triển game nâng cao.md"
+        },
+        {
+          "code": "AIL304m",
+          "name": "Học máy",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "MAS291",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/AIL304m - Học máy.md"
+        },
+        {
+          "code": "DBM301",
+          "name": "Khai phá dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBM301 - Khai phá dữ liệu.md"
+        },
+        {
+          "code": "DCD301",
+          "name": "Thiết kế vi mạch số",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "ECI101"
+          ],
+          "notePath": "Mon hoc/DCD301 - Thiết kế vi mạch số.md"
+        },
+        {
+          "code": "DHV301",
+          "name": "Xử lý và Trực quan hóa Dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m"
+          ],
+          "notePath": "Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md"
+        },
+        {
+          "code": "EXE101",
+          "name": "Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1",
+          "semester": 7,
+          "groupCodes": [
+            "EXE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md"
+        },
+        {
+          "code": "GDC301",
+          "name": "Thiết kế game cơ bản - Từ ý tưởng đến thực hiện",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md"
+        },
+        {
+          "code": "JPD316",
+          "name": "Tiếng Nhật trung cấp 1-B1 - B2",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md"
+        },
+        {
+          "code": "KOR311",
+          "name": "Hàn ngữ trung cấp 1",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md"
+        },
+        {
+          "code": "MDS301",
+          "name": "Học máy trong khoa học dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md"
+        },
+        {
+          "code": "MIP201",
+          "name": "Lập trình vi điều khiển",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/MIP201 - Lập trình vi điều khiển.md"
+        },
+        {
+          "code": "MMA301",
+          "name": "Phát triển ứng dụng di động đa nền tảng",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FER202"
+          ],
+          "notePath": "Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md"
+        },
+        {
+          "code": "PMG201c",
+          "name": "Quản trị dự án",
+          "semester": 7,
+          "groupCodes": [
+            "PMG201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PMG201c - Quản trị dự án.md"
+        },
+        {
+          "code": "PRN222",
+          "name": "Lập trình ứng dụng đa nền tảng nâng cao với .NET",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRN212"
+          ],
+          "notePath": "Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md"
+        },
+        {
+          "code": "PRU213",
+          "name": "Lập trình Game với C Sharp",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRU213 - Lập trình Game với C Sharp.md"
+        },
+        {
+          "code": "SBA301",
+          "name": "Tích hợp ứng dụng trang đơn với Spring Boot",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "HSF302"
+          ],
+          "notePath": "Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md"
+        },
+        {
+          "code": "SDN302",
+          "name": "Phát triển Server-Side với NodeJS, Express và MongoDB",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "FER202"
+          ],
+          "notePath": "Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+        },
+        {
+          "code": "SWD392",
+          "name": "Kiến trúc và thiết kế phần mềm",
+          "semester": 7,
+          "groupCodes": [
+            "SWD392"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md"
+        },
+        {
+          "code": "EXE201",
+          "name": "Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2",
+          "semester": 8,
+          "groupCodes": [
+            "EXE201"
+          ],
+          "prerequisiteCodes": [
+            "EXE101"
+          ],
+          "notePath": "Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md"
+        },
+        {
+          "code": "ITE302c",
+          "name": "Đạo đức trong CNTT",
+          "semester": 8,
+          "groupCodes": [
+            "ITE302c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ITE302c - Đạo đức trong CNTT.md"
+        },
+        {
+          "code": "JIS401",
+          "name": "Tiếng Nhật CNTT trong ngành phần mềm",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md"
+        },
+        {
+          "code": "JIT401",
+          "name": "Tiếng Nhật công nghệ thông tin",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md"
+        },
+        {
+          "code": "MLN111",
+          "name": "Triết học Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN111"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN111 - Triết học Mác - Lê-nin.md"
+        },
+        {
+          "code": "MLN122",
+          "name": "Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN122"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md"
+        },
+        {
+          "code": "PRM393",
+          "name": "Lập trình di động",
+          "semester": 8,
+          "groupCodes": [
+            "PRM393"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRM393 - Lập trình di động.md"
+        },
+        {
+          "code": "EXE402",
+          "name": "Dự án khởi nghiệp tốt nghiệp",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "EXE201",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md"
+        },
+        {
+          "code": "GRC490",
+          "name": "Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "HCM202",
+          "name": "Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh",
+          "semester": 9,
+          "groupCodes": [
+            "HCM202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md"
+        },
+        {
+          "code": "MLN131",
+          "name": "Scientific socialism - Chủ nghĩa xã hội khoa học",
+          "semester": 9,
+          "groupCodes": [
+            "MLN131"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md"
+        },
+        {
+          "code": "PIT490",
+          "name": "Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md"
+        },
+        {
+          "code": "SEP490",
+          "name": "Đồ án tốt nghiệp KTPM",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md"
+        },
+        {
+          "code": "SET490",
+          "name": "Khóa luận tốt nghiệp Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "VNR202",
+          "name": "History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam",
+          "semester": 9,
+          "groupCodes": [
+            "VNR202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md"
+        }
+      ]
+    },
+    {
+      "code": "BIT_SE_K21B",
+      "courses": [
+        {
+          "code": "COV111",
+          "name": "Chess 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/COV111 - Chess 1.md"
+        },
+        {
+          "code": "DBA103",
+          "name": "Nhạc cụ truyền thống - Đàn Bầu",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md"
+        },
+        {
+          "code": "DNG103",
+          "name": "Nhạc cụ truyền thống-Đàn nguyệt",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md"
+        },
+        {
+          "code": "DNH103",
+          "name": "Nhạc cụ truyền thống- Đàn Nhị",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md"
+        },
+        {
+          "code": "DSA103",
+          "name": "Nhạc cụ truyền thống- Sáo trúc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md"
+        },
+        {
+          "code": "DTB103",
+          "name": "Nhạc cụ truyền thống- Đàn Tỳ bà",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md"
+        },
+        {
+          "code": "DTR103",
+          "name": "Nhạc cụ truyền thống-Đàn Tranh",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md"
+        },
+        {
+          "code": "OTP101",
+          "name": "Định hướng và Rèn luyện tập trung",
+          "semester": 0,
+          "groupCodes": [
+            "OTP101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md"
+        },
+        {
+          "code": "PEN",
+          "name": "Tiếng Anh chuẩn bị",
+          "semester": 0,
+          "groupCodes": [
+            "PEN"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PEN - Tiếng Anh chuẩn bị.md"
+        },
+        {
+          "code": "TRG103",
+          "name": "Nhạc cụ truyền thống -Trống dân tộc",
+          "semester": 0,
+          "groupCodes": [
+            "TMI_ELE"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md"
+        },
+        {
+          "code": "VOV114",
+          "name": "Vovinam 1",
+          "semester": 0,
+          "groupCodes": [
+            "PHE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/VOV114 - Vovinam 1.md"
+        },
+        {
+          "code": "CEA201",
+          "name": "Tổ chức và Kiến trúc máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CEA201"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md"
+        },
+        {
+          "code": "COV121",
+          "name": "Chess 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "COV111"
+          ],
+          "notePath": "Mon hoc/COV121 - Chess 2.md"
+        },
+        {
+          "code": "CSI106",
+          "name": "Nhập môn khoa học máy tính",
+          "semester": 1,
+          "groupCodes": [
+            "CSI106"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/CSI106 - Nhập môn khoa học máy tính.md"
+        },
+        {
+          "code": "MAE101",
+          "name": "Toán cho ngành kỹ thuật",
+          "semester": 1,
+          "groupCodes": [
+            "MAE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md"
+        },
+        {
+          "code": "PRF192",
+          "name": "Cơ sở lập trình",
+          "semester": 1,
+          "groupCodes": [
+            "PRF192"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRF192 - Cơ sở lập trình.md"
+        },
+        {
+          "code": "SSA101",
+          "name": "Kỹ năng học thuật",
+          "semester": 1,
+          "groupCodes": [
+            "SSA101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSA101 - Kỹ năng học thuật.md"
+        },
+        {
+          "code": "VOV124",
+          "name": "Vovinam 2",
+          "semester": 1,
+          "groupCodes": [
+            "PHE_COM*2"
+          ],
+          "prerequisiteCodes": [
+            "VOV114"
+          ],
+          "notePath": "Mon hoc/VOV124 - Vovinam 2.md"
+        },
+        {
+          "code": "COV131",
+          "name": "Chess 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "COV121"
+          ],
+          "notePath": "Mon hoc/COV131 - Chess 3.md"
+        },
+        {
+          "code": "MAD101",
+          "name": "Toán rời rạc",
+          "semester": 2,
+          "groupCodes": [
+            "MAD101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MAD101 - Toán rời rạc.md"
+        },
+        {
+          "code": "NWC204",
+          "name": "Mạng máy tính",
+          "semester": 2,
+          "groupCodes": [
+            "NWC204"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/NWC204 - Mạng máy tính.md"
+        },
+        {
+          "code": "OSG202",
+          "name": "Hệ điều hành",
+          "semester": 2,
+          "groupCodes": [
+            "OSG202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/OSG202 - Hệ điều hành.md"
+        },
+        {
+          "code": "PRO192",
+          "name": "Lập trình hướng đối tượng",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192 - Lập trình hướng đối tượng.md"
+        },
+        {
+          "code": "PRO192c",
+          "name": "Lập trình hướng đối tượng với Java",
+          "semester": 2,
+          "groupCodes": [
+            "PRO192"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md"
+        },
+        {
+          "code": "VOV134",
+          "name": "Vovinam 3",
+          "semester": 2,
+          "groupCodes": [
+            "PHE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "VOV124"
+          ],
+          "notePath": "Mon hoc/VOV134 - Vovinam 3.md"
+        },
+        {
+          "code": "WED201c",
+          "name": "Thiết kế web",
+          "semester": 2,
+          "groupCodes": [
+            "WED201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WED201c - Thiết kế web.md"
+        },
+        {
+          "code": "DBI202",
+          "name": "Các hệ cơ sở dữ liệu",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md"
+        },
+        {
+          "code": "DBI202-OLD",
+          "name": "Database Systems",
+          "semester": 3,
+          "groupCodes": [
+            "DBI202"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBI202-OLD - Database Systems.md"
+        },
+        {
+          "code": "JPD113",
+          "name": "Tiếng Nhật sơ cấp 1-A1.1",
+          "semester": 3,
+          "groupCodes": [
+            "JPD113"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md"
+        },
+        {
+          "code": "LAB211",
+          "name": "Thực hành OOP với Java",
+          "semester": 3,
+          "groupCodes": [
+            "LAB211"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/LAB211 - Thực hành OOP với Java.md"
+        },
+        {
+          "code": "MAS291",
+          "name": "Xác suất thống kê",
+          "semester": 3,
+          "groupCodes": [
+            "MAS291"
+          ],
+          "prerequisiteCodes": [
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MAS291 - Xác suất thống kê.md"
+        },
+        {
+          "code": "SWE202c",
+          "name": "Nhập môn kỹ thuật phần mềm",
+          "semester": 3,
+          "groupCodes": [
+            "SWE202c"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "CSD201",
+          "name": "Cấu trúc dữ liệu và giải thuật",
+          "semester": 4,
+          "groupCodes": [
+            "CSD201"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md"
+        },
+        {
+          "code": "IOT102",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IOT102 - Internet vạn vật.md"
+        },
+        {
+          "code": "IoT102t",
+          "name": "Internet vạn vật",
+          "semester": 4,
+          "groupCodes": [
+            "IOT102"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/IoT102t - Internet vạn vật.md"
+        },
+        {
+          "code": "JPD123",
+          "name": "Tiếng Nhật sơ cấp 1-A1.2",
+          "semester": 4,
+          "groupCodes": [
+            "JPD123"
+          ],
+          "prerequisiteCodes": [
+            "JPD113"
+          ],
+          "notePath": "Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md"
+        },
+        {
+          "code": "PRJ301",
+          "name": "Phát triển ứng dụng Java web",
+          "semester": 4,
+          "groupCodes": [
+            "PRJ301"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md"
+        },
+        {
+          "code": "SWR302",
+          "name": "Yêu cầu phần mềm",
+          "semester": 4,
+          "groupCodes": [
+            "SWR302"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWR302 - Yêu cầu phần mềm.md"
+        },
+        {
+          "code": "ECI101",
+          "name": "Nhập môn các linh kiện và mạch điện tử",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md"
+        },
+        {
+          "code": "FER202",
+          "name": "Phát triển web Front-End với React",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "WED201c"
+          ],
+          "notePath": "Mon hoc/FER202 - Phát triển web Front-End với React.md"
+        },
+        {
+          "code": "FGU301",
+          "name": "Phát triển game cơ bản",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/FGU301 - Phát triển game cơ bản.md"
+        },
+        {
+          "code": "HSF302",
+          "name": "Làm việc với Spring Framework",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301"
+          ],
+          "notePath": "Mon hoc/HSF302 - Làm việc với Spring Framework.md"
+        },
+        {
+          "code": "JPD133",
+          "name": "Tiếng Nhật sơ cấp 1-A1 - A2",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "JPD123"
+          ],
+          "notePath": "Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md"
+        },
+        {
+          "code": "PDS301m",
+          "name": "Lập trình Python cho khoa học dữ liệu ứng dụng",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "MAS291"
+          ],
+          "notePath": "Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md"
+        },
+        {
+          "code": "PRN212",
+          "name": "Lập trình ứng dụng đa nền tảng cơ bản với .NET",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [
+            "PRO192",
+            "DBI202"
+          ],
+          "notePath": "Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md"
+        },
+        {
+          "code": "PRP201c",
+          "name": "Lập trình Python",
+          "semester": 5,
+          "groupCodes": [
+            "SE_COM*1"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PRP201c - Lập trình Python.md"
+        },
+        {
+          "code": "SSG105",
+          "name": "Kỹ năng giao tiếp và cộng tác",
+          "semester": 5,
+          "groupCodes": [
+            "SSG105"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/SSG105 - Kỹ năng giao tiếp và cộng tác.md"
+        },
+        {
+          "code": "SWP391",
+          "name": "Dự án phát triển phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWP391"
+          ],
+          "prerequisiteCodes": [
+            "PRJ301",
+            "SWE201c",
+            "SWE202c",
+            "LAB211"
+          ],
+          "notePath": "Mon hoc/SWP391 - Dự án phát triển phần mềm.md"
+        },
+        {
+          "code": "SWT301",
+          "name": "Kiểm thử phần mềm",
+          "semester": 5,
+          "groupCodes": [
+            "SWT301"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c"
+          ],
+          "notePath": "Mon hoc/SWT301 - Kiểm thử phần mềm.md"
+        },
+        {
+          "code": "WDU203c",
+          "name": "Thiết kế trải nghiệm người dùng",
+          "semester": 5,
+          "groupCodes": [
+            "WDU203c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md"
+        },
+        {
+          "code": "ENW493c",
+          "name": "Phương pháp nghiên cứu và kỹ năng viết học thuật",
+          "semester": 6,
+          "groupCodes": [
+            "ENW493c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md"
+        },
+        {
+          "code": "OJT202",
+          "name": "Đào tạo trong môi trường thực tế",
+          "semester": 6,
+          "groupCodes": [
+            "OJT202"
+          ],
+          "prerequisiteCodes": [
+            "JPD133"
+          ],
+          "notePath": "Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md"
+        },
+        {
+          "code": "AGU301",
+          "name": "Phát triển game nâng cao",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FGU301"
+          ],
+          "notePath": "Mon hoc/AGU301 - Phát triển game nâng cao.md"
+        },
+        {
+          "code": "AIL304m",
+          "name": "Học máy",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "MAS291",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/AIL304m - Học máy.md"
+        },
+        {
+          "code": "DBM301",
+          "name": "Khai phá dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/DBM301 - Khai phá dữ liệu.md"
+        },
+        {
+          "code": "DCD301",
+          "name": "Thiết kế vi mạch số",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "ECI101"
+          ],
+          "notePath": "Mon hoc/DCD301 - Thiết kế vi mạch số.md"
+        },
+        {
+          "code": "DHV301",
+          "name": "Xử lý và Trực quan hóa Dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m"
+          ],
+          "notePath": "Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md"
+        },
+        {
+          "code": "EXE101",
+          "name": "Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1",
+          "semester": 7,
+          "groupCodes": [
+            "EXE101"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md"
+        },
+        {
+          "code": "GDC301",
+          "name": "Thiết kế game cơ bản - Từ ý tưởng đến thực hiện",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md"
+        },
+        {
+          "code": "JPD316",
+          "name": "Tiếng Nhật trung cấp 1-B1 - B2",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md"
+        },
+        {
+          "code": "KOR311",
+          "name": "Hàn ngữ trung cấp 1",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md"
+        },
+        {
+          "code": "MDS301",
+          "name": "Học máy trong khoa học dữ liệu",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PDS301m",
+            "MAE101"
+          ],
+          "notePath": "Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md"
+        },
+        {
+          "code": "MIP201",
+          "name": "Lập trình vi điều khiển",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRF192"
+          ],
+          "notePath": "Mon hoc/MIP201 - Lập trình vi điều khiển.md"
+        },
+        {
+          "code": "MMA301",
+          "name": "Phát triển ứng dụng di động đa nền tảng",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "FER202"
+          ],
+          "notePath": "Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md"
+        },
+        {
+          "code": "PMG201c",
+          "name": "Quản trị dự án",
+          "semester": 7,
+          "groupCodes": [
+            "PMG201c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/PMG201c - Quản trị dự án.md"
+        },
+        {
+          "code": "PRN222",
+          "name": "Lập trình ứng dụng đa nền tảng nâng cao với .NET",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRN212"
+          ],
+          "notePath": "Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md"
+        },
+        {
+          "code": "PRU213",
+          "name": "Lập trình Game với C Sharp",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRU213 - Lập trình Game với C Sharp.md"
+        },
+        {
+          "code": "SBA301",
+          "name": "Tích hợp ứng dụng trang đơn với Spring Boot",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "HSF302"
+          ],
+          "notePath": "Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md"
+        },
+        {
+          "code": "SDN302",
+          "name": "Phát triển Server-Side với NodeJS, Express và MongoDB",
+          "semester": 7,
+          "groupCodes": [
+            "SE_COM*2",
+            "SE_COM*3"
+          ],
+          "prerequisiteCodes": [
+            "DBI202",
+            "FER202"
+          ],
+          "notePath": "Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+        },
+        {
+          "code": "SWD392",
+          "name": "Kiến trúc và thiết kế phần mềm",
+          "semester": 7,
+          "groupCodes": [
+            "SWD392"
+          ],
+          "prerequisiteCodes": [
+            "SWE201c",
+            "SWE202c",
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md"
+        },
+        {
+          "code": "EXE201",
+          "name": "Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2",
+          "semester": 8,
+          "groupCodes": [
+            "EXE201"
+          ],
+          "prerequisiteCodes": [
+            "EXE101"
+          ],
+          "notePath": "Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md"
+        },
+        {
+          "code": "ITE302c",
+          "name": "Đạo đức trong CNTT",
+          "semester": 8,
+          "groupCodes": [
+            "ITE302c"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/ITE302c - Đạo đức trong CNTT.md"
+        },
+        {
+          "code": "JIS401",
+          "name": "Tiếng Nhật CNTT trong ngành phần mềm",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md"
+        },
+        {
+          "code": "JIT401",
+          "name": "Tiếng Nhật công nghệ thông tin",
+          "semester": 8,
+          "groupCodes": [
+            "SE_COM*4_ELE"
+          ],
+          "prerequisiteCodes": [
+            "JPD316"
+          ],
+          "notePath": "Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md"
+        },
+        {
+          "code": "MLN111",
+          "name": "Triết học Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN111"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN111 - Triết học Mác - Lê-nin.md"
+        },
+        {
+          "code": "MLN122",
+          "name": "Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin",
+          "semester": 8,
+          "groupCodes": [
+            "MLN122"
+          ],
+          "prerequisiteCodes": [],
+          "notePath": "Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md"
+        },
+        {
+          "code": "PRM393",
+          "name": "Lập trình di động",
+          "semester": 8,
+          "groupCodes": [
+            "PRM393"
+          ],
+          "prerequisiteCodes": [
+            "PRO192"
+          ],
+          "notePath": "Mon hoc/PRM393 - Lập trình di động.md"
+        },
+        {
+          "code": "EXE402",
+          "name": "Dự án khởi nghiệp tốt nghiệp",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "EXE201",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md"
+        },
+        {
+          "code": "GRC490",
+          "name": "Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "HCM202",
+          "name": "Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh",
+          "semester": 9,
+          "groupCodes": [
+            "HCM202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md"
+        },
+        {
+          "code": "MLN131",
+          "name": "Scientific socialism - Chủ nghĩa xã hội khoa học",
+          "semester": 9,
+          "groupCodes": [
+            "MLN131"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md"
+        },
+        {
+          "code": "PIT490",
+          "name": "Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md"
+        },
+        {
+          "code": "SEP490",
+          "name": "Đồ án tốt nghiệp KTPM",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md"
+        },
+        {
+          "code": "SET490",
+          "name": "Khóa luận tốt nghiệp Kỹ thuật phần mềm",
+          "semester": 9,
+          "groupCodes": [
+            "SE_GRA_ELE"
+          ],
+          "prerequisiteCodes": [
+            "PMG201c",
+            "SWD392",
+            "SWP391",
+            "OJT202"
+          ],
+          "notePath": "Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md"
+        },
+        {
+          "code": "VNR202",
+          "name": "History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam",
+          "semester": 9,
+          "groupCodes": [
+            "VNR202"
+          ],
+          "prerequisiteCodes": [
+            "MLN111",
+            "MLN122"
+          ],
+          "notePath": "Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md"
+        }
+      ]
+    }
+  ]
+}
