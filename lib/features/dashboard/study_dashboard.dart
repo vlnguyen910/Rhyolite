@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../design_system/app_theme.dart';
 import '../../domain/models/curriculum_catalog.dart';
 import '../../domain/models/personal_note.dart';
+import '../../domain/models/student_transcript.dart';
 import '../../services/personal_note_service.dart';
 
 class StudyDashboard extends StatefulWidget {
@@ -18,6 +19,7 @@ class StudyDashboard extends StatefulWidget {
     required this.onOpenChat,
     required this.onOpenGraph,
     this.noteService,
+    this.transcriptByCode = const {},
   });
 
   final String curriculum;
@@ -30,6 +32,7 @@ class StudyDashboard extends StatefulWidget {
   final ValueChanged<String> onOpenChat;
   final VoidCallback onOpenGraph;
   final IPersonalNoteService? noteService;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   State<StudyDashboard> createState() => _StudyDashboardState();
@@ -96,6 +99,7 @@ class _StudyDashboardState extends State<StudyDashboard> {
                 semesterCount: semesters.length,
                 curriculumCount: widget.curriculumCodes.length,
                 notes: _recentNotes,
+                transcriptCount: widget.transcriptByCode.length,
               ),
               const SizedBox(height: AppSpacing.lg),
               LayoutBuilder(
@@ -109,6 +113,7 @@ class _StudyDashboardState extends State<StudyDashboard> {
                         setState(() => _semester = value),
                     onCoursePressed: widget.onOpenCourse,
                     onOpenCurriculum: widget.onOpenCurriculum,
+                    transcriptByCode: widget.transcriptByCode,
                   );
                   final assistant = _AssistantCard(onPrompt: widget.onOpenChat);
                   if (stacked) {
@@ -362,12 +367,14 @@ class _OverviewMetrics extends StatelessWidget {
     required this.semesterCount,
     required this.curriculumCount,
     required this.notes,
+    required this.transcriptCount,
   });
 
   final int courseCount;
   final int semesterCount;
   final int curriculumCount;
   final Future<List<PersonalNote>> notes;
+  final int transcriptCount;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -393,9 +400,11 @@ class _OverviewMetrics extends StatelessWidget {
           _DashboardMetric(
             width: width,
             icon: Icons.insights_outlined,
-            value: '—',
-            label: 'GPA · Chưa nhập',
-            muted: true,
+            value: transcriptCount == 0 ? '—' : '$transcriptCount',
+            label: transcriptCount == 0
+                ? 'Kết quả · Chưa nhập'
+                : 'Kết quả đã nhập',
+            muted: transcriptCount == 0,
           ),
           FutureBuilder<List<PersonalNote>>(
             future: notes,
@@ -487,6 +496,7 @@ class _SemesterExplorer extends StatelessWidget {
     required this.onSemesterChanged,
     required this.onCoursePressed,
     required this.onOpenCurriculum,
+    required this.transcriptByCode,
   });
 
   final int semester;
@@ -495,6 +505,7 @@ class _SemesterExplorer extends StatelessWidget {
   final ValueChanged<int> onSemesterChanged;
   final ValueChanged<CurriculumCourse> onCoursePressed;
   final VoidCallback onOpenCurriculum;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   Widget build(BuildContext context) {
@@ -541,6 +552,7 @@ class _SemesterExplorer extends StatelessWidget {
                   title: 'Môn chung',
                   courses: sharedCourses,
                   onCoursePressed: onCoursePressed,
+                  transcriptByCode: transcriptByCode,
                 ),
               if (sharedCourses.isNotEmpty && comboCourses.isNotEmpty)
                 const SizedBox(height: 18),
@@ -549,6 +561,7 @@ class _SemesterExplorer extends StatelessWidget {
                   title: 'Môn thuộc nhóm combo',
                   courses: comboCourses,
                   onCoursePressed: onCoursePressed,
+                  transcriptByCode: transcriptByCode,
                 ),
             ],
           ],
@@ -563,11 +576,13 @@ class _CourseGroup extends StatelessWidget {
     required this.title,
     required this.courses,
     required this.onCoursePressed,
+    required this.transcriptByCode,
   });
 
   final String title;
   final List<CurriculumCourse> courses;
   final ValueChanged<CurriculumCourse> onCoursePressed;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -586,6 +601,7 @@ class _CourseGroup extends StatelessWidget {
           for (final course in courses)
             _CourseShortcut(
               course: course,
+              transcriptRecord: transcriptByCode[course.code.toUpperCase()],
               onPressed: () => onCoursePressed(course),
             ),
         ],
@@ -595,10 +611,15 @@ class _CourseGroup extends StatelessWidget {
 }
 
 class _CourseShortcut extends StatelessWidget {
-  const _CourseShortcut({required this.course, required this.onPressed});
+  const _CourseShortcut({
+    required this.course,
+    required this.onPressed,
+    this.transcriptRecord,
+  });
 
   final CurriculumCourse course;
   final VoidCallback onPressed;
+  final TranscriptRecord? transcriptRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -655,6 +676,24 @@ class _CourseShortcut extends StatelessWidget {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .onSurfaceVariant,
+                              ),
+                        ),
+                      ],
+                      if (transcriptRecord != null) ...[
+                        const SizedBox(height: 3),
+                        Text(
+                          'Điểm ${transcriptRecord!.grade.isEmpty ? '—' : transcriptRecord!.grade}'
+                          '${transcriptRecord!.status.isEmpty ? '' : ' · ${transcriptRecord!.status}'}',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
+                                color: transcriptRecord!.isPassed
+                                    ? Theme.of(context)
+                                          .extension<KnowledgeColors>()!
+                                          .success
+                                    : Theme.of(context).colorScheme.error,
+                                fontWeight: FontWeight.w800,
                               ),
                         ),
                       ],

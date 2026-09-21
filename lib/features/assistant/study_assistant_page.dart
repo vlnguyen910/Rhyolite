@@ -3,6 +3,7 @@ import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 import '../../domain/models/course_assistant_answer.dart';
 import '../../domain/models/curriculum_catalog.dart';
+import '../../domain/models/student_transcript.dart';
 import '../../services/course_assistant_service.dart';
 import '../knowledge/markdown_rendering.dart';
 
@@ -15,6 +16,7 @@ class StudyAssistantPage extends StatefulWidget {
     this.initialPrompt,
     this.promptRequestId = 0,
     this.service,
+    this.transcript,
   });
 
   final List<CurriculumCourse> courses;
@@ -23,6 +25,7 @@ class StudyAssistantPage extends StatefulWidget {
   final String? initialPrompt;
   final int promptRequestId;
   final ICourseAssistantService? service;
+  final StudentTranscript? transcript;
 
   @override
   State<StudyAssistantPage> createState() => _StudyAssistantPageState();
@@ -35,7 +38,7 @@ class _StudyAssistantPageState extends State<StudyAssistantPage> {
   final _messages = <_ChatEntry>[
     const _ChatEntry(
       role: _ChatRole.assistant,
-      markdown: 'Xin chào! Mình có thể đọc curriculum và syllabus đang lưu trong ứng dụng. Hãy hỏi về **mô tả môn, tín chỉ, thời lượng, tiên quyết, công cụ hoặc nội dung học**.',
+      markdown: 'Xin chào! Mình có thể đọc curriculum, syllabus và bảng điểm đã import. Hãy hỏi về **mô tả môn, tín chỉ, điểm số, môn đã qua, môn cần học lại hoặc tiến độ học tập**.',
     ),
   ];
   bool _sending = false;
@@ -79,7 +82,11 @@ class _StudyAssistantPageState extends State<StudyAssistantPage> {
       _sending = true;
     });
     _scrollToEnd();
-    final answer = await _service.answer(question, widget.courses);
+    final answer = await _service.answer(
+      question,
+      widget.courses,
+      transcript: widget.transcript,
+    );
     if (!mounted) return;
     setState(() {
       _messages.add(
@@ -112,6 +119,8 @@ class _StudyAssistantPageState extends State<StudyAssistantPage> {
       'PRM393 có bao nhiêu tín chỉ?',
       'Thời lượng của PRM393?',
       'Các môn tiên quyết của kỳ 8?',
+      'Điểm PRM393 của tôi là bao nhiêu?',
+      'Tôi còn môn nào chưa qua?',
     ];
     return Column(
       children: [
@@ -129,7 +138,7 @@ class _StudyAssistantPageState extends State<StudyAssistantPage> {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  'Đang trả lời từ dữ liệu local · ${_curriculumLabel(widget.curriculumCode)}',
+                  '${_service.providerLabel} · ${_curriculumLabel(widget.curriculumCode)}',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
                     fontWeight: FontWeight.w600,
@@ -139,6 +148,18 @@ class _StudyAssistantPageState extends State<StudyAssistantPage> {
             ],
           ),
         ),
+        if (_service.providerLabel.startsWith('Groq'))
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            child: Text(
+              'Khi hỏi Groq, dữ liệu môn học và bảng điểm đã import được gửi làm ngữ cảnh trả lời.',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+              ),
+            ),
+          ),
         Expanded(
           child: Center(
             child: ConstrainedBox(

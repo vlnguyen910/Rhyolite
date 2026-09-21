@@ -57,6 +57,7 @@
 | D-051 | Main UI dùng dashboard-first; curriculum semester board là page riêng và curriculum graph được mở từ dashboard/semester board. |
 | D-052 | Curriculum graph dùng quan hệ prerequisite/dependent; Course Detail graph bổ sung syllabus-topic và personal-note nodes. |
 | D-053 | Course Q&A cơ bản có thể trả lời local từ bundled curriculum/syllabus và cite syllabus; cloud AI dành cho truy vấn sâu hoặc personalization sau khi provider/consent được cấu hình. |
+| D-054 | MVP desktop dùng Groq qua OpenAI-compatible Chat Completions API; Flutter gọi trực tiếp qua service abstraction, key đọc từ environment hoặc `.env` local bị Git ignore, và tự fallback về local assistant khi cloud không khả dụng. |
 
 ## Open decisions
 
@@ -65,9 +66,6 @@
 | T-001 | Required fields của Course Markdown. |
 | T-002 | Curriculum JSON schema. |
 | T-003 | Local database technology. |
-| T-004 | Cloud AI provider. |
-| T-005 | Direct AI call vs backend/proxy. |
-| T-006 | API key handling. |
 | T-007 | Browser Extension target browser. |
 | T-008 | Localhost transport protocol. |
 | T-009 | File format cho transcript upload fallback. |

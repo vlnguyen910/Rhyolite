@@ -5,9 +5,11 @@ import 'package:rhyolite/design_system/app_theme.dart';
 import 'package:rhyolite/domain/models/course_knowledge.dart';
 import 'package:rhyolite/domain/models/curriculum_catalog.dart';
 import 'package:rhyolite/domain/models/personal_note.dart';
+import 'package:rhyolite/domain/models/student_transcript.dart';
 import 'package:rhyolite/services/course_knowledge_service.dart';
 import 'package:rhyolite/services/curriculum_service.dart';
 import 'package:rhyolite/services/personal_note_service.dart';
+import 'package:rhyolite/services/transcript_service.dart';
 import 'package:rhyolite/viewmodels/home_viewmodel.dart';
 
 class _TestCurriculumService implements ICurriculumService {
@@ -74,6 +76,21 @@ class _MemoryNoteService implements IPersonalNoteService {
     notes.add(note);
     return note;
   }
+}
+
+class _MemoryTranscriptRepository implements ITranscriptRepository {
+  _MemoryTranscriptRepository([this.transcript]);
+
+  StudentTranscript? transcript;
+
+  @override
+  Future<void> delete() async => transcript = null;
+
+  @override
+  Future<StudentTranscript?> load() async => transcript;
+
+  @override
+  Future<void> save(StudentTranscript value) async => transcript = value;
 }
 
 const _sharedCourses = [
@@ -199,10 +216,14 @@ const _catalog = CurriculumCatalog(
   ],
 );
 
-RhyoliteApp _testApp({_MemoryNoteService? noteService}) => RhyoliteApp(
+RhyoliteApp _testApp({
+  _MemoryNoteService? noteService,
+  ITranscriptRepository? transcriptRepository,
+}) => RhyoliteApp(
   homeViewModel: HomeViewModel(curriculumService: _TestCurriculumService()),
   courseKnowledgeService: _TestKnowledgeService(),
   noteService: noteService ?? _MemoryNoteService(),
+  transcriptRepository: transcriptRepository ?? _MemoryTranscriptRepository(),
 );
 
 void main() {
@@ -244,7 +265,8 @@ void main() {
 
     await tester.tap(find.text('Bảng điểm'));
     await tester.pumpAndSettle();
-    expect(find.text('Transcript Management'), findsOneWidget);
+    expect(find.text('Bảng điểm học tập'), findsOneWidget);
+    expect(find.text('Chọn file Excel'), findsOneWidget);
     expect(find.text('Software Engineering'), findsNothing);
   });
 
@@ -280,6 +302,43 @@ void main() {
       expect(find.textContaining('Mô tả kiểm thử cho PRF192'), findsOneWidget);
     },
   );
+
+  testWidgets('Imported grades are pinned to curriculum and course detail', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final transcript = StudentTranscript(
+      sourceFileName: 'AcademicTranscript.xls',
+      importedAt: DateTime.utc(2026, 9, 21),
+      records: const [
+        TranscriptRecord(
+          term: 'Fall2025',
+          semester: '1',
+          subjectCode: 'PRF192',
+          subjectName: 'Cơ sở lập trình',
+          prerequisite: '',
+          replacedSubject: '',
+          credit: '3',
+          grade: '8.5',
+          status: 'Passed',
+          matchesCurriculum: true,
+        ),
+      ],
+    );
+    await tester.pumpWidget(
+      _testApp(transcriptRepository: _MemoryTranscriptRepository(transcript)),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Chương trình học'));
+    await tester.pumpAndSettle();
+    expect(find.text('8.5'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('course:PRF192')));
+    await tester.pumpAndSettle();
+    expect(find.text('Điểm 8.5 · Passed'), findsOneWidget);
+  });
 
   testWidgets('Curriculum graph selects a node and opens course detail', (
     tester,
