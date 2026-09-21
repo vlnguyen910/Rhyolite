@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../design_system/app_theme.dart';
 import '../domain/models/curriculum_catalog.dart';
+import '../domain/models/student_transcript.dart';
 import '../features/assistant/study_assistant_page.dart';
 import '../features/dashboard/study_dashboard.dart';
 import '../features/graph/curriculum_graph_page.dart';
 import '../features/knowledge/course_detail_page.dart';
+import '../features/transcript/transcript_page.dart';
 import '../services/course_knowledge_service.dart';
-import '../services/course_assistant_service.dart';
+import '../services/groq_course_assistant_service.dart';
 import '../services/personal_note_service.dart';
+import '../services/transcript_service.dart';
 import '../viewmodels/home_viewmodel.dart';
 
 class HomeView extends StatefulWidget {
@@ -17,11 +20,15 @@ class HomeView extends StatefulWidget {
     this.viewModel,
     this.courseKnowledgeService,
     this.noteService,
+    this.transcriptParser,
+    this.transcriptRepository,
   });
 
   final HomeViewModel? viewModel;
   final ICourseKnowledgeService? courseKnowledgeService;
   final IPersonalNoteService? noteService;
+  final ITranscriptParser? transcriptParser;
+  final ITranscriptRepository? transcriptRepository;
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -34,6 +41,7 @@ class _HomeViewState extends State<HomeView> {
   String _query = '';
   String? _assistantPrompt;
   int _assistantPromptRequest = 0;
+  StudentTranscript? _transcript;
 
   static const _destinations = [
     _Destination(
@@ -131,6 +139,10 @@ class _HomeViewState extends State<HomeView> {
       final selectedCurriculum = catalog.find(_curriculum) != null
           ? _curriculum
           : catalog.codes.first;
+      final selectedCourses = catalog.find(selectedCurriculum)!.courses;
+      final transcriptByCode =
+          _transcript?.latestBySubjectCode ??
+          const <String, TranscriptRecord>{};
       return LayoutBuilder(
         builder: (context, constraints) {
           final compact = constraints.maxWidth < AppBreakpoints.compact;
@@ -168,9 +180,8 @@ class _HomeViewState extends State<HomeView> {
                               StudyDashboard(
                                 curriculum: selectedCurriculum,
                                 curriculumCodes: catalog.codes,
-                                courses: catalog
-                                    .find(selectedCurriculum)!
-                                    .courses,
+                                courses: selectedCourses,
+                                transcriptByCode: transcriptByCode,
                                 noteService: widget.noteService,
                                 onCurriculumChanged: (value) {
                                   if (value != null) {
@@ -196,9 +207,8 @@ class _HomeViewState extends State<HomeView> {
                               _CurriculumOverview(
                                 curriculum: selectedCurriculum,
                                 curriculumCodes: catalog.codes,
-                                courses: catalog
-                                    .find(selectedCurriculum)!
-                                    .courses,
+                                courses: selectedCourses,
+                                transcriptByCode: transcriptByCode,
                                 query: _query,
                                 onCurriculumChanged: (value) {
                                   if (value != null) {
@@ -208,10 +218,17 @@ class _HomeViewState extends State<HomeView> {
                                 onCoursePressed: _showCoursePreview,
                                 onGraphPressed: _showCurriculumGraph,
                               ),
-                              _placeholder(
-                                Icons.table_chart_outlined,
-                                'Transcript Management',
-                                'Import bảng điểm, xem trước dữ liệu và xác nhận trước khi lưu local.',
+                              TranscriptPage(
+                                courses: selectedCourses,
+                                parser: widget.transcriptParser,
+                                repository: widget.transcriptRepository,
+                                onTranscriptChanged: (transcript) {
+                                  if (!mounted ||
+                                      identical(_transcript, transcript)) {
+                                    return;
+                                  }
+                                  setState(() => _transcript = transcript);
+                                },
                               ),
                               _placeholder(
                                 Icons.analytics_outlined,
@@ -220,10 +237,9 @@ class _HomeViewState extends State<HomeView> {
                               ),
                               StudyAssistantPage(
                                 curriculumCode: selectedCurriculum,
-                                courses: catalog
-                                    .find(selectedCurriculum)!
-                                    .courses,
-                                service: CourseAssistantService(
+                                courses: selectedCourses,
+                                transcript: _transcript,
+                                service: GroqCourseAssistantService(
                                   knowledgeService:
                                       widget.courseKnowledgeService,
                                 ),
@@ -422,6 +438,9 @@ class _HomeViewState extends State<HomeView> {
           allCourses: selected.courses,
           knowledgeService: widget.courseKnowledgeService,
           noteService: widget.noteService,
+          transcriptByCode:
+              _transcript?.latestBySubjectCode ??
+              const <String, TranscriptRecord>{},
         ),
       ),
     );
@@ -566,6 +585,7 @@ class _CurriculumOverview extends StatelessWidget {
     required this.onCurriculumChanged,
     required this.onCoursePressed,
     required this.onGraphPressed,
+    required this.transcriptByCode,
   });
 
   final String curriculum;
@@ -575,6 +595,7 @@ class _CurriculumOverview extends StatelessWidget {
   final ValueChanged<String?> onCurriculumChanged;
   final ValueChanged<CurriculumCourse> onCoursePressed;
   final VoidCallback onGraphPressed;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   Widget build(BuildContext context) {
@@ -708,6 +729,7 @@ class _CurriculumOverview extends StatelessWidget {
                   child: _SemesterBoard(
                     groups: semesterGroups,
                     onCoursePressed: onCoursePressed,
+                    transcriptByCode: transcriptByCode,
                   ),
                 ),
         ),
@@ -769,10 +791,15 @@ class _MetricCard extends StatelessWidget {
 }
 
 class _SemesterBoard extends StatelessWidget {
-  const _SemesterBoard({required this.groups, required this.onCoursePressed});
+  const _SemesterBoard({
+    required this.groups,
+    required this.onCoursePressed,
+    required this.transcriptByCode,
+  });
 
   final Map<int, List<CurriculumCourse>> groups;
   final ValueChanged<CurriculumCourse> onCoursePressed;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   Widget build(BuildContext context) {
@@ -787,6 +814,7 @@ class _SemesterBoard extends StatelessWidget {
               courses: groups[semester]!,
               onCoursePressed: onCoursePressed,
               compact: compact,
+              transcriptByCode: transcriptByCode,
             ),
         ];
         return Column(
@@ -849,12 +877,14 @@ class _SemesterColumn extends StatelessWidget {
     required this.courses,
     required this.onCoursePressed,
     required this.compact,
+    required this.transcriptByCode,
   });
 
   final int semester;
   final List<CurriculumCourse> courses;
   final ValueChanged<CurriculumCourse> onCoursePressed;
   final bool compact;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -913,6 +943,8 @@ class _SemesterColumn extends StatelessWidget {
             for (var index = 0; index < courses.length; index++) ...[
               _CourseTile(
                 course: courses[index],
+                transcriptRecord:
+                    transcriptByCode[courses[index].code.toUpperCase()],
                 onPressed: () => onCoursePressed(courses[index]),
               ),
               if (index != courses.length - 1) const SizedBox(height: 8),
@@ -925,10 +957,15 @@ class _SemesterColumn extends StatelessWidget {
 }
 
 class _CourseTile extends StatelessWidget {
-  const _CourseTile({required this.course, required this.onPressed});
+  const _CourseTile({
+    required this.course,
+    required this.onPressed,
+    this.transcriptRecord,
+  });
 
   final CurriculumCourse course;
   final VoidCallback onPressed;
+  final TranscriptRecord? transcriptRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -988,9 +1025,47 @@ class _CourseTile extends StatelessWidget {
                   ],
                 ),
               ),
+              if (transcriptRecord != null) ...[
+                const SizedBox(width: 8),
+                _GradeBadge(record: transcriptRecord!),
+              ],
+              const SizedBox(width: 4),
               const Icon(Icons.chevron_right),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GradeBadge extends StatelessWidget {
+  const _GradeBadge({required this.record});
+
+  final TranscriptRecord record;
+
+  @override
+  Widget build(BuildContext context) {
+    final status = record.status.trim().toLowerCase();
+    final color = switch (status) {
+      'passed' => Theme.of(context).extension<KnowledgeColors>()!.success,
+      'not passed' || 'failed' => Theme.of(context).colorScheme.error,
+      'studying' => Theme.of(context).colorScheme.primary,
+      _ => Theme.of(context).colorScheme.outline,
+    };
+    return Tooltip(
+      message: record.status.isEmpty ? 'Chưa rõ trạng thái' : record.status,
+      child: Container(
+        constraints: const BoxConstraints(minWidth: 42),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: .12),
+          borderRadius: BorderRadius.circular(999),
+        ),
+        child: Text(
+          record.grade.isEmpty ? '—' : record.grade,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: color, fontWeight: FontWeight.w900),
         ),
       ),
     );

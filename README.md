@@ -51,3 +51,13 @@ flutter run -d linux
 # or on Windows:
 flutter run -d windows
 ```
+
+### Groq assistant
+
+Copy `.env.example` to `.env`, then set your local `GROQ_API_KEY`. The app reads
+`GROQ_API_KEY` and `GROQ_MODEL` from the operating-system environment first and
+falls back to the local `.env` file while running from the project directory.
+The `.env` file is ignored by Git and must never be committed.
+
+When Groq is unavailable or is not configured, the assistant continues to
+answer from the bundled curriculum and syllabus data.

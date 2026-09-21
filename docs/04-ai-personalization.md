@@ -15,17 +15,15 @@ AI phục vụ:
 
 ## 2. AI provider
 
-Cloud AI provider: `TBD`.
-
-Ví dụ provider không được mặc định trong spec.
+Cloud AI provider của MVP: Groq, dùng OpenAI-compatible Chat Completions API.
+Model được cấu hình bằng `GROQ_MODEL` để có thể thay đổi mà không sửa UI.
 
 ## 3. AI call architecture
 
-Desktop app gọi AI trực tiếp hay qua backend/proxy: `TBD`.
-
-API key management: `TBD`.
-
-Không implement architecture cố định cho hai phần này trước khi có quyết định.
+Desktop app lab gọi Groq trực tiếp qua `GroqCourseAssistantService`. Key được đọc
+từ `GROQ_API_KEY` trong environment hoặc `.env` local bị Git ignore. Khi không có
+key hoặc request lỗi, app dùng local assistant. Interface service giữ khả năng
+chuyển sang backend/proxy cho bản phân phối rộng hơn.
 
 ## 4. Knowledge boundary
 

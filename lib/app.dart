@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'design_system/app_theme.dart';
 import 'services/course_knowledge_service.dart';
 import 'services/personal_note_service.dart';
+import 'services/transcript_service.dart';
 import 'viewmodels/home_viewmodel.dart';
 import 'views/home_view.dart';
 
@@ -12,11 +13,15 @@ class RhyoliteApp extends StatelessWidget {
     this.homeViewModel,
     this.courseKnowledgeService,
     this.noteService,
+    this.transcriptParser,
+    this.transcriptRepository,
   });
 
   final HomeViewModel? homeViewModel;
   final ICourseKnowledgeService? courseKnowledgeService;
   final IPersonalNoteService? noteService;
+  final ITranscriptParser? transcriptParser;
+  final ITranscriptRepository? transcriptRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +35,8 @@ class RhyoliteApp extends StatelessWidget {
         viewModel: homeViewModel,
         courseKnowledgeService: courseKnowledgeService,
         noteService: noteService,
+        transcriptParser: transcriptParser,
+        transcriptRepository: transcriptRepository,
       ),
     );
   }

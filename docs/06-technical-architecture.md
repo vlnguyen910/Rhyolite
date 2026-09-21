@@ -149,23 +149,18 @@ Post-warning behavior: `TBD`.
 
 ## 10. AI architecture
 
-AI provider: `TBD`.
-
-Connection architecture:
+MVP provider: Groq qua OpenAI-compatible Chat Completions API.
 
 ```text
-Flutter → Cloud AI
+Flutter → GroqCourseAssistantService → Groq API
+                       ↓ khi lỗi/chưa có key
+              CourseAssistantService local
 ```
 
-hoặc:
-
-```text
-Flutter → Backend/Proxy → Cloud AI
-```
-
-chưa được quyết định.
-
-API key handling cũng `TBD`.
+Flutter gọi Groq trực tiếp trong bản lab desktop. Provider nằm sau
+`ICourseAssistantService` để có thể chuyển sang backend/proxy mà không đổi UI.
+Key được đọc từ biến môi trường hệ điều hành hoặc `.env` local đã bị Git ignore;
+không hard-code hoặc bundle key vào source.
 
 ## 11. Retrieval architecture
 

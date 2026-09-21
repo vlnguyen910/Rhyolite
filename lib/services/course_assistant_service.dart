@@ -1,13 +1,17 @@
 import '../domain/models/course_assistant_answer.dart';
 import '../domain/models/course_knowledge.dart';
 import '../domain/models/curriculum_catalog.dart';
+import '../domain/models/student_transcript.dart';
 import 'course_knowledge_service.dart';
 
 abstract class ICourseAssistantService {
+  String get providerLabel => 'Dữ liệu local';
+
   Future<CourseAssistantAnswer> answer(
     String question,
-    List<CurriculumCourse> courses,
-  );
+    List<CurriculumCourse> courses, {
+    StudentTranscript? transcript,
+  });
 }
 
 class CourseAssistantService implements ICourseAssistantService {
@@ -17,10 +21,14 @@ class CourseAssistantService implements ICourseAssistantService {
   final ICourseKnowledgeService _knowledgeService;
 
   @override
+  String get providerLabel => 'Dữ liệu local';
+
+  @override
   Future<CourseAssistantAnswer> answer(
     String question,
-    List<CurriculumCourse> courses,
-  ) async {
+    List<CurriculumCourse> courses, {
+    StudentTranscript? transcript,
+  }) async {
     final clean = question.trim();
     if (clean.isEmpty) {
       return const CourseAssistantAnswer(
@@ -30,6 +38,20 @@ class CourseAssistantService implements ICourseAssistantService {
     final normalized = _fold(clean);
     final semester = _semesterFrom(normalized);
     final course = _findCourse(clean, courses);
+
+    if (_asksAboutTranscript(normalized)) {
+      if (transcript == null || transcript.records.isEmpty) {
+        return const CourseAssistantAnswer(
+          markdown:
+              'Mình chưa có bảng điểm của bạn. Hãy mở **Bảng điểm**, import file '
+              'Academic Transcript từ FAP và xác nhận import trước khi hỏi lại.',
+        );
+      }
+      if (course != null) {
+        return _courseTranscriptAnswer(course, transcript);
+      }
+      return _transcriptAnswer(normalized, semester, transcript, courses);
+    }
 
     if (course == null && semester != null) {
       return _semesterAnswer(semester, normalized, courses);
@@ -109,6 +131,123 @@ class CourseAssistantService implements ICourseAssistantService {
       '- Tín chỉ: **${knowledge.credits ?? 'chưa rõ'}**\n'
       '- Tiên quyết: **${_prerequisiteText(course)}**'
       '${topicPreview.isEmpty ? '' : '\n\n### Module tiêu biểu\n\n${topicPreview.map((topic) => '- ${topic.title}').join('\n')}'}',
+    );
+  }
+
+  bool _asksAboutTranscript(String question) => _containsAny(question, [
+    'diem',
+    'bang diem',
+    'ket qua',
+    'gpa',
+    'hoc luc',
+    'tien do',
+    'da qua',
+    'chua qua',
+    'mon rot',
+    'mon truot',
+    'passed',
+    'not passed',
+    'studying',
+    'dang hoc',
+    'tu van hoc',
+  ]);
+
+  CourseAssistantAnswer _courseTranscriptAnswer(
+    CurriculumCourse course,
+    StudentTranscript transcript,
+  ) {
+    final record = transcript.latestBySubjectCode[course.code.toUpperCase()];
+    if (record == null) {
+      return CourseAssistantAnswer(
+        course: course,
+        markdown:
+            'Bảng điểm đã được import nhưng chưa có kết quả cho '
+            '**${course.code} · ${course.name}**.',
+      );
+    }
+    return CourseAssistantAnswer(
+      course: course,
+      markdown:
+          '## Kết quả ${course.code} · ${course.name}\n\n'
+          '- Điểm: **${record.grade.isEmpty ? 'chưa có' : record.grade}**\n'
+          '- Trạng thái: **${record.status.isEmpty ? 'chưa rõ' : record.status}**\n'
+          '${record.term.isEmpty ? '' : '- Học kỳ FAP: **${record.term}**\n'}'
+          '${record.credit.isEmpty ? '' : '- Tín chỉ: **${record.credit}**'}',
+    );
+  }
+
+  CourseAssistantAnswer _transcriptAnswer(
+    String normalizedQuestion,
+    int? semester,
+    StudentTranscript transcript,
+    List<CurriculumCourse> courses,
+  ) {
+    var records = transcript.latestBySubjectCode.values.toList();
+    if (semester != null) {
+      final semesterCodes = {
+        for (final course in courses.where(
+          (course) => course.semester == semester,
+        ))
+          course.code.toUpperCase(),
+      };
+      records = records
+          .where(
+            (record) =>
+                semesterCodes.contains(record.subjectCode.toUpperCase()),
+          )
+          .toList();
+    }
+    final asksNotPassed = _containsAny(normalizedQuestion, [
+      'chua qua',
+      'mon rot',
+      'mon truot',
+      'not passed',
+    ]);
+    final asksPassed =
+        !asksNotPassed &&
+        _containsAny(normalizedQuestion, ['da qua', 'passed']);
+    final asksStudying = _containsAny(normalizedQuestion, [
+      'dang hoc',
+      'studying',
+    ]);
+    if (asksNotPassed) {
+      records = records.where((record) {
+        final status = record.status.trim().toLowerCase();
+        return status == 'not passed' || status == 'failed';
+      }).toList();
+    } else if (asksPassed) {
+      records = records.where((record) => record.isPassed).toList();
+    } else if (asksStudying) {
+      records = records
+          .where((record) => record.status.trim().toLowerCase() == 'studying')
+          .toList();
+    }
+
+    final passed = transcript.latestBySubjectCode.values
+        .where((record) => record.isPassed)
+        .length;
+    final heading = semester == null
+        ? 'Bảng điểm đã import'
+        : 'Kết quả các môn thuộc kỳ $semester';
+    if (records.isEmpty) {
+      return CourseAssistantAnswer(
+        markdown:
+            '## $heading\n\nKhông tìm thấy môn phù hợp với yêu cầu trong bảng điểm.',
+      );
+    }
+    final rows = records
+        .map(
+          (record) =>
+              '- **${record.subjectCode}** · ${record.subjectName}: '
+              '**${record.grade.isEmpty ? '—' : record.grade}** · '
+              '${record.status.isEmpty ? 'chưa rõ trạng thái' : record.status}',
+        )
+        .join('\n');
+    return CourseAssistantAnswer(
+      markdown:
+          '## $heading\n\n'
+          'Đã đọc **${transcript.latestBySubjectCode.length} môn**, trong đó '
+          '**$passed môn Passed**.\n\n$rows',
     );
   }
 

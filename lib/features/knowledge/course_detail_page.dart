@@ -5,6 +5,7 @@ import '../../design_system/app_theme.dart';
 import '../../domain/models/course_knowledge.dart';
 import '../../domain/models/curriculum_catalog.dart';
 import '../../domain/models/personal_note.dart';
+import '../../domain/models/student_transcript.dart';
 import '../../services/course_knowledge_service.dart';
 import '../../services/personal_note_service.dart';
 import '../graph/course_graph_panel.dart';
@@ -19,6 +20,7 @@ class CourseDetailPage extends StatefulWidget {
     required this.allCourses,
     this.knowledgeService,
     this.noteService,
+    this.transcriptByCode = const {},
   });
 
   final CurriculumCourse course;
@@ -26,6 +28,7 @@ class CourseDetailPage extends StatefulWidget {
   final List<CurriculumCourse> allCourses;
   final ICourseKnowledgeService? knowledgeService;
   final IPersonalNoteService? noteService;
+  final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
   State<CourseDetailPage> createState() => _CourseDetailPageState();
@@ -63,6 +66,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           allCourses: widget.allCourses,
           knowledgeService: _knowledgeService,
           noteService: _noteService,
+          transcriptByCode: widget.transcriptByCode,
         ),
       ),
     );
@@ -183,6 +187,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
       );
 
   Widget _overview(CourseKnowledge knowledge) {
+    final transcriptRecord =
+        widget.transcriptByCode[widget.course.code.toUpperCase()];
     final prerequisites = widget.course.prerequisiteCodes;
     final dependents = widget.allCourses
         .where(
@@ -214,6 +220,14 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                     ),
                   ),
                   Chip(label: Text(widget.curriculumCode)),
+                  if (transcriptRecord != null)
+                    Chip(
+                      avatar: const Icon(Icons.fact_check_outlined, size: 18),
+                      label: Text(
+                        'Điểm ${transcriptRecord.grade.isEmpty ? '—' : transcriptRecord.grade}'
+                        '${transcriptRecord.status.isEmpty ? '' : ' · ${transcriptRecord.status}'}',
+                      ),
+                    ),
                   if (widget.course.isChoice)
                     Chip(
                       avatar: const Icon(Icons.alt_route, size: 18),
