@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
-import '../domain/models/course_knowledge.dart';
-import '../domain/models/curriculum_catalog.dart';
+import '../models/course_knowledge.dart';
+import '../models/curriculum_catalog.dart';
 
 abstract class ICourseKnowledgeService {
   Future<CourseKnowledge> load(CurriculumCourse course);

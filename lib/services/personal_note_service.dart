@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 
-import '../domain/models/personal_note.dart';
+import '../models/personal_note.dart';
 
 abstract class IPersonalNoteService {
   Future<List<PersonalNote>> loadForCourse(String courseCode);

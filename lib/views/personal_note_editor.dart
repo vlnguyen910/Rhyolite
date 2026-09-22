@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/personal_note.dart';
-import '../../services/personal_note_service.dart';
-import '../knowledge/markdown_rendering.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/personal_note.dart';
+import '../services/personal_note_service.dart';
+import 'widgets/markdown_rendering.dart';
 
 class PersonalNoteEditor extends StatefulWidget {
   const PersonalNoteEditor({

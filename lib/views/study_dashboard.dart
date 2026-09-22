@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../design_system/app_theme.dart';
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/personal_note.dart';
-import '../../domain/models/student_transcript.dart';
-import '../../services/personal_note_service.dart';
+import '../design_system/app_theme.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/personal_note.dart';
+import '../models/student_transcript.dart';
+import '../services/personal_note_service.dart';
 
 class StudyDashboard extends StatefulWidget {
   const StudyDashboard({

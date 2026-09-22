@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
-import '../../design_system/app_theme.dart';
-import '../../domain/models/course_knowledge.dart';
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/personal_note.dart';
-import '../../domain/models/student_transcript.dart';
-import '../../services/course_knowledge_service.dart';
-import '../../services/personal_note_service.dart';
-import '../graph/course_graph_panel.dart';
-import '../notes/personal_note_editor.dart';
-import 'markdown_rendering.dart';
+import '../design_system/app_theme.dart';
+import '../models/course_knowledge.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/personal_note.dart';
+import '../models/student_transcript.dart';
+import '../services/course_knowledge_service.dart';
+import '../services/personal_note_service.dart';
+import 'widgets/course_graph_panel.dart';
+import 'personal_note_editor.dart';
+import 'widgets/markdown_rendering.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({

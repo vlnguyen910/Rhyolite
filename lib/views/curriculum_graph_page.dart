@@ -2,8 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../design_system/app_theme.dart';
-import '../../domain/models/curriculum_catalog.dart';
+import '../design_system/app_theme.dart';
+import '../models/curriculum_catalog.dart';
 
 class CurriculumGraphPage extends StatefulWidget {
   const CurriculumGraphPage({
