@@ -11,6 +11,7 @@ import '../services/personal_note_service.dart';
 import 'widgets/course_graph_panel.dart';
 import 'personal_note_editor.dart';
 import 'widgets/markdown_rendering.dart';
+import 'widgets/syllabus_markdown_view.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({
@@ -296,11 +297,9 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     );
   }
 
-  Widget _syllabus(CourseKnowledge knowledge) => Markdown(
+  Widget _syllabus(CourseKnowledge knowledge) => SyllabusMarkdownView(
     key: ValueKey('syllabus:${widget.course.code}'),
-    selectable: true,
-    padding: const EdgeInsets.all(AppSpacing.xl),
-    data: renderableMarkdown(knowledge.bodyMarkdown),
+    source: knowledge.bodyMarkdown,
     onTapLink: (text, href, title) {
       final code = courseCodeFromLink(href);
       final course = code == null ? null : _findCourse(code);
