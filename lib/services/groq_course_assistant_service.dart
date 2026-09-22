@@ -83,6 +83,7 @@ class GroqCourseAssistantService implements ICourseAssistantService {
                       'hãy nói rõ phần nào chưa có. Không tự tạo tín chỉ, điểm số, điều kiện '
                       'tiên quyết hoặc quy định đào tạo. Nếu phần bảng điểm tham chiếu có dữ liệu, '
                       'hãy dùng trực tiếp và không yêu cầu người dùng gửi lại bảng điểm. '
+                      'Luôn phân biệt điểm tự nhập với dữ liệu FAP; không gọi điểm tự nhập là điểm chính thức. '
                       'Trả lời bằng tiếng Việt, Markdown '
                       'ngắn gọn, ưu tiên thông tin thực hành và giữ nguyên mã môn.',
                 },
@@ -173,6 +174,7 @@ class GroqCourseAssistantService implements ICourseAssistantService {
                   '- ${record.subjectCode}: ${record.subjectName}; '
                   'điểm=${record.grade.isEmpty ? 'chưa có' : record.grade}; '
                   'trạng thái=${record.status.isEmpty ? 'chưa rõ' : record.status}; '
+                  'nguồn=${record.sourceLabel}; '
                   'tín chỉ=${record.credit.isEmpty ? 'chưa rõ' : record.credit}; '
                   'term=${record.term.isEmpty ? 'chưa rõ' : record.term}',
             )

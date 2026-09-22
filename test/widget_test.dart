@@ -237,8 +237,15 @@ void main() {
 
     expect(find.text('Học đúng môn, đúng thời điểm.'), findsOneWidget);
     expect(find.byType(NavigationRail), findsOneWidget);
+    expect(
+      tester.widget<NavigationRail>(find.byType(NavigationRail)).destinations,
+      hasLength(4),
+    );
     expect(find.text('Chương trình học'), findsWidgets);
     expect(find.text('Bảng điểm'), findsOneWidget);
+    expect(find.text('Phân tích'), findsNothing);
+    expect(find.text('Kế hoạch học'), findsNothing);
+    expect(find.text('Cài đặt'), findsNothing);
     expect(find.byTooltip('Tải lại dữ liệu'), findsOneWidget);
     expect(find.byTooltip('Thông tin ứng dụng'), findsOneWidget);
     await tester.tap(find.text('Chương trình học'));
@@ -337,7 +344,96 @@ void main() {
 
     await tester.tap(find.byKey(const ValueKey('course:PRF192')));
     await tester.pumpAndSettle();
-    expect(find.text('Điểm 8.5 · Passed'), findsOneWidget);
+    expect(find.text('Điểm 8.5 · Passed · Từ FAP'), findsOneWidget);
+  });
+
+  testWidgets('A student can edit and restore an imported grade', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final repository = _MemoryTranscriptRepository(
+      StudentTranscript(
+        sourceFileName: 'AcademicTranscript.xls',
+        importedAt: DateTime.utc(2026, 9, 21),
+        records: const [
+          TranscriptRecord(
+            term: 'Fall2025',
+            semester: '1',
+            subjectCode: 'PRF192',
+            subjectName: 'Cơ sở lập trình',
+            prerequisite: '',
+            replacedSubject: '',
+            credit: '3',
+            grade: '7',
+            status: 'Passed',
+            matchesCurriculum: true,
+          ),
+        ],
+      ),
+    );
+    await tester.pumpWidget(_testApp(transcriptRepository: repository));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Bảng điểm'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('transcript-edit:PRF192')));
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const ValueKey('transcript-grade-input')),
+      '8.5',
+    );
+    await tester.tap(find.byKey(const ValueKey('transcript-save-grade')));
+    await tester.pumpAndSettle();
+
+    expect(repository.transcript?.records.single.grade, '8.5');
+    expect(repository.transcript?.records.single.importedGrade, '7');
+    expect(find.text('Tự nhập'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('transcript-restore:PRF192')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Khôi phục').last);
+    await tester.pumpAndSettle();
+    expect(repository.transcript?.records.single.grade, '7');
+    expect(repository.transcript?.records.single.isManual, isFalse);
+  });
+
+  testWidgets('A student can add a grade for a course missing from FAP', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final repository = _MemoryTranscriptRepository(
+      StudentTranscript(
+        sourceFileName: 'AcademicTranscript.xls',
+        importedAt: DateTime.utc(2026, 9, 21),
+        records: const [],
+      ),
+    );
+    await tester.pumpWidget(_testApp(transcriptRepository: repository));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Bảng điểm'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('transcript-add-grade')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('transcript-course-input')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('PRF192 ·').last);
+    await tester.pumpAndSettle();
+    await tester.enterText(
+      find.byKey(const ValueKey('transcript-grade-input')),
+      '9',
+    );
+    await tester.tap(find.byKey(const ValueKey('transcript-save-grade')));
+    await tester.pumpAndSettle();
+
+    expect(repository.transcript?.latestBySubjectCode['PRF192']?.grade, '9');
+    expect(
+      repository.transcript?.latestBySubjectCode['PRF192']?.isManual,
+      isTrue,
+    );
+    expect(find.text('Tự nhập'), findsOneWidget);
   });
 
   testWidgets('Curriculum graph selects a node and opens course detail', (
@@ -530,6 +626,10 @@ void main() {
 
     expect(find.byType(NavigationRail), findsNothing);
     expect(find.byType(NavigationBar), findsOneWidget);
+    expect(
+      tester.widget<NavigationBar>(find.byType(NavigationBar)).destinations,
+      hasLength(4),
+    );
     expect(find.byKey(const ValueKey('course-search')), findsNothing);
     await tester.tap(find.text('Curriculum'));
     await tester.pumpAndSettle();

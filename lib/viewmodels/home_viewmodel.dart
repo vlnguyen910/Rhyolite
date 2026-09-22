@@ -5,15 +5,7 @@ import '../domain/models/curriculum_catalog.dart';
 import '../services/app_service.dart';
 import '../services/curriculum_service.dart';
 
-enum NavigationTab {
-  overview,
-  curriculum,
-  transcript,
-  analysis,
-  aiChat,
-  studyStrategy,
-  settings,
-}
+enum NavigationTab { overview, curriculum, transcript, aiChat }
 
 class HomeViewModel extends ChangeNotifier {
   final IAppService _appService;

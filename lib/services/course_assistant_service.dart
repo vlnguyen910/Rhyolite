@@ -171,6 +171,7 @@ class CourseAssistantService implements ICourseAssistantService {
           '## Kết quả ${course.code} · ${course.name}\n\n'
           '- Điểm: **${record.grade.isEmpty ? 'chưa có' : record.grade}**\n'
           '- Trạng thái: **${record.status.isEmpty ? 'chưa rõ' : record.status}**\n'
+          '- Nguồn điểm: **${record.sourceLabel}**\n'
           '${record.term.isEmpty ? '' : '- Học kỳ FAP: **${record.term}**\n'}'
           '${record.credit.isEmpty ? '' : '- Tín chỉ: **${record.credit}**'}',
     );
@@ -240,7 +241,8 @@ class CourseAssistantService implements ICourseAssistantService {
           (record) =>
               '- **${record.subjectCode}** · ${record.subjectName}: '
               '**${record.grade.isEmpty ? '—' : record.grade}** · '
-              '${record.status.isEmpty ? 'chưa rõ trạng thái' : record.status}',
+              '${record.status.isEmpty ? 'chưa rõ trạng thái' : record.status} '
+              '(${record.sourceLabel})',
         )
         .join('\n');
     return CourseAssistantAnswer(
