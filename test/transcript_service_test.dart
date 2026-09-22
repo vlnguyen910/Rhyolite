@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rhyolite/domain/models/curriculum_catalog.dart';
-import 'package:rhyolite/domain/models/student_transcript.dart';
+import 'package:rhyolite/models/curriculum_catalog.dart';
+import 'package:rhyolite/models/student_transcript.dart';
 import 'package:rhyolite/services/transcript_service.dart';
 
 const _courses = [

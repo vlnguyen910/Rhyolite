@@ -1,10 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-import '../../design_system/app_theme.dart';
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/student_transcript.dart';
-import '../../services/transcript_service.dart';
+import '../design_system/app_theme.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/student_transcript.dart';
+import '../services/transcript_service.dart';
 
 class TranscriptPage extends StatefulWidget {
   const TranscriptPage({

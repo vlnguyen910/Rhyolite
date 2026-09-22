@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../design_system/app_theme.dart';
-import '../domain/models/curriculum_catalog.dart';
-import '../domain/models/student_transcript.dart';
-import '../features/assistant/study_assistant_page.dart';
-import '../features/dashboard/study_dashboard.dart';
-import '../features/graph/curriculum_graph_page.dart';
-import '../features/knowledge/course_detail_page.dart';
-import '../features/transcript/transcript_page.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/student_transcript.dart';
+import 'study_assistant_page.dart';
+import 'study_dashboard.dart';
+import 'curriculum_graph_page.dart';
+import 'course_detail_page.dart';
+import 'transcript_page.dart';
 import '../services/course_knowledge_service.dart';
 import '../services/groq_course_assistant_service.dart';
 import '../services/personal_note_service.dart';

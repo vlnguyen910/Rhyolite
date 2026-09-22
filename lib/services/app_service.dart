@@ -1,4 +1,4 @@
-import '../domain/models/app_info.dart';
+import '../models/app_info.dart';
 
 abstract class IAppService {
   Future<AppInfo> getAppInfo();

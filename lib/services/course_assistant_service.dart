@@ -1,7 +1,7 @@
-import '../domain/models/course_assistant_answer.dart';
-import '../domain/models/course_knowledge.dart';
-import '../domain/models/curriculum_catalog.dart';
-import '../domain/models/student_transcript.dart';
+import '../models/course_assistant_answer.dart';
+import '../models/course_knowledge.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/student_transcript.dart';
 import 'course_knowledge_service.dart';
 
 abstract class ICourseAssistantService {

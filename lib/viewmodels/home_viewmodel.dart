@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-import '../domain/models/app_info.dart';
-import '../domain/models/curriculum_catalog.dart';
+import '../models/app_info.dart';
+import '../models/curriculum_catalog.dart';
 import '../services/app_service.dart';
 import '../services/curriculum_service.dart';
 

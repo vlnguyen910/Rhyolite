@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
-import '../../domain/models/course_assistant_answer.dart';
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/student_transcript.dart';
-import '../../services/course_assistant_service.dart';
-import '../knowledge/markdown_rendering.dart';
+import '../models/course_assistant_answer.dart';
+import '../models/curriculum_catalog.dart';
+import '../models/student_transcript.dart';
+import '../services/course_assistant_service.dart';
+import 'widgets/markdown_rendering.dart';
 
 class StudyAssistantPage extends StatefulWidget {
   const StudyAssistantPage({

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rhyolite/domain/models/curriculum_catalog.dart';
+import 'package:rhyolite/models/curriculum_catalog.dart';
 import 'package:rhyolite/services/course_knowledge_service.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:rhyolite/domain/models/app_info.dart';
-import 'package:rhyolite/domain/models/curriculum_catalog.dart';
+import 'package:rhyolite/models/app_info.dart';
+import 'package:rhyolite/models/curriculum_catalog.dart';
 import 'package:rhyolite/services/app_service.dart';
 import 'package:rhyolite/services/curriculum_service.dart';
 import 'package:rhyolite/viewmodels/home_viewmodel.dart';

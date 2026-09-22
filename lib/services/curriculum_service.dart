@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import '../domain/models/curriculum_catalog.dart';
+import '../models/curriculum_catalog.dart';
 
 abstract class ICurriculumService {
   Future<CurriculumCatalog> loadCatalog();

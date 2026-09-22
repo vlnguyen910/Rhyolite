@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import '../../domain/models/course_knowledge.dart';
-import '../../domain/models/curriculum_catalog.dart';
-import '../../domain/models/personal_note.dart';
+import '../../models/course_knowledge.dart';
+import '../../models/curriculum_catalog.dart';
+import '../../models/personal_note.dart';
 
 class CourseGraphPanel extends StatefulWidget {
   const CourseGraphPanel({
