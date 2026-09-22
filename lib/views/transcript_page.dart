@@ -31,6 +31,8 @@ class _TranscriptPageState extends State<TranscriptPage> {
   StudentTranscript? _preview;
   bool _loading = true;
   bool _importing = false;
+  bool _mergeImport = true;
+  bool _overwriteManual = false;
   String? _error;
 
   @override
@@ -115,16 +117,23 @@ class _TranscriptPageState extends State<TranscriptPage> {
   Future<void> _confirmImport() async {
     final preview = _preview;
     if (preview == null) return;
+    final updated =
+        _saved?.reimport(
+          preview,
+          merge: _mergeImport,
+          overwriteManual: _overwriteManual,
+        ) ??
+        preview;
     setState(() => _importing = true);
     try {
-      await _repository.save(preview);
+      await _repository.save(updated);
       if (!mounted) return;
       setState(() {
-        _saved = preview;
+        _saved = updated;
         _preview = null;
         _importing = false;
       });
-      widget.onTranscriptChanged(preview);
+      widget.onTranscriptChanged(updated);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Đã import và gắn điểm vào các môn học.')),
       );
@@ -135,6 +144,113 @@ class _TranscriptPageState extends State<TranscriptPage> {
         _importing = false;
       });
     }
+  }
+
+  Future<void> _saveEdited(StudentTranscript updated) async {
+    setState(() {
+      _importing = true;
+      _error = null;
+    });
+    try {
+      await _repository.save(updated);
+      if (!mounted) return;
+      setState(() {
+        _saved = updated;
+        _importing = false;
+      });
+      widget.onTranscriptChanged(updated);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Đã lưu thay đổi bảng điểm trên máy.')),
+      );
+    } on Object {
+      if (!mounted) return;
+      setState(() {
+        _error = 'Không thể lưu thay đổi bảng điểm.';
+        _importing = false;
+      });
+    }
+  }
+
+  Future<void> _editRecord(int index) async {
+    final saved = _saved;
+    if (saved == null || _importing || _preview != null) return;
+    final edit = await showDialog<_TranscriptEdit>(
+      context: context,
+      builder: (_) => _TranscriptEditDialog(record: saved.records[index]),
+    );
+    if (edit == null || !mounted) return;
+    await _saveEdited(
+      saved.editRecord(index, grade: edit.grade, status: edit.status),
+    );
+  }
+
+  Future<void> _addRecord() async {
+    final saved = _saved;
+    if (saved == null || _importing || _preview != null) return;
+    final existingCodes = saved.latestBySubjectCode.keys.toSet();
+    final available =
+        widget.courses
+            .where(
+              (course) => !existingCodes.contains(course.code.toUpperCase()),
+            )
+            .toList()
+          ..sort((a, b) => a.code.compareTo(b.code));
+    if (available.isEmpty) return;
+    final edit = await showDialog<_TranscriptEdit>(
+      context: context,
+      builder: (_) => _TranscriptEditDialog(availableCourses: available),
+    );
+    if (edit == null || edit.course == null || !mounted) return;
+    final course = edit.course!;
+    await _saveEdited(
+      saved.addManualRecord(
+        TranscriptRecord(
+          term: '',
+          semester: '${course.semester}',
+          subjectCode: course.code,
+          subjectName: course.name,
+          prerequisite: course.prerequisiteCodes.join(', '),
+          replacedSubject: '',
+          credit: '',
+          grade: edit.grade,
+          status: edit.status,
+          matchesCurriculum: true,
+          isManual: true,
+          editedAt: DateTime.now(),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _restoreRecord(int index) async {
+    final saved = _saved;
+    if (saved == null || _importing || _preview != null) return;
+    final record = saved.records[index];
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          record.hasFapOriginal ? 'Khôi phục điểm FAP?' : 'Xóa điểm tự nhập?',
+        ),
+        content: Text(
+          record.hasFapOriginal
+              ? 'Điểm tự nhập của ${record.subjectCode} sẽ được thay bằng giá trị từ lần import FAP gần nhất.'
+              : 'Môn ${record.subjectCode} chưa có trong file FAP. Xóa kết quả tự nhập này?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Hủy'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(record.hasFapOriginal ? 'Khôi phục' : 'Xóa'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+    await _saveEdited(saved.restoreRecord(index));
   }
 
   @override
@@ -165,13 +281,27 @@ class _TranscriptPageState extends State<TranscriptPage> {
               else ...[
                 _TranscriptSummary(
                   transcript: transcript,
+                  existing: _saved,
                   preview: _preview != null,
                   importing: _importing,
+                  mergeImport: _mergeImport,
+                  overwriteManual: _overwriteManual,
+                  onMergeChanged: (value) =>
+                      setState(() => _mergeImport = value),
+                  onOverwriteChanged: (value) =>
+                      setState(() => _overwriteManual = value),
                   onConfirm: _confirmImport,
                   onCancel: () => setState(() => _preview = null),
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                _TranscriptRecords(transcript: transcript),
+                _TranscriptRecords(
+                  transcript: transcript,
+                  editingEnabled: _preview == null && !_importing,
+                  canAdd: _saved != null,
+                  onAdd: _addRecord,
+                  onEdit: _editRecord,
+                  onRestore: _restoreRecord,
+                ),
               ],
             ],
           ),
@@ -324,15 +454,25 @@ class _EmptyTranscript extends StatelessWidget {
 class _TranscriptSummary extends StatelessWidget {
   const _TranscriptSummary({
     required this.transcript,
+    required this.existing,
     required this.preview,
     required this.importing,
+    required this.mergeImport,
+    required this.overwriteManual,
+    required this.onMergeChanged,
+    required this.onOverwriteChanged,
     required this.onConfirm,
     required this.onCancel,
   });
 
   final StudentTranscript transcript;
+  final StudentTranscript? existing;
   final bool preview;
   final bool importing;
+  final bool mergeImport;
+  final bool overwriteManual;
+  final ValueChanged<bool> onMergeChanged;
+  final ValueChanged<bool> onOverwriteChanged;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
 
@@ -342,6 +482,14 @@ class _TranscriptSummary extends StatelessWidget {
     final matched = records.where((record) => record.matchesCurriculum).length;
     final passed = records.where((record) => record.isPassed).length;
     final unmatched = records.length - matched;
+    final manualConflicts = preview && existing != null
+        ? records.where((record) {
+            return existing!
+                    .latestBySubjectCode[record.subjectCode.toUpperCase()]
+                    ?.isManual ??
+                false;
+          }).length
+        : 0;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.xl),
@@ -401,12 +549,42 @@ class _TranscriptSummary extends StatelessWidget {
                 _SummaryMetric(label: 'Đã ghép curriculum', value: '$matched'),
                 _SummaryMetric(label: 'Đã qua', value: '$passed'),
                 _SummaryMetric(
-                  label: 'Cần kiểm tra',
+                  label: 'Chưa khớp curriculum',
                   value: '$unmatched',
                   warning: unmatched > 0,
                 ),
+                if (transcript.manualRecordCount > 0)
+                  _SummaryMetric(
+                    label: 'Điểm tự nhập',
+                    value: '${transcript.manualRecordCount}',
+                  ),
               ],
             ),
+            if (preview && existing != null) ...[
+              const SizedBox(height: 18),
+              const Divider(),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: const Text('Ghép với bảng điểm đang có'),
+                subtitle: const Text(
+                  'Bật để giữ các môn cũ không có trong file mới. Tắt để bỏ các môn FAP cũ; điểm tự nhập được xử lý theo lựa chọn bên dưới.',
+                ),
+                value: mergeImport,
+                onChanged: importing ? null : onMergeChanged,
+              ),
+              if (existing!.manualRecordCount > 0)
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Ghi đè điểm tự nhập'),
+                  subtitle: Text(
+                    'Có $manualConflicts môn tự nhập trùng mã trong file mới. '
+                    'Mặc định giữ điểm tự nhập; bật để dùng điểm FAP cho các môn trùng mã. '
+                    'Khi tắt, điểm tự nhập không có trong file mới vẫn được giữ.',
+                  ),
+                  value: overwriteManual,
+                  onChanged: importing ? null : onOverwriteChanged,
+                ),
+            ],
           ],
         ),
       ),
@@ -449,8 +627,20 @@ class _SummaryMetric extends StatelessWidget {
 }
 
 class _TranscriptRecords extends StatelessWidget {
-  const _TranscriptRecords({required this.transcript});
+  const _TranscriptRecords({
+    required this.transcript,
+    required this.editingEnabled,
+    required this.canAdd,
+    required this.onAdd,
+    required this.onEdit,
+    required this.onRestore,
+  });
   final StudentTranscript transcript;
+  final bool editingEnabled;
+  final bool canAdd;
+  final VoidCallback onAdd;
+  final ValueChanged<int> onEdit;
+  final ValueChanged<int> onRestore;
 
   @override
   Widget build(BuildContext context) => Card(
@@ -459,10 +649,23 @@ class _TranscriptRecords extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Chi tiết môn học',
-            style: Theme.of(context).textTheme.titleLarge
-                ?.copyWith(fontWeight: FontWeight.w900),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Chi tiết môn học',
+                  style: Theme.of(context).textTheme.titleLarge
+                      ?.copyWith(fontWeight: FontWeight.w900),
+                ),
+              ),
+              if (canAdd)
+                OutlinedButton.icon(
+                  key: const ValueKey('transcript-add-grade'),
+                  onPressed: editingEnabled ? onAdd : null,
+                  icon: const Icon(Icons.add),
+                  label: const Text('Thêm môn'),
+                ),
+            ],
           ),
           const SizedBox(height: 4),
           Text(
@@ -473,7 +676,12 @@ class _TranscriptRecords extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           for (var index = 0; index < transcript.records.length; index++) ...[
-            _TranscriptRecordTile(record: transcript.records[index]),
+            _TranscriptRecordTile(
+              record: transcript.records[index],
+              editingEnabled: editingEnabled,
+              onEdit: () => onEdit(index),
+              onRestore: () => onRestore(index),
+            ),
             if (index != transcript.records.length - 1)
               const Divider(height: 1),
           ],
@@ -484,8 +692,16 @@ class _TranscriptRecords extends StatelessWidget {
 }
 
 class _TranscriptRecordTile extends StatelessWidget {
-  const _TranscriptRecordTile({required this.record});
+  const _TranscriptRecordTile({
+    required this.record,
+    required this.editingEnabled,
+    required this.onEdit,
+    required this.onRestore,
+  });
   final TranscriptRecord record;
+  final bool editingEnabled;
+  final VoidCallback onEdit;
+  final VoidCallback onRestore;
 
   @override
   Widget build(BuildContext context) {
@@ -532,6 +748,15 @@ class _TranscriptRecordTile extends StatelessWidget {
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                 ),
+                Text(
+                  record.sourceLabel,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: record.isManual
+                        ? Theme.of(context).colorScheme.primary
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ],
             ),
           ),
@@ -553,6 +778,27 @@ class _TranscriptRecordTile extends StatelessWidget {
               style: TextStyle(color: statusColor, fontWeight: FontWeight.w800),
             ),
           ),
+          if (editingEnabled) ...[
+            IconButton(
+              key: ValueKey('transcript-edit:${record.subjectCode}'),
+              tooltip: 'Sửa điểm ${record.subjectCode}',
+              onPressed: onEdit,
+              icon: const Icon(Icons.edit_outlined),
+            ),
+            if (record.isManual)
+              IconButton(
+                key: ValueKey('transcript-restore:${record.subjectCode}'),
+                tooltip: record.hasFapOriginal
+                    ? 'Khôi phục điểm FAP ${record.subjectCode}'
+                    : 'Xóa điểm tự nhập ${record.subjectCode}',
+                onPressed: onRestore,
+                icon: Icon(
+                  record.hasFapOriginal
+                      ? Icons.restore_outlined
+                      : Icons.delete_outline,
+                ),
+              ),
+          ],
         ],
       ),
     );
@@ -571,4 +817,160 @@ Color _statusColor(BuildContext context, String status) {
     default:
       return Theme.of(context).colorScheme.outline;
   }
+}
+
+class _TranscriptEdit {
+  const _TranscriptEdit({
+    required this.course,
+    required this.grade,
+    required this.status,
+  });
+
+  final CurriculumCourse? course;
+  final String grade;
+  final String status;
+}
+
+class _TranscriptEditDialog extends StatefulWidget {
+  const _TranscriptEditDialog({this.record, this.availableCourses = const []});
+
+  final TranscriptRecord? record;
+  final List<CurriculumCourse> availableCourses;
+
+  @override
+  State<_TranscriptEditDialog> createState() => _TranscriptEditDialogState();
+}
+
+class _TranscriptEditDialogState extends State<_TranscriptEditDialog> {
+  static const _statuses = ['Passed', 'Not passed', 'Studying', 'Not started'];
+
+  final _formKey = GlobalKey<FormState>();
+  late final TextEditingController _gradeController;
+  CurriculumCourse? _course;
+  late String _status;
+
+  @override
+  void initState() {
+    super.initState();
+    _gradeController = TextEditingController(text: widget.record?.grade ?? '');
+    final currentStatus = widget.record?.status ?? '';
+    _status = currentStatus.isEmpty ? 'Studying' : currentStatus;
+  }
+
+  @override
+  void dispose() {
+    _gradeController.dispose();
+    super.dispose();
+  }
+
+  String? _validateGrade(String? value) {
+    final text = (value ?? '').trim();
+    if (text.isEmpty) return null;
+    if (const {'P', 'F'}.contains(text.toUpperCase())) return null;
+    final score = double.tryParse(text.replaceAll(',', '.'));
+    if (score == null || score < 0 || score > 10) {
+      return 'Nhập điểm từ 0 đến 10, P hoặc F.';
+    }
+    return null;
+  }
+
+  void _submit() {
+    if (!_formKey.currentState!.validate()) return;
+    Navigator.pop(
+      context,
+      _TranscriptEdit(
+        course: _course,
+        grade: _gradeController.text.trim().replaceAll(',', '.'),
+        status: _status,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => AlertDialog(
+    title: Text(
+      widget.record == null
+          ? 'Thêm môn tự nhập'
+          : 'Sửa điểm ${widget.record!.subjectCode}',
+    ),
+    content: SizedBox(
+      width: 420,
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Điểm tự nhập không phải dữ liệu chính thức từ FAP.'),
+            const SizedBox(height: 16),
+            if (widget.record == null) ...[
+              DropdownButtonFormField<CurriculumCourse>(
+                key: const ValueKey('transcript-course-input'),
+                isExpanded: true,
+                decoration: const InputDecoration(labelText: 'Môn học'),
+                items: [
+                  for (final course in widget.availableCourses)
+                    DropdownMenuItem(
+                      value: course,
+                      child: Text(
+                        '${course.code} · ${course.name}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                ],
+                validator: (value) => value == null ? 'Chọn môn học.' : null,
+                onChanged: (value) => _course = value,
+              ),
+              const SizedBox(height: 12),
+            ],
+            TextFormField(
+              key: const ValueKey('transcript-grade-input'),
+              controller: _gradeController,
+              decoration: const InputDecoration(
+                labelText: 'Điểm',
+                hintText: '0–10, P/F hoặc để trống',
+              ),
+              validator: _validateGrade,
+            ),
+            const SizedBox(height: 12),
+            DropdownButtonFormField<String>(
+              key: const ValueKey('transcript-status-input'),
+              initialValue: _status,
+              decoration: const InputDecoration(labelText: 'Trạng thái'),
+              items: [
+                for (final status in {
+                  ..._statuses,
+                  if (!_statuses.contains(_status)) _status,
+                })
+                  DropdownMenuItem(value: status, child: Text(status)),
+              ],
+              onChanged: (value) {
+                if (value != null) _status = value;
+              },
+            ),
+            if (widget.record?.hasFapOriginal ?? false) ...[
+              const SizedBox(height: 12),
+              Text(
+                'FAP gốc: ${widget.record!.isManual ? widget.record!.importedGrade : widget.record!.grade} · '
+                '${widget.record!.isManual ? widget.record!.importedStatus : widget.record!.status}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ],
+        ),
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: const Text('Hủy'),
+      ),
+      FilledButton(
+        key: const ValueKey('transcript-save-grade'),
+        onPressed: _submit,
+        child: const Text('Lưu điểm'),
+      ),
+    ],
+  );
 }

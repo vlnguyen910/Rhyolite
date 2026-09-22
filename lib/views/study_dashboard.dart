@@ -683,7 +683,8 @@ class _CourseShortcut extends StatelessWidget {
                         const SizedBox(height: 3),
                         Text(
                           'Điểm ${transcriptRecord!.grade.isEmpty ? '—' : transcriptRecord!.grade}'
-                          '${transcriptRecord!.status.isEmpty ? '' : ' · ${transcriptRecord!.status}'}',
+                          '${transcriptRecord!.status.isEmpty ? '' : ' · ${transcriptRecord!.status}'}'
+                          ' · ${transcriptRecord!.sourceLabel}',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.labelSmall

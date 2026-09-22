@@ -119,4 +119,115 @@ void main() {
     await repository.delete();
     expect(await repository.load(), isNull);
   });
+
+  test('manual edit preserves original FAP values and can restore them', () {
+    final original = StudentTranscript(
+      sourceFileName: 'AcademicTranscript.xls',
+      importedAt: DateTime.utc(2026, 9, 21),
+      records: const [
+        TranscriptRecord(
+          term: 'Fall2025',
+          semester: '1',
+          subjectCode: 'PRF192',
+          subjectName: 'Programming Fundamentals',
+          prerequisite: '',
+          replacedSubject: '',
+          credit: '3',
+          grade: '7',
+          status: 'Passed',
+          matchesCurriculum: true,
+        ),
+      ],
+    );
+
+    final edited = original.editRecord(0, grade: '8.5', status: 'Passed');
+    final restoredFromStorage = StudentTranscript.fromJson(edited.toJson());
+    final record = restoredFromStorage.records.single;
+    expect(record.grade, '8.5');
+    expect(record.sourceLabel, 'Tự nhập');
+    expect(record.importedGrade, '7');
+    expect(record.editedAt, isNotNull);
+    expect(restoredFromStorage.restoreRecord(0).records.single.grade, '7');
+    expect(
+      restoredFromStorage.restoreRecord(0).records.single.isManual,
+      isFalse,
+    );
+  });
+
+  test('reimport can preserve or overwrite manual grades and merge rows', () {
+    TranscriptRecord row(String code, String grade) => TranscriptRecord(
+      term: 'Fall2025',
+      semester: '1',
+      subjectCode: code,
+      subjectName: code,
+      prerequisite: '',
+      replacedSubject: '',
+      credit: '3',
+      grade: grade,
+      status: 'Passed',
+      matchesCurriculum: true,
+    );
+    final old = StudentTranscript(
+      sourceFileName: 'old.xls',
+      importedAt: DateTime.utc(2026, 9, 1),
+      records: [row('PRF192', '7'), row('PRO192', '6')],
+    ).editRecord(0, grade: '8.5', status: 'Passed');
+    final incoming = StudentTranscript(
+      sourceFileName: 'new.xls',
+      importedAt: DateTime.utc(2026, 9, 22),
+      records: [row('PRF192', '9'), row('CSD201', '7')],
+    );
+
+    final kept = old.reimport(incoming, merge: true, overwriteManual: false);
+    expect(kept.latestBySubjectCode['PRF192']?.grade, '8.5');
+    expect(kept.latestBySubjectCode['PRF192']?.importedGrade, '9');
+    expect(kept.latestBySubjectCode['PRO192']?.grade, '6');
+    expect(kept.latestBySubjectCode['CSD201']?.grade, '7');
+
+    final replaced = old.reimport(
+      incoming,
+      merge: false,
+      overwriteManual: true,
+    );
+    expect(replaced.latestBySubjectCode['PRF192']?.grade, '9');
+    expect(replaced.latestBySubjectCode['PRF192']?.isManual, isFalse);
+    expect(replaced.latestBySubjectCode.containsKey('PRO192'), isFalse);
+  });
+
+  test('manual-only grade remains until explicitly removed or overwritten', () {
+    final original = StudentTranscript(
+      sourceFileName: 'old.xls',
+      importedAt: DateTime.utc(2026, 9, 21),
+      records: const [],
+    );
+    final manual = original.addManualRecord(
+      const TranscriptRecord(
+        term: '',
+        semester: '2',
+        subjectCode: 'PRO192',
+        subjectName: 'Object Oriented Programming',
+        prerequisite: '',
+        replacedSubject: '',
+        credit: '',
+        grade: '8',
+        status: 'Passed',
+        matchesCurriculum: true,
+        isManual: true,
+      ),
+    );
+    final incoming = StudentTranscript(
+      sourceFileName: 'new.xls',
+      importedAt: DateTime.utc(2026, 9, 22),
+      records: const [],
+    );
+
+    expect(
+      manual
+          .reimport(incoming, merge: false, overwriteManual: false)
+          .latestBySubjectCode['PRO192']
+          ?.grade,
+      '8',
+    );
+    expect(manual.restoreRecord(0).records, isEmpty);
+  });
 }

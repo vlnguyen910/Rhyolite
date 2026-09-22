@@ -125,6 +125,10 @@ Nếu course trong transcript không match curriculum đã chọn:
 - App phải thông báo cho user.
 - App phải đánh dấu course nào không match.
 
+### PR-TRANSCRIPT-10 — Chỉnh sửa điểm thủ công
+
+Sau lần import đầu, sinh viên có thể sửa điểm/trạng thái của một môn hoặc thêm kết quả cho môn chưa có trong file. Điểm tự nhập phải được phân biệt với điểm FAP, và giá trị FAP gốc phải có thể khôi phục. Khi import lại, app cho chọn Merge/Replace và chỉ ghi đè điểm tự nhập nếu người dùng bật lựa chọn đó trong bước xem trước. AI phải biết nguồn của điểm đang áp dụng.
+
 Business rule cho unmatched course sau đó: `TBD`.
 
 ## 6. Academic Profile

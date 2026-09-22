@@ -110,6 +110,7 @@ void main() {
     expect(answer.course?.code, 'PRM393');
     expect(answer.markdown, contains('8.5'));
     expect(answer.markdown, contains('Passed'));
+    expect(answer.markdown, contains('Từ FAP'));
   });
 
   test(
@@ -134,6 +135,7 @@ void main() {
       expect(request.body, contains('PRM393'));
       expect(request.body, contains('Học Flutter và Dart'));
       expect(request.body, contains('điểm=8.5'));
+      expect(request.body, contains('nguồn=Từ FAP'));
       expect(request.body, contains('không yêu cầu người dùng gửi lại'));
       return http.Response(
         jsonEncode({

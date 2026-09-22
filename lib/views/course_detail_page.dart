@@ -225,7 +225,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                       avatar: const Icon(Icons.fact_check_outlined, size: 18),
                       label: Text(
                         'Điểm ${transcriptRecord.grade.isEmpty ? '—' : transcriptRecord.grade}'
-                        '${transcriptRecord.status.isEmpty ? '' : ' · ${transcriptRecord.status}'}',
+                        '${transcriptRecord.status.isEmpty ? '' : ' · ${transcriptRecord.status}'}'
+                        ' · ${transcriptRecord.sourceLabel}',
                       ),
                     ),
                   if (widget.course.isChoice)

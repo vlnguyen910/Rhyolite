@@ -58,6 +58,7 @@
 | D-052 | Curriculum graph dùng quan hệ prerequisite/dependent; Course Detail graph bổ sung syllabus-topic và personal-note nodes. |
 | D-053 | Course Q&A cơ bản có thể trả lời local từ bundled curriculum/syllabus và cite syllabus; cloud AI dành cho truy vấn sâu hoặc personalization sau khi provider/consent được cấu hình. |
 | D-054 | MVP desktop dùng Groq qua OpenAI-compatible Chat Completions API; Flutter gọi trực tiếp qua service abstraction, key đọc từ environment hoặc `.env` local bị Git ignore, và tự fallback về local assistant khi cloud không khả dụng. |
+| D-055 | Sau khi import FAP, sinh viên có thể sửa hoặc thêm điểm thủ công. App giữ giá trị FAP gốc, gắn nhãn nguồn điểm, và cho khôi phục. Khi import lại, mặc định giữ điểm tự nhập; người dùng có thể chọn ghi đè. |
 
 ## Open decisions
 
