@@ -28,11 +28,19 @@ class ObsidianGraphNode {
 }
 
 class ObsidianGraphEdge {
-  const ObsidianGraphEdge(this.from, this.to, {this.color});
+  const ObsidianGraphEdge(
+    this.from,
+    this.to, {
+    this.color,
+    this.strokeWidth,
+    this.label,
+  });
 
   final String from;
   final String to;
   final Color? color;
+  final double? strokeWidth;
+  final String? label;
 }
 
 class ObsidianGraphView extends StatefulWidget {
@@ -363,14 +371,17 @@ class _GraphPainter extends CustomPainter {
       final from = positions[edge.from];
       final to = positions[edge.to];
       if (from == null || to == null) continue;
+      final baseWidth = edge.strokeWidth ?? 1.0;
       canvas.drawLine(
         from,
         to,
         Paint()
           ..color = active
               ? (edge.color ?? edgeColor).withValues(alpha: .9)
-              : edgeColor.withValues(alpha: activeId == null ? .22 : .07)
-          ..strokeWidth = active ? 2 : 1,
+              : (edge.color ?? edgeColor).withValues(
+                  alpha: activeId == null ? .24 : .08,
+                )
+          ..strokeWidth = active ? math.max(2.0, baseWidth * 1.5) : baseWidth,
       );
     }
   }

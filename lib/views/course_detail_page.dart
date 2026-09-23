@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 import '../design_system/app_theme.dart';
+import '../models/course_concept.dart';
 import '../models/course_knowledge.dart';
 import '../models/curriculum_catalog.dart';
 import '../models/personal_note.dart';
 import '../models/student_transcript.dart';
+import '../services/concept_relation_service.dart';
 import '../services/course_knowledge_service.dart';
 import '../services/personal_note_service.dart';
 import 'widgets/course_graph_panel.dart';
@@ -21,6 +23,7 @@ class CourseDetailPage extends StatefulWidget {
     required this.allCourses,
     this.knowledgeService,
     this.noteService,
+    this.relationService,
     this.transcriptByCode = const {},
   });
 
@@ -29,6 +32,7 @@ class CourseDetailPage extends StatefulWidget {
   final List<CurriculumCourse> allCourses;
   final ICourseKnowledgeService? knowledgeService;
   final IPersonalNoteService? noteService;
+  final IConceptRelationService? relationService;
   final Map<String, TranscriptRecord> transcriptByCode;
 
   @override
@@ -38,6 +42,7 @@ class CourseDetailPage extends StatefulWidget {
 class _CourseDetailPageState extends State<CourseDetailPage> {
   late final ICourseKnowledgeService _knowledgeService;
   late final IPersonalNoteService _noteService;
+  late final IConceptRelationService _relationService;
   late Future<CourseKnowledge> _knowledge;
   late Future<List<PersonalNote>> _notes;
 
@@ -46,6 +51,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     super.initState();
     _knowledgeService = widget.knowledgeService ?? CourseKnowledgeService();
     _noteService = widget.noteService ?? PersonalNoteService();
+    _relationService = widget.relationService ?? ConceptRelationService();
     _knowledge = _knowledgeService.load(widget.course);
     _notes = _noteService.loadForCourse(widget.course.code);
   }
@@ -67,7 +73,111 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           allCourses: widget.allCourses,
           knowledgeService: _knowledgeService,
           noteService: _noteService,
+          relationService: _relationService,
           transcriptByCode: widget.transcriptByCode,
+        ),
+      ),
+    );
+  }
+
+  void _showConceptSheet(String conceptName) {
+    final concept = _relationService.findConcept(conceptName);
+    final courseCodes = _relationService.getCoursesForConcept(
+      conceptName,
+      widget.allCourses,
+    );
+    final matchingCourses = courseCodes
+        .map(_findCourse)
+        .whereType<CurriculumCourse>()
+        .toList();
+
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (context) => DraggableScrollableSheet(
+        expand: false,
+        initialChildSize: .55,
+        minChildSize: .35,
+        maxChildSize: .85,
+        builder: (context, scrollController) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          child: ListView(
+            controller: scrollController,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.bubble_chart,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '[[$conceptName]]',
+                          style: Theme.of(context).textTheme.titleLarge
+                              ?.copyWith(fontWeight: FontWeight.w800),
+                        ),
+                        if (concept != null)
+                          Text(
+                            concept.category,
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (concept != null && concept.description.isNotEmpty) ...[
+                Text(
+                  concept.description,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 20),
+              ],
+              Text(
+                'Các môn học thuộc chủ đề này (${matchingCourses.length}):',
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 10),
+              if (matchingCourses.isEmpty)
+                const Text('Chưa có môn học nào khác trong curriculum này.')
+              else
+                for (final c in matchingCourses)
+                  Card(
+                    margin: const EdgeInsets.only(bottom: 8),
+                    child: ListTile(
+                      title: Text(
+                        '${c.code} · ${c.name}',
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      subtitle: Text('Học kỳ ${c.semester}'),
+                      trailing: const Icon(Icons.arrow_forward_ios, size: 14),
+                      onTap: () {
+                        Navigator.pop(context);
+                        if (c.code != widget.course.code) {
+                          _openCourse(c);
+                        }
+                      },
+                    ),
+                  ),
+            ],
+          ),
         ),
       ),
     );
@@ -196,6 +306,19 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           (course) => course.prerequisiteCodes.contains(widget.course.code),
         )
         .toList();
+
+    final concepts = _relationService.getConceptsForCourse(
+      widget.course.code,
+      dynamicConcepts: knowledge.concepts,
+    );
+
+    final relations = _relationService.getRelatedCourses(
+      widget.course.code,
+      widget.allCourses,
+      dynamicConcepts: knowledge.concepts,
+      minRelevance: 0.15,
+    );
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.xl),
       child: Center(
@@ -246,7 +369,28 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                     : MarkdownBody(
                         selectable: true,
                         data: renderableMarkdown(knowledge.descriptionMarkdown),
+                        onTapLink: (text, href, title) {
+                          final code = courseCodeFromLink(href);
+                          final course = code == null
+                              ? null
+                              : _findCourse(code);
+                          if (course != null) {
+                            _openCourse(course);
+                            return;
+                          }
+                          final concept = conceptFromLink(href);
+                          if (concept != null) _showConceptSheet(concept);
+                        },
                       ),
+              ),
+              const SizedBox(height: 16),
+              _ConceptRelationCard(
+                course: widget.course,
+                concepts: concepts,
+                relations: relations,
+                allCourses: widget.allCourses,
+                onOpen: _openCourse,
+                onSelectConcept: _showConceptSheet,
               ),
               const SizedBox(height: 16),
               _SectionCard(
@@ -303,7 +447,14 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
     onTapLink: (text, href, title) {
       final code = courseCodeFromLink(href);
       final course = code == null ? null : _findCourse(code);
-      if (course != null) _openCourse(course);
+      if (course != null) {
+        _openCourse(course);
+        return;
+      }
+      final concept = conceptFromLink(href);
+      if (concept != null) {
+        _showConceptSheet(concept);
+      }
     },
   );
 
@@ -340,6 +491,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
             allCourses: widget.allCourses,
             knowledge: knowledgeState.data!,
             notes: notesState.data!,
+            relationService: _relationService,
             onOpenCourse: _openCourse,
             onOpenNote: _editNote,
           );
@@ -368,9 +520,9 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.edit_note, size: 56),
+              const Icon(Icons.note_alt_outlined, size: 56),
               const SizedBox(height: 12),
-              const Text('Chưa có ghi chú cho môn này.'),
+              const Text('Chưa có note nào cho môn này.'),
               const SizedBox(height: 12),
               FilledButton.icon(
                 onPressed: _editNote,
@@ -384,15 +536,17 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
       return ListView.separated(
         padding: const EdgeInsets.all(AppSpacing.xl),
         itemCount: notes.length,
-        separatorBuilder: (_, _) => const SizedBox(height: 10),
+        separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
           final note = notes[index];
           return Card(
             child: ListTile(
-              key: ValueKey('personal-note:${note.id}'),
-              title: Text(note.title),
+              title: Text(
+                note.title,
+                style: const TextStyle(fontWeight: FontWeight.w700),
+              ),
               subtitle: Text(
-                note.body.isEmpty ? 'Note trống' : note.body,
+                note.body,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -408,6 +562,172 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
       );
     },
   );
+}
+
+class _ConceptRelationCard extends StatelessWidget {
+  const _ConceptRelationCard({
+    required this.course,
+    required this.concepts,
+    required this.relations,
+    required this.allCourses,
+    required this.onOpen,
+    required this.onSelectConcept,
+  });
+
+  final CurriculumCourse course;
+  final List<String> concepts;
+  final List<CourseRelation> relations;
+  final List<CurriculumCourse> allCourses;
+  final ValueChanged<CurriculumCourse> onOpen;
+  final ValueChanged<String> onSelectConcept;
+
+  @override
+  Widget build(BuildContext context) {
+    final byCode = {for (final c in allCourses) c.code.toUpperCase(): c};
+    final topRelations = relations.take(5).toList();
+
+    return _SectionCard(
+      title: 'Khái niệm & Môn học liên quan',
+      icon: Icons.bubble_chart_outlined,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (concepts.isNotEmpty) ...[
+            const Text(
+              'Chủ đề kiến thức (Concept):',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final concept in concepts)
+                  ActionChip(
+                    avatar: const Icon(Icons.tag, size: 16),
+                    label: Text('[[$concept]]'),
+                    tooltip: 'Nhấn để xem các môn cùng chủ đề [[$concept]]',
+                    onPressed: () => onSelectConcept(concept),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 16),
+          ],
+          const Text(
+            'Môn học có mức độ liên quan cao nhất:',
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+          ),
+          const SizedBox(height: 10),
+          if (topRelations.isEmpty)
+            const Text('Chưa có dữ liệu liên quan cho môn học này.')
+          else
+            Column(
+              children: [
+                for (final rel in topRelations)
+                  _RelatedCourseTile(
+                    relation: rel,
+                    course: byCode[rel.targetCourseCode],
+                    onTap: () {
+                      final target = byCode[rel.targetCourseCode];
+                      if (target != null) onOpen(target);
+                    },
+                  ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RelatedCourseTile extends StatelessWidget {
+  const _RelatedCourseTile({
+    required this.relation,
+    required this.course,
+    required this.onTap,
+  });
+
+  final CourseRelation relation;
+  final CurriculumCourse? course;
+  final VoidCallback onTap;
+
+  Color _relevanceColor(BuildContext context, double score) {
+    if (score >= 0.70) return const Color(0xff10b981); // Emerald
+    if (score >= 0.45) return const Color(0xff06b6d4); // Cyan
+    return const Color(0xfff59e0b); // Amber
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scoreColor = _relevanceColor(context, relation.relevanceScore);
+    final pct = relation.relevancePercentage;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest
+            .withValues(alpha: .45),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outlineVariant
+              .withValues(alpha: .5),
+        ),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: scoreColor.withValues(alpha: .18),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: scoreColor.withValues(alpha: .6)),
+              ),
+              child: Text(
+                '$pct%',
+                style: TextStyle(
+                  color: scoreColor,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${relation.targetCourseCode} · ${course?.name ?? ''}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if (relation.explanation.isNotEmpty)
+                    Text(
+                      relation.explanation,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        fontSize: 11,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                ],
+              ),
+            ),
+            const Icon(Icons.arrow_forward_ios, size: 14),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _SectionCard extends StatelessWidget {

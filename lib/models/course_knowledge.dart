@@ -8,6 +8,7 @@ class CourseKnowledge {
     required this.durationMarkdown,
     required this.toolsMarkdown,
     this.topics = const [],
+    this.concepts = const [],
     this.credits,
     this.sourceUrl,
   });
@@ -20,6 +21,7 @@ class CourseKnowledge {
   final String durationMarkdown;
   final String toolsMarkdown;
   final List<KnowledgeTopic> topics;
+  final List<String> concepts;
   final String? credits;
   final String? sourceUrl;
 }

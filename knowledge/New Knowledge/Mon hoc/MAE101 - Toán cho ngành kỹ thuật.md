@@ -29,6 +29,7 @@ Không có môn tiên quyết được nêu trong nguồn.
 | BIT_SE_K21B | 1 | MAE101 | Học phần |
 
 ## Đề cương chi tiết
+Đây là môn học thuộc khối kiến thức [[Toán]], cung cấp nền tảng giải tích vi tích phân và đại số tuyến tính.
 
 ### Thông tin đề cương
 

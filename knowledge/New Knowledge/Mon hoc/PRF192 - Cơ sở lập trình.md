@@ -29,6 +29,7 @@ Không có môn tiên quyết được nêu trong nguồn.
 | BIT_SE_K21B | 1 | PRF192 | Học phần |
 
 ## Đề cương chi tiết
+Đây là môn học nền tảng về [[Cơ sở lập trình]], tạo tiền đề quan trọng cho các môn học lập trình tiếp theo.
 
 ### Thông tin đề cương
 

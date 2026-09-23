@@ -33,6 +33,7 @@ sourceFile: "FPT_Full_Data_Export.json"
 | BIT_SE_K21B | 7 | SE_COM*3 | Lựa chọn trong nhóm |
 
 ## Đề cương chi tiết
+Đây là môn học về [[Backend]] 
 
 ### Thông tin đề cương
 
