@@ -254,18 +254,13 @@ class _HomeViewState extends State<HomeView> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: SizedBox(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              'assets/Rhyolite.png',
               width: 48,
               height: 48,
-              child: Icon(
-                Icons.school,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
+              fit: BoxFit.cover,
             ),
           ),
           if (extended) ...[
@@ -320,7 +315,15 @@ class _HomeViewState extends State<HomeView> {
     context: context,
     applicationName: _viewModel.appInfo?.appName ?? 'Rhyolite',
     applicationVersion: _viewModel.appInfo?.version,
-    applicationIcon: const Icon(Icons.school, size: 40),
+    applicationIcon: ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Image.asset(
+        'assets/Rhyolite.png',
+        width: 48,
+        height: 48,
+        fit: BoxFit.cover,
+      ),
+    ),
     children: [
       Text(
         _viewModel.appInfo?.description ??

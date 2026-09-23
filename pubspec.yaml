@@ -63,6 +63,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/Rhyolite.png
     - assets/data/curricula.json
     - knowledge/New Knowledge/Mon hoc/
 
