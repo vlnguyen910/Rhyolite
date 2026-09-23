@@ -87,8 +87,10 @@ class StudentTranscript {
     if (!record.isManual) {
       throw ArgumentError('New transcript record must be marked manual.');
     }
-    if (latestBySubjectCode.containsKey(record.subjectCode.toUpperCase())) {
-      throw ArgumentError('Subject code already exists in transcript.');
+    if (records.any((existing) => _recordKey(existing) == _recordKey(record))) {
+      throw ArgumentError(
+        'This course record already exists for the semester.',
+      );
     }
     return StudentTranscript(
       sourceFileName: sourceFileName,
@@ -102,13 +104,15 @@ class StudentTranscript {
     required bool merge,
     required bool overwriteManual,
   }) {
-    final existingByCode = latestBySubjectCode;
-    final incomingCodes = <String>{};
+    final existingByRecord = {
+      for (final record in records) _recordKey(record): record,
+    };
+    final incomingKeys = <String>{};
     final updated = <TranscriptRecord>[];
     for (final record in incoming.records) {
-      final code = record.subjectCode.toUpperCase();
-      incomingCodes.add(code);
-      final existing = existingByCode[code];
+      final key = _recordKey(record);
+      incomingKeys.add(key);
+      final existing = existingByRecord[key];
       updated.add(
         existing != null && existing.isManual && !overwriteManual
             ? record.withManualValues(
@@ -120,7 +124,7 @@ class StudentTranscript {
       );
     }
     for (final record in records) {
-      if (incomingCodes.contains(record.subjectCode.toUpperCase())) continue;
+      if (incomingKeys.contains(_recordKey(record))) continue;
       if (merge || (record.isManual && !overwriteManual)) {
         updated.add(record);
       }
@@ -150,6 +154,12 @@ class StudentTranscript {
     );
   }
 }
+
+String _recordKey(TranscriptRecord record) => [
+  record.subjectCode.trim().toUpperCase(),
+  record.semester.trim().toUpperCase(),
+  record.term.trim().toUpperCase(),
+].join('|');
 
 class TranscriptRecord {
   const TranscriptRecord({

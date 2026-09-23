@@ -194,6 +194,67 @@ void main() {
     expect(replaced.latestBySubjectCode.containsKey('PRO192'), isFalse);
   });
 
+  test('preserves the same course across semester records during reimport', () {
+    TranscriptRecord row({
+      required String semester,
+      required String term,
+      required String grade,
+      required String status,
+    }) => TranscriptRecord(
+      term: term,
+      semester: semester,
+      subjectCode: 'FER101',
+      subjectName: 'Fundamentals',
+      prerequisite: '',
+      replacedSubject: '',
+      credit: '3',
+      grade: grade,
+      status: status,
+      matchesCurriculum: true,
+    );
+
+    final old = StudentTranscript(
+      sourceFileName: 'old.xls',
+      importedAt: DateTime.utc(2026, 9, 1),
+      records: [
+        row(semester: '5', term: 'Fall2025', grade: '4.0', status: 'Failed'),
+      ],
+    );
+    final incoming = StudentTranscript(
+      sourceFileName: 'new.xls',
+      importedAt: DateTime.utc(2026, 9, 22),
+      records: [
+        row(semester: '5', term: 'Fall2025', grade: '4.0', status: 'Failed'),
+        row(semester: '6', term: 'Spring2026', grade: '8.0', status: 'Passed'),
+      ],
+    );
+
+    final merged = old.reimport(incoming, merge: true, overwriteManual: false);
+    expect(merged.records, hasLength(2));
+    expect(
+      merged.records.map((record) => '${record.semester}:${record.grade}'),
+      containsAll(<String>['5:4.0', '6:8.0']),
+    );
+    expect(
+      merged.records.where((record) => record.subjectCode == 'FER101'),
+      hasLength(2),
+    );
+  });
+
+  test('parser keeps duplicate course rows when semesters differ', () {
+    final records = FapTranscriptParser().parseRows(const [
+      ['Term', 'Semester', 'Subject Code', 'Subject Name', 'Grade', 'Status'],
+      ['Fall2025', '5', 'FER101', 'Fundamentals', '4.0', 'Failed'],
+      ['Spring2026', '6', 'FER101', 'Fundamentals', '8.0', 'Passed'],
+    ], _courses);
+
+    expect(records, hasLength(2));
+    expect(records[0].semester, '5');
+    expect(records[0].grade, '4.0');
+    expect(records[1].semester, '6');
+    expect(records[1].grade, '8.0');
+  });
+
   test('manual-only grade remains until explicitly removed or overwritten', () {
     final original = StudentTranscript(
       sourceFileName: 'old.xls',

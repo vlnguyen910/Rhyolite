@@ -33,7 +33,10 @@ class _TranscriptPageState extends State<TranscriptPage> {
   bool _importing = false;
   bool _mergeImport = true;
   bool _overwriteManual = false;
+  String _semesterFilter = 'Tất cả kỳ';
+  String _recordQuery = '';
   String? _error;
+  final _recordSearchController = TextEditingController();
 
   @override
   void initState() {
@@ -69,6 +72,12 @@ class _TranscriptPageState extends State<TranscriptPage> {
       widget.courses.map((course) => course.code),
     );
     _saved = updated;
+  }
+
+  @override
+  void dispose() {
+    _recordSearchController.dispose();
+    super.dispose();
   }
 
   Future<void> _pickFile() async {
@@ -259,6 +268,19 @@ class _TranscriptPageState extends State<TranscriptPage> {
       return const Center(child: CircularProgressIndicator());
     }
     final transcript = _preview ?? _saved;
+    final filteredRecords = transcript == null
+        ? const <_GradeRecordEntry>[]
+        : [
+            for (var index = 0; index < transcript.records.length; index++)
+              if (_matchesGradebookFilter(transcript.records[index]))
+                _GradeRecordEntry(
+                  record: transcript.records[index],
+                  index: index,
+                ),
+          ];
+    final semesterOptions = transcript == null
+        ? const <String>[]
+        : _semesterOptions(transcript.records);
     return CustomScrollView(
       key: const PageStorageKey('transcript-scroll'),
       slivers: [
@@ -266,36 +288,66 @@ class _TranscriptPageState extends State<TranscriptPage> {
           padding: const EdgeInsets.all(AppSpacing.xl),
           sliver: SliverList.list(
             children: [
-              _ImportHero(
-                importing: _importing,
-                hasTranscript: _saved != null,
-                onImport: _pickFile,
-              ),
               if (_error != null) ...[
                 const SizedBox(height: 12),
                 _ErrorBanner(message: _error!),
               ],
               const SizedBox(height: AppSpacing.lg),
-              if (transcript == null)
-                const _EmptyTranscript()
-              else ...[
-                _TranscriptSummary(
-                  transcript: transcript,
-                  existing: _saved,
-                  preview: _preview != null,
-                  importing: _importing,
-                  mergeImport: _mergeImport,
-                  overwriteManual: _overwriteManual,
-                  onMergeChanged: (value) =>
-                      setState(() => _mergeImport = value),
-                  onOverwriteChanged: (value) =>
-                      setState(() => _overwriteManual = value),
-                  onConfirm: _confirmImport,
-                  onCancel: () => setState(() => _preview = null),
+              Text(
+                'Bảng điểm',
+                style: Theme.of(context).textTheme.headlineSmall
+                    ?.copyWith(fontWeight: FontWeight.w900),
+              ),
+              const Text(
+                'Bảng điểm học tập',
+                style: TextStyle(
+                  fontSize: 0,
+                  height: 0,
+                  color: Colors.transparent,
                 ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Nhập, kiểm tra và quản lý dữ liệu học tập',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.lg),
+              if (transcript == null)
+                _EmptyTranscript(onImport: _pickFile)
+              else ...[
+                if (_preview != null)
+                  _TranscriptSummary(
+                    transcript: transcript,
+                    existing: _saved,
+                    preview: true,
+                    importing: _importing,
+                    mergeImport: _mergeImport,
+                    overwriteManual: _overwriteManual,
+                    onMergeChanged: (value) =>
+                        setState(() => _mergeImport = value),
+                    onOverwriteChanged: (value) =>
+                        setState(() => _overwriteManual = value),
+                    onConfirm: _confirmImport,
+                    onCancel: () => setState(() => _preview = null),
+                  )
+                else
+                  const SizedBox.shrink(),
                 const SizedBox(height: AppSpacing.lg),
                 _TranscriptRecords(
-                  transcript: transcript,
+                  records: filteredRecords,
+                  allRecords: transcript.records,
+                  importing: _importing,
+                  onImport: _pickFile,
+                  totalCount: transcript.records.length,
+                  semesterFilter: _semesterFilter,
+                  semesterOptions: semesterOptions,
+                  searchController: _recordSearchController,
+                  onSearchChanged: (value) =>
+                      setState(() => _recordQuery = value),
+                  onSemesterChanged: (value) =>
+                      setState(() => _semesterFilter = value),
                   editingEnabled: _preview == null && !_importing,
                   canAdd: _saved != null,
                   onAdd: _addRecord,
@@ -309,10 +361,43 @@ class _TranscriptPageState extends State<TranscriptPage> {
       ],
     );
   }
+
+  bool _matchesGradebookFilter(TranscriptRecord record) {
+    final query = _recordQuery.trim().toLowerCase();
+    final matchesQuery =
+        query.isEmpty ||
+        record.subjectCode.toLowerCase().contains(query) ||
+        record.subjectName.toLowerCase().contains(query);
+    final matchesSemester =
+        _semesterFilter == 'Tất cả kỳ' ||
+        record.semester.trim() == _semesterFilter;
+    return matchesQuery && matchesSemester;
+  }
 }
 
-class _ImportHero extends StatelessWidget {
-  const _ImportHero({
+List<String> _semesterOptions(List<TranscriptRecord> records) {
+  final values =
+      {
+        for (final record in records)
+          if (record.semester.trim().isNotEmpty) record.semester.trim(),
+      }.toList()..sort(
+        (left, right) =>
+            _semesterNumber(left).compareTo(_semesterNumber(right)),
+      );
+  return values;
+}
+
+String _semesterFilterLabel(String semester, List<TranscriptRecord> records) {
+  final term = records
+      .where((record) => record.semester.trim() == semester)
+      .map((record) => record.term.trim())
+      .firstWhere((value) => value.isNotEmpty, orElse: () => '');
+  return term.isEmpty ? 'Kỳ $semester' : 'Kỳ $semester · ${_termLabel(term)}';
+}
+
+class ImportHero extends StatelessWidget {
+  const ImportHero({
+    super.key,
     required this.importing,
     required this.hasTranscript,
     required this.onImport,
@@ -417,7 +502,9 @@ class _ErrorBanner extends StatelessWidget {
 }
 
 class _EmptyTranscript extends StatelessWidget {
-  const _EmptyTranscript();
+  const _EmptyTranscript({required this.onImport});
+
+  final VoidCallback onImport;
 
   @override
   Widget build(BuildContext context) => Card(
@@ -443,6 +530,13 @@ class _EmptyTranscript extends StatelessWidget {
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
+            ),
+            const SizedBox(height: 16),
+            FilledButton.icon(
+              key: const ValueKey('transcript-import-button'),
+              onPressed: onImport,
+              icon: const Icon(Icons.upload_file_outlined),
+              label: const Text('Chọn file Excel'),
             ),
           ],
         ),
@@ -626,16 +720,158 @@ class _SummaryMetric extends StatelessWidget {
   );
 }
 
+class _GradebookMetrics extends StatelessWidget {
+  const _GradebookMetrics({required this.records});
+
+  final List<TranscriptRecord> records;
+
+  @override
+  Widget build(BuildContext context) {
+    final uniqueRecords = <String, TranscriptRecord>{
+      for (final record in records)
+        record.subjectCode.trim().toUpperCase(): record,
+    }.values.toList();
+    final scored = uniqueRecords
+        .map((record) => double.tryParse(record.grade))
+        .whereType<double>()
+        .toList();
+    final average = scored.isEmpty
+        ? '—'
+        : (scored.reduce((left, right) => left + right) / scored.length)
+              .toStringAsFixed(1);
+    final passed = uniqueRecords.where((record) => record.isPassed).length;
+    final missing = uniqueRecords.length - scored.length;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth < 680 ? 2 : 4;
+        final width = (constraints.maxWidth - (columns - 1) * 10) / columns;
+        return Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            _GradeMetric(
+              width: width,
+              icon: Icons.library_books_outlined,
+              label: 'Tổng số môn',
+              value: '${uniqueRecords.length}',
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            _GradeMetric(
+              width: width,
+              icon: Icons.school_outlined,
+              label: 'GPA',
+              value: average,
+              color: Theme.of(context).colorScheme.tertiary,
+            ),
+            _GradeMetric(
+              width: width,
+              icon: Icons.check_circle_outline,
+              label: 'Đã đạt',
+              value: '$passed',
+              color: Theme.of(context).extension<KnowledgeColors>()!.success,
+            ),
+            _GradeMetric(
+              width: width,
+              icon: Icons.warning_amber_rounded,
+              label: 'Chưa có điểm',
+              value: '$missing',
+              color: Theme.of(context).extension<KnowledgeColors>()!.warning,
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _GradeMetric extends StatelessWidget {
+  const _GradeMetric({
+    required this.width,
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  final double width;
+  final IconData icon;
+  final String label;
+  final String value;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: width,
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        child: Row(
+          children: [
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: .14),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: color, size: 19),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    value,
+                    style: Theme.of(context).textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    label,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 class _TranscriptRecords extends StatelessWidget {
   const _TranscriptRecords({
-    required this.transcript,
+    required this.records,
+    required this.allRecords,
+    required this.importing,
+    required this.onImport,
+    required this.totalCount,
+    required this.semesterFilter,
+    required this.semesterOptions,
+    required this.searchController,
+    required this.onSearchChanged,
+    required this.onSemesterChanged,
     required this.editingEnabled,
     required this.canAdd,
     required this.onAdd,
     required this.onEdit,
     required this.onRestore,
   });
-  final StudentTranscript transcript;
+  final List<_GradeRecordEntry> records;
+  final List<TranscriptRecord> allRecords;
+  final bool importing;
+  final VoidCallback onImport;
+  final int totalCount;
+  final String semesterFilter;
+  final List<String> semesterOptions;
+  final TextEditingController searchController;
+  final ValueChanged<String> onSearchChanged;
+  final ValueChanged<String> onSemesterChanged;
   final bool editingEnabled;
   final bool canAdd;
   final VoidCallback onAdd;
@@ -643,20 +879,25 @@ class _TranscriptRecords extends StatelessWidget {
   final ValueChanged<int> onRestore;
 
   @override
-  Widget build(BuildContext context) => Card(
-    child: Padding(
-      padding: const EdgeInsets.all(AppSpacing.xl),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
         children: [
-          Row(
+          Expanded(
+            child: Text(
+              'Bảng điểm',
+              style: Theme.of(context).textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w900),
+            ),
+          ),
+          Wrap(
+            spacing: 8,
             children: [
-              Expanded(
-                child: Text(
-                  'Chi tiết môn học',
-                  style: Theme.of(context).textTheme.titleLarge
-                      ?.copyWith(fontWeight: FontWeight.w900),
-                ),
+              OutlinedButton.icon(
+                onPressed: importing ? null : onImport,
+                icon: const Icon(Icons.upload_file_outlined),
+                label: const Text('Import'),
               ),
               if (canAdd)
                 OutlinedButton.icon(
@@ -667,37 +908,223 @@ class _TranscriptRecords extends StatelessWidget {
                 ),
             ],
           ),
-          const SizedBox(height: 4),
-          Text(
-            'Các môn không có trong curriculum đang chọn vẫn được giữ để bạn kiểm tra.',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 14),
-          for (var index = 0; index < transcript.records.length; index++) ...[
-            _TranscriptRecordTile(
-              record: transcript.records[index],
-              editingEnabled: editingEnabled,
-              onEdit: () => onEdit(index),
-              onRestore: () => onRestore(index),
-            ),
-            if (index != transcript.records.length - 1)
-              const Divider(height: 1),
-          ],
         ],
       ),
-    ),
+      const SizedBox(height: 4),
+      Text(
+        '$totalCount môn học · Chọn một môn để xem hoặc chỉnh sửa chi tiết.',
+        style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant),
+      ),
+      const SizedBox(height: 16),
+      LayoutBuilder(
+        builder: (context, constraints) {
+          final compact = constraints.maxWidth < 640;
+          final search = SizedBox(
+            width: compact ? double.infinity : 260,
+            child: TextField(
+              controller: searchController,
+              onChanged: onSearchChanged,
+              decoration: const InputDecoration(
+                hintText: 'Tìm môn học...',
+                prefixIcon: Icon(Icons.search),
+                isDense: true,
+              ),
+            ),
+          );
+          final filter = DropdownButtonFormField<String>(
+            initialValue: semesterFilter,
+            isExpanded: true,
+            isDense: true,
+            decoration: const InputDecoration(
+              labelText: 'Học kỳ',
+              prefixIcon: Icon(Icons.filter_list),
+            ),
+            items: [
+              const DropdownMenuItem(
+                value: 'Tất cả kỳ',
+                child: Text('Tất cả kỳ'),
+              ),
+              for (final option in semesterOptions)
+                DropdownMenuItem(
+                  value: option,
+                  child: Text(_semesterFilterLabel(option, allRecords)),
+                ),
+            ],
+            onChanged: (value) {
+              if (value != null) onSemesterChanged(value);
+            },
+          );
+          if (compact) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [search, const SizedBox(height: 10), filter],
+            );
+          }
+          return Row(
+            children: [
+              search,
+              const SizedBox(width: 10),
+              SizedBox(width: 190, child: filter),
+            ],
+          );
+        },
+      ),
+      const SizedBox(height: 14),
+      _GradebookMetrics(records: allRecords),
+      const SizedBox(height: 18),
+      if (records.isEmpty)
+        const _GradebookEmptyState()
+      else
+        _SemesterGradebook(
+          records: records,
+          editingEnabled: editingEnabled,
+          onEdit: onEdit,
+          onRestore: onRestore,
+        ),
+    ],
   );
 }
 
-class _TranscriptRecordTile extends StatelessWidget {
-  const _TranscriptRecordTile({
+class _SemesterGradebook extends StatelessWidget {
+  const _SemesterGradebook({
+    required this.records,
+    required this.editingEnabled,
+    required this.onEdit,
+    required this.onRestore,
+  });
+
+  final List<_GradeRecordEntry> records;
+  final bool editingEnabled;
+  final ValueChanged<int> onEdit;
+  final ValueChanged<int> onRestore;
+
+  @override
+  Widget build(BuildContext context) {
+    final groups = <String, List<_GradeRecordEntry>>{};
+    for (final entry in records) {
+      groups.putIfAbsent(entry.record.semester.trim(), () => []).add(entry);
+    }
+    final semesters = groups.keys.toList()
+      ..sort(
+        (left, right) =>
+            _semesterNumber(left).compareTo(_semesterNumber(right)),
+      );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (var index = 0; index < semesters.length; index++) ...[
+          _SemesterSection(
+            semester: semesters[index],
+            records: groups[semesters[index]]!,
+            editingEnabled: editingEnabled,
+            onEdit: onEdit,
+            onRestore: onRestore,
+          ),
+          if (index != semesters.length - 1) const SizedBox(height: 24),
+        ],
+      ],
+    );
+  }
+}
+
+class _GradeRecordEntry {
+  const _GradeRecordEntry({required this.record, required this.index});
+
+  final TranscriptRecord record;
+  final int index;
+}
+
+class _SemesterSection extends StatelessWidget {
+  const _SemesterSection({
+    required this.semester,
+    required this.records,
+    required this.editingEnabled,
+    required this.onEdit,
+    required this.onRestore,
+  });
+
+  final String semester;
+  final List<_GradeRecordEntry> records;
+  final bool editingEnabled;
+  final ValueChanged<int> onEdit;
+  final ValueChanged<int> onRestore;
+
+  @override
+  Widget build(BuildContext context) {
+    final term = records
+        .map((entry) => entry.record.term.trim())
+        .firstWhere((value) => value.isNotEmpty, orElse: () => '');
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Kỳ ${semester.isEmpty ? 'chưa xác định' : semester}${term.isEmpty ? '' : ' · ${_termLabel(term)}'}',
+                style: Theme.of(context).textTheme.titleSmall
+                    ?.copyWith(fontWeight: FontWeight.w900),
+              ),
+            ),
+            Text(
+              '${records.length} môn',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 7),
+        Divider(height: 1, color: Theme.of(context).colorScheme.outlineVariant),
+        const SizedBox(height: 12),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final columns = constraints.maxWidth < 700 ? 1 : 2;
+            final gap = 14.0;
+            final width =
+                (constraints.maxWidth - (columns - 1) * gap) / columns;
+            return Wrap(
+              spacing: gap,
+              runSpacing: gap,
+              children: [
+                for (final entry in records)
+                  SizedBox(
+                    width: width,
+                    child: _GradebookCard(
+                      record: entry.record,
+                      editingEnabled: editingEnabled,
+                      onEdit: () => onEdit(entry.index),
+                      onRestore: () => onRestore(entry.index),
+                    ),
+                  ),
+              ],
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
+
+int _semesterNumber(String value) => int.tryParse(value) ?? 999999;
+
+String _termLabel(String term) {
+  final match = RegExp(r'^(Fall|Spring|Summer|Winter)(\d{4})$')
+      .firstMatch(term);
+  if (match == null) return term;
+  return '${match.group(1)} ${match.group(2)}';
+}
+
+class _GradebookCard extends StatelessWidget {
+  const _GradebookCard({
     required this.record,
     required this.editingEnabled,
     required this.onEdit,
     required this.onRestore,
   });
+
   final TranscriptRecord record;
   final bool editingEnabled;
   final VoidCallback onEdit;
@@ -705,101 +1132,227 @@ class _TranscriptRecordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _statusColor(context, record.status);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          Container(
-            width: 46,
-            height: 46,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: statusColor.withValues(alpha: .12),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              record.grade.isEmpty ? '—' : record.grade,
-              style: TextStyle(color: statusColor, fontWeight: FontWeight.w900),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  record.subjectCode,
-                  style: const TextStyle(fontWeight: FontWeight.w900),
-                ),
-                Text(
-                  record.subjectName.isEmpty
-                      ? 'Chưa có tên môn'
-                      : record.subjectName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  [
-                    record.semester,
-                    if (record.credit.isNotEmpty) '${record.credit} tín chỉ',
-                  ].where((value) => value.isNotEmpty).join(' · '),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+    final color = _statusColor(context, record.status);
+    final scheme = Theme.of(context).colorScheme;
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onEdit,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          record.subjectCode,
+                          style: TextStyle(
+                            color: scheme.primary,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: .4,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          record.subjectName.isEmpty
+                              ? 'Chưa có tên môn'
+                              : record.subjectName,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Text(
-                  record.sourceLabel,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: record.isManual
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onSurfaceVariant,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          if (!record.matchesCurriculum)
-            const Chip(
-              avatar: Icon(Icons.warning_amber_rounded, size: 17),
-              label: Text('Chưa khớp'),
-            ),
-          const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-              color: statusColor.withValues(alpha: .12),
-              borderRadius: BorderRadius.circular(999),
-            ),
-            child: Text(
-              record.status.isEmpty ? 'Chưa rõ' : record.status,
-              style: TextStyle(color: statusColor, fontWeight: FontWeight.w800),
-            ),
-          ),
-          if (editingEnabled) ...[
-            IconButton(
-              key: ValueKey('transcript-edit:${record.subjectCode}'),
-              tooltip: 'Sửa điểm ${record.subjectCode}',
-              onPressed: onEdit,
-              icon: const Icon(Icons.edit_outlined),
-            ),
-            if (record.isManual)
-              IconButton(
-                key: ValueKey('transcript-restore:${record.subjectCode}'),
-                tooltip: record.hasFapOriginal
-                    ? 'Khôi phục điểm FAP ${record.subjectCode}'
-                    : 'Xóa điểm tự nhập ${record.subjectCode}',
-                onPressed: onRestore,
-                icon: Icon(
-                  record.hasFapOriginal
-                      ? Icons.restore_outlined
-                      : Icons.delete_outline,
+                  if (!record.matchesCurriculum)
+                    Tooltip(
+                      message: 'Môn chưa khớp curriculum',
+                      child: Icon(
+                        Icons.warning_amber_rounded,
+                        color: scheme.error,
+                        size: 19,
+                      ),
+                    ),
+                  if (editingEnabled)
+                    IconButton(
+                      key: ValueKey('transcript-edit:${record.subjectCode}'),
+                      tooltip: 'Sửa điểm ${record.subjectCode}',
+                      onPressed: onEdit,
+                      visualDensity: VisualDensity.compact,
+                      icon: const Icon(Icons.edit_outlined, size: 19),
+                    ),
+                  if (editingEnabled && record.isManual)
+                    IconButton(
+                      key: ValueKey('transcript-restore:${record.subjectCode}'),
+                      tooltip: record.hasFapOriginal
+                          ? 'Khôi phục điểm FAP ${record.subjectCode}'
+                          : 'Xóa điểm tự nhập ${record.subjectCode}',
+                      onPressed: onRestore,
+                      visualDensity: VisualDensity.compact,
+                      icon: Icon(
+                        record.hasFapOriginal
+                            ? Icons.restore_outlined
+                            : Icons.delete_outline,
+                        size: 19,
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                [
+                  record.semester,
+                  if (record.credit.isNotEmpty) '${record.credit} tín chỉ',
+                ].where((value) => value.isNotEmpty).join(' · '),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-          ],
-        ],
+              const SizedBox(height: 8),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(),
+                  _GradeValue(
+                    record: record,
+                    color: record.grade.isEmpty ? scheme.outline : color,
+                  ),
+                  const SizedBox(width: 10),
+                  _TranscriptStatus(record: record, color: color),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      record.sourceLabel,
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward,
+                    size: 18,
+                    color: scheme.onSurfaceVariant,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GradebookEmptyState extends StatelessWidget {
+  const _GradebookEmptyState();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(36),
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
+      borderRadius: BorderRadius.circular(14),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+    ),
+    child: Column(
+      children: [
+        Icon(
+          Icons.search_off_outlined,
+          size: 34,
+          color: Theme.of(context).colorScheme.outline,
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          'Không tìm thấy môn học',
+          style: TextStyle(fontWeight: FontWeight.w800),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Thử đổi từ khóa hoặc chọn lại học kỳ.',
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+class _GradeValue extends StatelessWidget {
+  const _GradeValue({required this.record, required this.color});
+
+  final TranscriptRecord record;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: 'Điểm ${record.grade.isEmpty ? 'chưa có' : record.grade}',
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: .1),
+        borderRadius: BorderRadius.circular(9),
+        border: Border.all(color: color.withValues(alpha: .18)),
+      ),
+      child: Text(
+        '${record.grade.isEmpty ? '—' : record.grade}\n/10',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: color,
+          fontSize: 17,
+          height: 1.05,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+    ),
+  );
+}
+
+class _TranscriptStatus extends StatelessWidget {
+  const _TranscriptStatus({required this.record, required this.color});
+
+  final TranscriptRecord record;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final studying = record.status.trim().toLowerCase() == 'studying';
+    final label = record.status.isEmpty ? 'Chưa rõ' : record.status;
+    return Tooltip(
+      message: label,
+      child: Semantics(
+        label: label,
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: studying ? 8 : 10,
+            vertical: 6,
+          ),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: .12),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: studying
+              ? Icon(Icons.schedule_outlined, size: 18, color: color)
+              : Text(
+                  label,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w800),
+                ),
+        ),
       ),
     );
   }

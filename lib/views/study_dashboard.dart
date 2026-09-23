@@ -624,8 +624,13 @@ class _CourseShortcut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).extension<KnowledgeColors>()!.course;
+    final record = transcriptRecord;
+    final studying = record?.status.trim().toLowerCase() == 'studying';
+    final statusColor = record?.isPassed == true
+        ? Theme.of(context).extension<KnowledgeColors>()!.success
+        : Theme.of(context).colorScheme.primary;
     return SizedBox(
-      width: 210,
+      width: 230,
       child: Material(
         color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(14),
@@ -661,16 +666,13 @@ class _CourseShortcut extends StatelessWidget {
                       ),
                       Text(
                         course.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       if (course.isChoice) ...[
                         const SizedBox(height: 2),
                         Text(
                           _comboSlotLabel(course.groupCodes),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.labelSmall
                               ?.copyWith(
                                 color: Theme.of(context)
@@ -679,23 +681,48 @@ class _CourseShortcut extends StatelessWidget {
                               ),
                         ),
                       ],
-                      if (transcriptRecord != null) ...[
-                        const SizedBox(height: 3),
-                        Text(
-                          'Điểm ${transcriptRecord!.grade.isEmpty ? '—' : transcriptRecord!.grade}'
-                          '${transcriptRecord!.status.isEmpty ? '' : ' · ${transcriptRecord!.status}'}'
-                          ' · ${transcriptRecord!.sourceLabel}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(
-                                color: transcriptRecord!.isPassed
-                                    ? Theme.of(context)
-                                          .extension<KnowledgeColors>()!
-                                          .success
-                                    : Theme.of(context).colorScheme.error,
-                                fontWeight: FontWeight.w800,
+                      if (record != null) ...[
+                        const SizedBox(height: 5),
+                        Center(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Điểm ${record.grade.isEmpty ? '—' : record.grade}',
+                                style: Theme.of(context).textTheme.labelSmall
+                                    ?.copyWith(
+                                      color: statusColor,
+                                      fontWeight: FontWeight.w900,
+                                    ),
                               ),
+                              const SizedBox(width: 6),
+                              if (studying)
+                                Tooltip(
+                                  message: 'Studying',
+                                  child: Semantics(
+                                    label: 'Studying',
+                                    child: Icon(
+                                      Icons.schedule_outlined,
+                                      size: 16,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primary,
+                                    ),
+                                  ),
+                                )
+                              else if (record.status.isNotEmpty)
+                                Text(
+                                  record.status,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall
+                                      ?.copyWith(
+                                        color: statusColor,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                ),
+                            ],
+                          ),
                         ),
                       ],
                     ],

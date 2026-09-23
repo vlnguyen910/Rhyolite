@@ -398,6 +398,63 @@ void main() {
     expect(repository.transcript?.records.single.isManual, isFalse);
   });
 
+  testWidgets('Gradebook keeps retakes grouped in their original semesters', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1280, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final repository = _MemoryTranscriptRepository(
+      StudentTranscript(
+        sourceFileName: 'AcademicTranscript.xls',
+        importedAt: DateTime.utc(2026, 9, 21),
+        records: const [
+          TranscriptRecord(
+            term: 'Fall2025',
+            semester: '5',
+            subjectCode: 'PRF192',
+            subjectName: 'Cơ sở lập trình',
+            prerequisite: '',
+            replacedSubject: '',
+            credit: '3',
+            grade: '4.0',
+            status: 'Failed',
+            matchesCurriculum: true,
+          ),
+          TranscriptRecord(
+            term: 'Spring2026',
+            semester: '6',
+            subjectCode: 'PRF192',
+            subjectName: 'Cơ sở lập trình',
+            prerequisite: '',
+            replacedSubject: '',
+            credit: '3',
+            grade: '8.0',
+            status: 'Passed',
+            matchesCurriculum: true,
+          ),
+        ],
+      ),
+    );
+    await tester.pumpWidget(_testApp(transcriptRepository: repository));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bảng điểm'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kỳ 5 · Fall 2025'), findsOneWidget);
+    expect(find.text('Kỳ 6 · Spring 2026'), findsOneWidget);
+    expect(find.textContaining('4.0\n/10'), findsOneWidget);
+    expect(find.textContaining('8.0\n/10'), findsOneWidget);
+    expect(find.text('Failed'), findsOneWidget);
+    expect(find.text('Passed'), findsOneWidget);
+
+    await tester.enterText(find.byType(TextField).last, 'PRF192');
+    await tester.pumpAndSettle();
+    expect(find.text('Kỳ 5 · Fall 2025'), findsOneWidget);
+    expect(find.text('Kỳ 6 · Spring 2026'), findsOneWidget);
+    expect(find.textContaining('4.0\n/10'), findsOneWidget);
+    expect(find.textContaining('8.0\n/10'), findsOneWidget);
+  });
+
   testWidgets('A student can add a grade for a course missing from FAP', (
     tester,
   ) async {

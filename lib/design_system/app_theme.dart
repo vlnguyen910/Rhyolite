@@ -70,7 +70,7 @@ abstract final class AppTheme {
       brightness: brightness,
     );
     final dark = brightness == Brightness.dark;
-    return ThemeData(
+    final theme = ThemeData(
       useMaterial3: true,
       brightness: brightness,
       colorScheme: scheme,
@@ -123,7 +123,7 @@ abstract final class AppTheme {
         indicatorColor: scheme.secondaryContainer,
         labelTextStyle: WidgetStateProperty.resolveWith(
           (states) => TextStyle(
-            fontSize: 12,
+            fontSize: 13,
             fontWeight: states.contains(WidgetState.selected)
                 ? FontWeight.w700
                 : FontWeight.w500,
@@ -136,7 +136,7 @@ abstract final class AppTheme {
           color: scheme.inverseSurface,
           borderRadius: BorderRadius.circular(8),
         ),
-        textStyle: TextStyle(color: scheme.onInverseSurface, fontSize: 13),
+        textStyle: TextStyle(color: scheme.onInverseSurface, fontSize: 14),
       ),
       extensions: const [
         KnowledgeColors(
@@ -147,6 +147,13 @@ abstract final class AppTheme {
           warning: Color(0xffb45309),
         ),
       ],
+    );
+    return theme.copyWith(
+      textTheme: Typography.material2021().englishLike.apply(
+        fontSizeFactor: 1.15,
+        bodyColor: scheme.onSurface,
+        displayColor: scheme.onSurface,
+      ),
     );
   }
 }
