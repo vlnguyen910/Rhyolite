@@ -31,6 +31,7 @@ Mã tiên quyết chưa có trong nguồn: `MAC101`. Giữ dạng chữ, không 
 | BIT_SE_K21B | 3 | MAS291 | Học phần |
 
 ## Đề cương chi tiết
+Đây là môn học thuộc khối kiến thức [[Toán]], cung cấp cơ sở xác suất và phân tích thống kê thực nghiệm.
 
 ### Thông tin đề cương
 

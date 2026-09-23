@@ -26,4 +26,35 @@ void main() {
     expect(knowledge.topics, isNotEmpty);
     expect(knowledge.topics.first.title, contains('M1'));
   });
+
+  test(
+    'loads structured SDN302 knowledge and extracts Backend concept wikilink',
+    () async {
+      const course = CurriculumCourse(
+        code: 'SDN302',
+        name: 'Server-Side development with NodeJS, Express, and MongoDB',
+        semester: 7,
+        groupCodes: ['SE_COM*2'],
+        prerequisiteCodes: ['DBI202', 'FER202'],
+        notePath: 'Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md',
+      );
+
+      final knowledge = await CourseKnowledgeService().load(course);
+      expect(knowledge.concepts, contains('Backend'));
+    },
+  );
+
+  test('loads structured PRF192 knowledge and extracts Cơ sở lập trình concept wikilink', () async {
+    const course = CurriculumCourse(
+      code: 'PRF192',
+      name: 'Cơ sở lập trình',
+      semester: 1,
+      groupCodes: ['PRF192'],
+      prerequisiteCodes: [],
+      notePath: 'Mon hoc/PRF192 - Cơ sở lập trình.md',
+    );
+
+    final knowledge = await CourseKnowledgeService().load(course);
+    expect(knowledge.concepts, contains('Cơ sở lập trình'));
+  });
 }

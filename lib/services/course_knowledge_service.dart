@@ -32,6 +32,7 @@ class CourseKnowledgeService implements ICourseKnowledgeService {
       durationMarkdown: _section(body, 'Thời lượng'),
       toolsMarkdown: _section(body, 'Công cụ'),
       topics: _topics(body),
+      concepts: _concepts(body, normalized),
       credits: _tableValue(body, 'NoCredit'),
       sourceUrl: _tableValue(body, 'sourceUrl'),
     );
@@ -104,5 +105,56 @@ class CourseKnowledgeService implements ICourseKnowledgeService {
       if (topics.length == 8) break;
     }
     return topics;
+  }
+
+  List<String> _concepts(String body, String normalized) {
+    final concepts = <String>{};
+    if (normalized.startsWith('---\n')) {
+      final end = normalized.indexOf('\n---\n', 4);
+      if (end != -1) {
+        final frontmatter = normalized.substring(4, end);
+        final inlineMatch = RegExp(
+          r'^concepts:\s*\[(.*?)\]',
+          multiLine: true,
+        ).firstMatch(frontmatter);
+        if (inlineMatch != null) {
+          final items = inlineMatch.group(1)!.split(',');
+          for (final item in items) {
+            final cleaned = item
+                .trim()
+                .replaceAll(RegExp(r'''^["']|["']$'''), '')
+                .trim();
+            if (cleaned.isNotEmpty) concepts.add(cleaned);
+          }
+        }
+        final listMatches = RegExp(
+          r'^concepts:\s*\n((?:\s*-\s*[^\n]+\n?)+)',
+          multiLine: true,
+        ).firstMatch(frontmatter);
+        if (listMatches != null) {
+          final lines = listMatches.group(1)!.split('\n');
+          for (final line in lines) {
+            final cleaned = line
+                .replaceFirst(RegExp(r'^\s*-\s*'), '')
+                .trim()
+                .replaceAll(RegExp(r'''^["']|["']$'''), '')
+                .trim();
+            if (cleaned.isNotEmpty) concepts.add(cleaned);
+          }
+        }
+      }
+    }
+
+    final courseCodePattern = RegExp(r'^[A-Za-z]{2,5}\d{3}[a-zA-Z]?(-OLD)?$');
+    final wikilinkPattern = RegExp(r'\[\[([^\]|#]+)(?:\|([^\]]+))?\]\]');
+    for (final match in wikilinkPattern.allMatches(body)) {
+      final target = match.group(1)!.trim();
+      if (target.isEmpty) continue;
+      if (target.contains('/') || target.contains(r'\')) continue;
+      final firstToken = target.split(' - ').first.trim();
+      if (courseCodePattern.hasMatch(firstToken)) continue;
+      concepts.add(target);
+    }
+    return concepts.toList();
   }
 }

@@ -29,6 +29,7 @@ Không có môn tiên quyết được nêu trong nguồn.
 | BIT_SE_K21B | 2 | MAD101 | Học phần |
 
 ## Đề cương chi tiết
+Đây là môn học thuộc khối kiến thức [[Toán]], chuyên sâu về cấu trúc rời rạc, lý thuyết đồ thị và logic toán học.
 
 ### Thông tin đề cương
 
