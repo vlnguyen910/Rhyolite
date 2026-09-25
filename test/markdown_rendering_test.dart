@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:rhyolite/services/syllabus_section_service.dart';
 import 'package:rhyolite/views/widgets/markdown_rendering.dart';
 import 'package:rhyolite/views/widgets/syllabus_markdown_view.dart';
 
 void main() {
+  test('splits syllabus by heading and keeps code fences intact', () {
+    final sections = splitSyllabusSections('''
+# PRM393
+## Đề cương chi tiết
+### Mô tả
+Nội dung môn học.
+```md
+### Heading trong ví dụ
+```
+### Download All Student Material
+| Session | Topic |
+| --- | --- |
+| 1 | Flutter |
+''');
+
+    expect(sections.map((section) => section.title), [
+      'Đề cương chi tiết · Mô tả',
+      'Đề cương chi tiết · Download All Student Material',
+    ]);
+    expect(sections[0].markdown, contains('### Heading trong ví dụ'));
+    expect(sections[1].markdown, contains('| 1 | Flutter |'));
+  });
+
   test('keeps table rows intact when syllabus cells contain break tags', () {
     final rendered = renderableMarkdown(
       '# Môn học\n\n| Chủ đề | Nội dung |\n| --- | --- |\n'
@@ -63,5 +87,28 @@ void main() {
 
     await tester.tap(find.text('Cơ sở lập trình'));
     expect(tapped, 'course:PRF192');
+  });
+
+  testWidgets('renders only the selected syllabus section', (tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SyllabusMarkdownView(
+            source:
+                '# PRM393\n\n## Mô tả\nNội dung cơ bản.\n\n'
+                '## Nội dung buổi học\n| Buổi | Chủ đề |\n| --- | --- |\n'
+                '| 1 | Widget tree |',
+          ),
+        ),
+      ),
+    );
+
+    expect(find.text('Widget tree'), findsNothing);
+    await tester.tap(find.byKey(const ValueKey('syllabus-section-picker')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Nội dung buổi học').last);
+    await tester.pumpAndSettle();
+    expect(find.text('Widget tree'), findsOneWidget);
+    expect(find.text('Nội dung cơ bản.'), findsNothing);
   });
 }
