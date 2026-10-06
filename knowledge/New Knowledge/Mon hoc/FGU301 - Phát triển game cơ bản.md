@@ -1,0 +1,183 @@
+---
+subjectCode: "FGU301"
+subjectName: "Phát triển game cơ bản"
+aliases: ["FGU301"]
+curriculumCode: ["BIT_SE_K19B", "BIT_SE_K19D_K20A", "BIT_SE_K20B", "BIT_SE_K21B"]
+semester: ["5"]
+curriculumSubjectCode: ["SE_COM*1"]
+sourceGroupCodes: ["SE_COM*1"]
+prerequisiteCodes: ["PRO192"]
+prerequisiteFieldPresent: true
+prerequisiteHasMissingCourses: false
+syllabusId: ["13152"]
+sourceFile: "FPT_Full_Data_Export.json"
+---
+
+# FGU301 - Phát triển game cơ bản
+
+## Môn tiên quyết
+
+[[PRO192 - Lập trình hướng đối tượng|PRO192]]
+
+## Chương trình và học kỳ
+
+| curriculumCode | Học kỳ | Mã học phần / nhóm | Vị trí trong nguồn |
+| --- | --- | --- | --- |
+| BIT_SE_K19B | 5 | SE_COM*1 | Lựa chọn trong nhóm |
+| BIT_SE_K19D_K20A | 5 | SE_COM*1 | Lựa chọn trong nhóm |
+| BIT_SE_K20B | 5 | SE_COM*1 | Lựa chọn trong nhóm |
+| BIT_SE_K21B | 5 | SE_COM*1 | Lựa chọn trong nhóm |
+
+## Đề cương chi tiết
+
+### Thông tin đề cương
+
+| Trường | Giá trị |
+| --- | --- |
+| sourceUrl | https://flm.fpt.edu.vn/gui/role/student/SyllabusDetails?sylID=13152 |
+| Syllabus ID | 13152 |
+| Syllabus Name | Fundamental Game Development_Phát triển game cơ bản |
+| Course Name English | Fundamental Game Development |
+| Subject Code | FGU301 |
+| Learning-Teaching Method | Social Constructivism,In-class lecture,Inquiry-based Teaching |
+| NoCredit | 3 |
+| Degree Level | Bachelor |
+| Scoring Scale | 10 |
+| DecisionNo MM/dd/yyyy | 932/QĐ-ĐHFPT dated 08/22/2025 |
+| IsApproved | True |
+| Is Scored | True |
+| MinAvgMarkToPass | 5 |
+| IsActive | True |
+| ApprovedDate | 8/22/2025 |
+
+### Mô tả
+
+This comprehensive Basic Unity Training Program is designed to equip participants with essential skills in Unity game development, empowering them to create engaging and interactive 2D and 3D games. Building upon strong foundation in C# programming, the course delves into advanced topics such as 3D game development, physics, animations, and user interface design. Through a combination of theoretical lectures, hands-on labs, and collaborative projects, participants will gain practical experience and confidence in using Unity to bring their game ideas to life.  
+
+Key Learning Outcomes:  
+- Master C# Programming: Gain a deep understanding of C# syntax, data structures, algorithms, and object-oriented programming principles.
+- Navigate the Unity Environment: Become proficient in using Unity's interface and tools for game development.
+- Develop 3D Games: Learn the fundamentals of 3D game development, including rendering, lighting, animations, and physics.
+- Create Engaging Game Worlds: Master the art of designing game objects, animations, and physics components to create immersive and interactive game environments.
+- Build User-Friendly Interfaces: Design intuitive and visually appealing user interfaces that enhance the player experience.
+- Develop Games from Start to Finish: Complete hands-on projects, applying your knowledge to create your own small games and interactive applications.
+- Collaborate Effectively: Work collaboratively with teammates to develop game projects, fostering effective communication and teamwork skills.
+
+### Thời lượng
+
+45h (60 sessions) contact hours + 1h final exam + 104h self-study
+
+### Yêu cầu sinh viên
+
+- Students must attend at least 80% of contact slots in order to be accepted to the final examination.
+- Student is responsible to do all exercises, assignments and labs given by instructor in class or at home and submit on time
+- Use laptop in class only for learning purpose 
+- Promptly  access to http://flm.fpt.edu.vn for up-to-date course information
+
+### Công cụ
+
+- Internet
+- Visual Studio 2019 or later (C# programming language)
+- Unity Hub and Unity 5 (version 2021.3 LTS or later)
+- Minimum hardware requirement: Windows 10, 64-bit versions, CPU: X64, RAM: 8GB
+- Students use Unity with their personal email for educational purposes only
+
+### Điều kiện tiên quyết nguyên văn
+
+PRO192
+
+### 5 material(s)
+
+| No. | Material Description | Author | Publisher | Published Date | Edition | ISBN | Is Main Material | Is Hard Copy | Is Online | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Unity Official Document | Unity Technologies | Unity Technologies |  |  |  | True | False | True | https://docs.unity3d.com/Manual/index.html |
+| 2 | Microsoft Learn: C# | Microsoft | Microsoft |  |  |  | True | False | True | https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/<br>overview |
+| 3 | C# Programming for Unity Game Development Specialization | University of Colorado System | Coursera |  |  |  | False | False | True | https://www.coursera.org/specializations/programming-unity-game-development |
+| 4 | Unity Learn Platform | Unity Technologies | Unity Technologies |  |  |  | False | False | True | https://learn.unity.com |
+| 5 | Unity Official Channel | Unity Technologies | Youtube |  |  |  | False | False | True | https://www.youtube.com/@unity |
+
+### 8 LO(s)
+
+| No. | CLO Name | CLO Details |
+| --- | --- | --- |
+| 1 | CLO1 | Understand C# Programming Fundamentals: Syntax and Data Types, Control Flow, Functions and Methods, Classes and Objects, Debugging |
+| 2 | CLO2 | Understand C# data structures (lists, stacks, queues, trees) and algorithms (sorting, searching); Event Handling |
+| 3 | CLO3 | Understand the Unity interface and basic tools for game development |
+| 4 | CLO4 | Understand 3D Game Development; Rendering and Lighting; Animations and Physics |
+| 5 | CLO5 | Create and manipulate game objects, animations, and physics components |
+| 6 | CLO6 | Design user interfaces and handle user input effectively |
+| 7 | CLO7 | Develop small games and interactive applications using Unity |
+| 8 | CLO8 | Collaborate effectively in a team environment for game development projects. |
+
+### Download All Student Material
+
+| Session | Topic | Learning-Teaching Type | LO | ITU | Student Materials | S-Download | Student's Tasks | URLs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Chapter 1: Introduction to Unity  1.1 Unity interface  1.2 Scene, game object, component  1.3 Create a simple 2D or 3D project | Offline | CLO3, CLO5 | IT | - Chapter 1 slide and online materials | FGU301_Slide | Read the slide of Chapter 1: Introduction to Unity |  |
+| 2 | Chapter 1: Introduction to Unity (cont.)  1.1 Unity interface  1.2 Scene, game object, component  1.3 Create a simple 2D or 3D project | Offline | CLO3, CLO5 | IT | - Chapter 1 slide and online materials | link2-1 | Read the slide of Chapter 1: Introduction to Unity |  |
+| 3 | Chapter 1: Introduction to Unity (cont.)  1.1 Unity interface  1.2 Scene, game object, component  1.3 Create a simple 2D or 3D project | Offline | CLO3, CLO5 | IT | - Chapter 1 slide and online materials | link3-1 | Read the slide of Chapter 1: Introduction to Unity |  |
+| 4 | Chapter 2: C# Fundamentals  2.1 C# script component  2.2 Variables, data types, operators  2.3 Control flow (if-else, loops) | Offline | CLO 1 | IT | - Chapter 2 slide and online materials | link4-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 5 | Chapter 2: C# Fundamentals (cont.)  2.1 C# script component  2.2 Variables, data types, operators  2.3 Control flow (if-else, loops) | Offline | CLO 1 | IT | - Chapter 2 slide and online materials | link5-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 6 | Chapter 2: C# Fundamentals (cont.)  2.1 C# script component  2.2 Variables, data types, operators  2.3 Control flow (if-else, loops) | Offline | CLO 1 | IT | - Chapter 2 slide and online materials | link6-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 7 | Chapter 2: C# Fundamentals (cont.)  2.4 Classes, objects, methods, properties  2.5 Inheritancea, polymorphism, encapsulation  2.6 Arrays, lists, dictionaries | Offline | CLO2 | IT | - Chapter 2 slide and online materials | link7-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 8 | Chapter 2: C# Fundamentals (cont.)  2.4 Classes, objects, methods, properties  2.5 Inheritancea, polymorphism, encapsulation  2.6 Arrays, lists, dictionaries | Offline | CLO2 | IT | - Chapter 2 slide and online materials | link8-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 9 | Chapter 2: C# Fundamentals (cont.)  2.4 Classes, objects, methods, properties  2.5 Inheritancea, polymorphism, encapsulation  2.6 Arrays, lists, dictionaries | Offline | CLO2 | IT | - Chapter 2 slide and online materials | link9-1 | Read the slide of Chapter 2: C# Fundamentals |  |
+| 10 | Hands-on 1: Project 1 - Simple 2D project  Create a basic platforming game, focusing on character movement, collision detection, and scoring.Quiz 1 | Offline | CLO1, CLO2, CLO3, CLO5, CLO7, CLO8 | U |  |  | Review Chapter 1, 2Implement project 1Do Quiz 1 |  |
+| 11 | Hands-on 1 (cont.): Project 1 - Simple 2D project  Create a basic platforming game, focusing on character movement, collision detection, and scoring.Quiz 1 | Offline | CLO1, CLO2, CLO3, CLO5, CLO7, CLO8 | U |  |  | Review Chapter 1, 2Implement project 1Do Quiz 1 |  |
+| 12 | Hands-on 1 (cont.): Project 1 - Simple 2D project  Create a basic platforming game, focusing on character movement, collision detection, and scoring.Quiz 1 | Offline | CLO1, CLO2, CLO3, CLO5, CLO7, CLO8 | U |  |  | Review Chapter 1, 2Implement project 1Do Quiz 1 |  |
+| 13 | Chapter 3: Introduction to 2D and 3D Graphics in Unity	  3.1 2D/3D Graphics: Sprites, meshes, materials  3.2 Mecanim and Animation Controller. | Offline | CLO3, CLO4 | IT | - Chapter 3 slide and online materials | link13-1 | Read the slide of Chapter 3: Introduction to 2D and 3D |  |
+| 14 | Chapter 3: Introduction to 2D and 3D Graphics in Unity (cont.)  3.1 2D/3D Graphics: Sprites, meshes, materials  3.2 Mecanim and Animation Controller. | Offline | CLO3, CLO4 | IT | - Chapter 3 slide and online materials | link14-1 | Read the slide of Chapter 3: Introduction to 2D and 3D |  |
+| 15 | Chapter 3: Introduction to 2D and 3D Graphics in Unity (cont.)  3.1 2D/3D Graphics: Sprites, meshes, materials  3.2 Mecanim and Animation Controller. | Offline | CLO3, CLO4 | IT | - Chapter 3 slide and online materials | link15-1 | Read the slide of Chapter 3: Introduction to 2D and 3D |  |
+| 16 | Chapter 3: Introduction to 2D and 3D Graphics in Unity (cont.)  3.3 Unity GUI  3.4 Introduce UI event handling and user input | Offline | CLO6 | IT | - Chapter 3 slide and online materials | link16-1 | Read the slide of Introduction to 2D and 3D Graphics in Unity |  |
+| 17 | Chapter 3: Introduction to 2D and 3D Graphics in Unity (cont.)  3.3 Unity GUI  3.4 Introduce UI event handling and user input | Offline | CLO6 | IT | - Chapter 3 slide and online materials | link17-1 | Read the slide of Introduction to 2D and 3D Graphics in Unity |  |
+| 18 | Chapter 3: Introduction to 2D and 3D Graphics in Unity (cont.)  3.3 Unity GUI  3.4 Introduce UI event handling and user input | Offline | CLO6 | IT | - Chapter 3 slide and online materials | link18-1 | Read the slide of Introduction to 2D and 3D Graphics in Unity |  |
+| 19 | Chapter 4: Unity's Physics Engine  4.1	Rigidbodies, colliders  4.2	Forces, torque | Offline | CLO4 | IT | - Chapter 4 slide and online materials | link19-1 | Read the slide of Chapter 4: Unity's Physics Engine |  |
+| 20 | Chapter 4: Unity's Physics Engine (cont.)  4.1	Rigidbodies, colliders  4.2	Forces, torque | Offline | CLO4 | IT | - Chapter 4 slide and online materials | link20-1 | Read the slide of Chapter 4: Unity's Physics Engine |  |
+| 21 | Chapter 4: Unity's Physics Engine (cont.)  4.1	Rigidbodies, colliders  4.2	Forces, torque | Offline | CLO4 | IT | - Chapter 4 slide and online materials | link21-1 | Read the slide of Chapter 4: Unity's Physics Engine |  |
+| 22 | Hands-on 2: Project 1 - 2D Platformer Expansion  Expand the platformer game with levels, enemies, and power-ups.Quiz 2 | Offline | CLO3, CLO4, CLO6, CLO7, CLO8 | U |  |  | Reveiw Chapter 3, 4Implement project 1 (cont.)Do Quiz 2 |  |
+| 23 | Hands-on 2 (cont.): Project 1 - 2D Platformer Expansion  Expand the platformer game with levels, enemies, and power-ups.Quiz 2 | Offline | CLO3, CLO4, CLO6, CLO7, CLO8 | U |  |  | Reveiw Chapter 3, 4Implement project 1 (cont.)Do Quiz 2 |  |
+| 24 | Hands-on 2 (cont.): Project 1 - 2D Platformer Expansion (cont.)  Expand the platformer game with levels, enemies, and power-ups.Quiz 2 | Offline | CLO3, CLO4, CLO6, CLO7, CLO8 | U |  |  | Reveiw Chapter 3, 4Implement project 1 (cont.)Do Quiz 2 |  |
+| 25 | Assignment 1 assessment: Project 1 - 2D Platformer ExpansionProject Presentations and Feedback | Offline | CLO4, CLO6, CLO7, CLO8 | TU |  |  | Present projects 1 |  |
+| 26 | Assignment 1 assessment (cont.): Project 1 - 2D Platformer ExpansionProject Presentations and Feedback | Offline | CLO4, CLO6, CLO7, CLO8 | TU |  |  | Present projects 1 |  |
+| 27 | Assignment 1 assessment (cont.): Project 1 - 2D Platformer ExpansionProject Presentations and Feedback | Offline | CLO4, CLO6, CLO7, CLO8 | TU |  |  | Present projects 1 |  |
+| 28 | Chapter 5: Input Handling  5.1 Keyboard, mouse input  5.2 Unity Input System  5.3 Unity Input Manager | Offline | CLO3 | TU | - Chapter 5 slide and online materials | link28-1 | Read the slide of Chapter 5: Input Handling |  |
+| 29 | Chapter 5: Input Handling (cont.)  5.1 Keyboard, mouse input  5.2 Unity Input System  5.3 Unity Input Manager | Offline | CLO3 | TU | - Chapter 5 slide and online materials | link29-1 | Read the slide of Chapter 5: Input Handling |  |
+| 30 | Chapter 5: Input Handling (cont.)  5.1 Keyboard, mouse input  5.2 Unity Input System  5.3 Unity Input Manager | Offline | CLO3 | TU | - Chapter 5 slide and online materials | link30-1 | Read the slide of Chapter 5: Input Handling |  |
+| 31 | Chapter 6: Interactive Programming  6.1 Event Handling: Event-driven programming  6.2 Coroutines: Time-based execution of code  6.3 Serialization: Saving and loading game data | Offline | CLO3 | IT | - Chapter 6 slide and online materials | link31-1 | Read the slide of Chapter 6: Interactive Programming |  |
+| 32 | Chapter 6: Interactive Programming (cont.)  6.1 Event Handling: Event-driven programming  6.2 Coroutines: Time-based execution of code  6.3 Serialization: Saving and loading game data | Offline | CLO3 | IT | - Chapter 6 slide and online materials | link32-1 | Read the slide of Chapter 6: Interactive Programming |  |
+| 33 | Chapter 6: Interactive Programming (cont.)  6.1 Event Handling: Event-driven programming  6.2 Coroutines: Time-based execution of code  6.3 Serialization: Saving and loading game data | Offline | CLO3 | IT | - Chapter 6 slide and online materials | link33-1 | Read the slide of Chapter 6: Interactive Programming |  |
+| 34 | Chapter 7: Advanced C#  7.1 Delegates, events, coroutines  7.2 Unity's component-based architecture (ECS) | Offline | CLO1, CLO2 | IT | - Chapter 7 slide and online materials | link34-1 | Read the slide of Chapter 7: Advanced C# |  |
+| 35 | Chapter 7: Advanced C# (cont.)  7.1 Delegates, events, coroutines  7.2 Unity's component-based architecture (ECS) | Offline | CLO1, CLO2 | IT | - Chapter 7 slide and online materials | link35-1 | Read the slide of Chapter 7: Advanced C# |  |
+| 36 | Chapter 7: Advanced C# (cont.)  7.1 Delegates, events, coroutines  7.2 Unity's component-based architecture (ECS) | Offline | CLO1, CLO2 | IT | - Chapter 7 slide and online materials | link36-1 | Read the slide of Chapter 7: Advanced C# |  |
+| 37 | Hands-on 3: Project 2 - Create Simple 3D Puzzle Game:  Design a puzzle game using data structures and algorithms.Quiz 3 | Offline | CLO1, CLO3, CLO7, CLO8 | U |  |  | Review Chapter 5, 6, 7Implement project 2Do Quiz 3 |  |
+| 38 | Hands-on 3 (cont.): Project 2 - Create Simple 3D Puzzle Game:  Design a puzzle game using data structures and algorithms.Quiz 3 | Offline | CLO1, CLO3, CLO7, CLO8 | U |  |  | Review Chapter 5, 6, 7Implement project 2Do Quiz 3 |  |
+| 39 | Hands-on 3 (cont.): Project 2 - Create Simple 3D Puzzle Game:  Design a puzzle game using data structures and algorithms.Quiz 3 | Offline | CLO1, CLO3, CLO7, CLO8 | U |  |  | Review Chapter 5, 6, 7Implement project 2Do Quiz 3 |  |
+| 40 | Assignment 2 assessment: Project 2 - 3D gameProject Presentations and Feedback | Offline | CLO1, CLO2, CLO3, CLO7, CLO8 | TU |  |  | Present projects 2 |  |
+| 41 | Assignment 2 assessment (cont.): Project 2 - 3D gameProject Presentations and Feedback | Offline | CLO1, CLO2, CLO3, CLO7, CLO8 | TU |  |  | Present projects 2 |  |
+| 42 | Assignment 2 assessment (cont.): Project 2 - 3D gameProject Presentations and Feedback | Offline | CLO1, CLO2, CLO3, CLO7, CLO8 | TU |  |  | Present projects 2 |  |
+| 43 | Chapter 8: Unity Audio  8.1 Importing sound effects  8.2 Playing sound effects | Offline | CLO3 | TU | - Chapter 8 slide and online materials | link43-1 | Read the slide of Chapter 8: Unity Audio |  |
+| 44 | Chapter 8: Unity Audio (cont.)  8.1 Importing sound effects  8.2 Playing sound effects | Offline | CLO3 | TU | - Chapter 8 slide and online materials | link44-1 | Read the slide of Chapter 8: Unity Audio |  |
+| 45 | Chapter 8: Unity Audio (cont.)  8.1 Importing sound effects  8.2 Playing sound effects | Offline | CLO3 | TU | - Chapter 8 slide and online materials | link45-1 | Read the slide of Chapter 8: Unity Audio |  |
+| 46 | Chapter 9: Game Logic and Scoring Systems  9.1 Game Logic and Scoring Systems  9.2 Using AI in Unity games  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 8 slide and online materials | link46-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 47 | Chapter 9: Game Logic and Scoring Systems (cont.)  9.1 Game Logic and Scoring Systems  9.2 Using AI in Unity games  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 8 slide and online materials | link47-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 48 | Chapter 9: Game Logic and Scoring Systems (cont.)  9.1 Game Logic and Scoring Systems  9.2 Using AI in Unity games  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 8 slide and online materials | link48-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 49 | Chapter 9: Game Logic and Scoring Systems (cont.)  9.1 Game Logic and Scoring Systems  9.2 Basic AI concept in Unity game  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 9 slide and online materials | link49-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 50 | Chapter 9: Game Logic and Scoring Systems (cont.)  9.1 Game Logic and Scoring Systems  9.2 Basic AI concept in Unity game  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 9 slide and online materials | link50-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 51 | Chapter 9: Game Logic and Scoring Systems (cont.)  9.1 Game Logic and Scoring Systems  9.2 Basic AI concept in Unity game  9.3 Basic networking concepts in Unity | Offline | CLO4, CLO5 | IT | - Chapter 9 slide and online materials | link51-1 | Read the slide of Chapter 9: Game Logic and Scoring Systems |  |
+| 52 | Hands-on 4: Project 2 - Implement 3D game | Offline | CLO7, CLO8 | U |  |  | Review Chapter 8, 9Implement project 2 (cont.) |  |
+| 53 | Hands-on 4 (cont.): Project 2 - Implement 3D game | Offline | CLO7, CLO8 | U |  |  | Review Chapter 8, 9Implement project 2 (cont.) |  |
+| 54 | Hands-on 4 (cont.): Project 2 - Implement 3D game | Offline | CLO7, CLO8 | U |  |  | Review Chapter 8, 9Implement project 2 (cont.) |  |
+| 55 | Final Project Presentations and Feedback | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+| 56 | Final Project Presentations and Feedback (cont.) | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+| 57 | Final Project Presentations and Feedback (cont.) | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+| 58 | Final Project Presentations and Feedback (cont.) | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+| 59 | Final Project Presentations and Feedback (cont.) | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+| 60 | Final Project Presentations and Feedback (cont.) | Offline | CLO7, CLO8 | U |  |  | Present final project |  |
+
+### 3 assessment(s)
+
+| No. | Category | Type | Part | Weight | Completion Criteria | Duration | CLO | Question Type | No Question | Knowledge and Skill | Grading Guide | Note |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Assignment (Lab) | on-going | 2 | 40.0% | &gt;0 | 90' | Assignment 1: CLO4, CLO6, CLO7, CLO8Assignment 2: CLO1, CLO2, CLO3, CLO7, CLO8 | Theory present or project |  | - Assignment 1 cover content: Chapter 1, 2, 3, 4- Assignment 2 cover content: Chapter 3, 4, 5, 6, 7 | - Guided by instructor- Application or Theory- Work in group- Presentation | Instructor has responsibility to review the test for students after graded. |
+| 2 | Progress test (Quiz) | on-going | 3 | 30.0% | &gt;0 | 10'-30' | Quiz 1: CLO1, CLO2, CLO3, CLO5,Quiz 2: CLO3, CLO4, CLO6Quiz 3: CLO1, CLO3 | Multiple choicesMarked by Computer or a suitable format | 30 | Quiz 1 cover content: Chapter 1, 2Quiz 2 cover content: Chapter 3, 4Quiz 3 cover content: Chapter 5, 6, 7 | by exam board,using computer | Instruction and schedules for Progress tests must be presented in the  Course Implementation Plan approved by director of the campus. Progress test must be taken right after the last lectures of required material. Instructor has responsibility to review the test for students after graded. |
+| 3 | Final exam | Final exam | 1 | 30.0% | 4 | 60' | CLO1 - CLO6 | Multiple choicesMarked by Computer | 50 | concepts, algorithms; all studied chapters | by exam board,using computer | The exam questions must be updated or different at least 70% to the previous ones. |

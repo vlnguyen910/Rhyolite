@@ -1,0 +1,415 @@
+﻿curriculumCode,sourcePath,semester,curriculumSubjectCode,subjectCode,note
+BIT_SE_K19B,$[0].subjects[35].children[11],7,SE_COM*2,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K19B,$[0].subjects[36].children[11],7,SE_COM*3,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[11],7,SE_COM*2,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[11],7,SE_COM*3,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K20B,$[2].subjects[35].children[11],7,SE_COM*2,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K20B,$[2].subjects[36].children[11],7,SE_COM*3,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K21B,$[3].subjects[35].children[11],7,SE_COM*2,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K21B,$[3].subjects[36].children[11],7,SE_COM*3,AGU301,Mon hoc/AGU301 - Phát triển game nâng cao.md
+BIT_SE_K19B,$[0].subjects[35].children[3],7,SE_COM*2,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K19B,$[0].subjects[36].children[3],7,SE_COM*3,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[3],7,SE_COM*2,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[3],7,SE_COM*3,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K20B,$[2].subjects[35].children[3],7,SE_COM*2,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K20B,$[2].subjects[36].children[3],7,SE_COM*3,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K21B,$[3].subjects[35].children[3],7,SE_COM*2,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K21B,$[3].subjects[36].children[3],7,SE_COM*3,AIL304m,Mon hoc/AIL304m - Học máy.md
+BIT_SE_K19B,$[0].subjects[4].children[0],1,CEA201,CEA201,Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md
+BIT_SE_K19D_K20A,$[1].subjects[4].children[0],1,CEA201,CEA201,Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md
+BIT_SE_K20B,$[2].subjects[4].children[0],1,CEA201,CEA201,Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md
+BIT_SE_K21B,$[3].subjects[4].children[0],1,CEA201,CEA201,Mon hoc/CEA201 - Tổ chức và Kiến trúc máy tính.md
+BIT_SE_K19B,$[0].subjects[2].children[1],0,PHE_COM*1,COV111,Mon hoc/COV111 - Chess 1.md
+BIT_SE_K19D_K20A,$[1].subjects[2].children[1],0,PHE_COM*1,COV111,Mon hoc/COV111 - Chess 1.md
+BIT_SE_K20B,$[2].subjects[2].children[1],0,PHE_COM*1,COV111,Mon hoc/COV111 - Chess 1.md
+BIT_SE_K21B,$[3].subjects[2].children[1],0,PHE_COM*1,COV111,Mon hoc/COV111 - Chess 1.md
+BIT_SE_K19B,$[0].subjects[7].children[1],1,PHE_COM*2,COV121,Mon hoc/COV121 - Chess 2.md
+BIT_SE_K19D_K20A,$[1].subjects[7].children[1],1,PHE_COM*2,COV121,Mon hoc/COV121 - Chess 2.md
+BIT_SE_K20B,$[2].subjects[7].children[1],1,PHE_COM*2,COV121,Mon hoc/COV121 - Chess 2.md
+BIT_SE_K21B,$[3].subjects[7].children[1],1,PHE_COM*2,COV121,Mon hoc/COV121 - Chess 2.md
+BIT_SE_K19B,$[0].subjects[13].children[1],2,PHE_COM*3,COV131,Mon hoc/COV131 - Chess 3.md
+BIT_SE_K19D_K20A,$[1].subjects[13].children[1],2,PHE_COM*3,COV131,Mon hoc/COV131 - Chess 3.md
+BIT_SE_K20B,$[2].subjects[13].children[1],2,PHE_COM*3,COV131,Mon hoc/COV131 - Chess 3.md
+BIT_SE_K21B,$[3].subjects[13].children[1],2,PHE_COM*3,COV131,Mon hoc/COV131 - Chess 3.md
+BIT_SE_K19B,$[0].subjects[16].children[0],3,CSD201,CSD201,Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md
+BIT_SE_K19D_K20A,$[1].subjects[16].children[0],3,CSD201,CSD201,Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md
+BIT_SE_K20B,$[2].subjects[21].children[0],4,CSD201,CSD201,Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md
+BIT_SE_K21B,$[3].subjects[21].children[0],4,CSD201,CSD201,Mon hoc/CSD201 - Cấu trúc dữ liệu và giải thuật.md
+BIT_SE_K19B,$[0].subjects[5].children[0],1,CSI106,CSI106,Mon hoc/CSI106 - Nhập môn khoa học máy tính.md
+BIT_SE_K19D_K20A,$[1].subjects[5].children[0],1,CSI106,CSI106,Mon hoc/CSI106 - Nhập môn khoa học máy tính.md
+BIT_SE_K20B,$[2].subjects[5].children[0],1,CSI106,CSI106,Mon hoc/CSI106 - Nhập môn khoa học máy tính.md
+BIT_SE_K21B,$[3].subjects[5].children[0],1,CSI106,CSI106,Mon hoc/CSI106 - Nhập môn khoa học máy tính.md
+BIT_SE_K19B,$[0].subjects[3].children[5],0,TMI_ELE,DBA103,Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[5],0,TMI_ELE,DBA103,Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md
+BIT_SE_K20B,$[2].subjects[3].children[5],0,TMI_ELE,DBA103,Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md
+BIT_SE_K21B,$[3].subjects[3].children[5],0,TMI_ELE,DBA103,Mon hoc/DBA103 - Nhạc cụ truyền thống - Đàn Bầu.md
+BIT_SE_K19B,$[0].subjects[17].children[0],3,DBI202,DBI202,Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[17].children[0],3,DBI202,DBI202,Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md
+BIT_SE_K20B,$[2].subjects[16].children[0],3,DBI202,DBI202,Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md
+BIT_SE_K21B,$[3].subjects[16].children[0],3,DBI202,DBI202,Mon hoc/DBI202 - Các hệ cơ sở dữ liệu.md
+BIT_SE_K19B,$[0].subjects[17].children[1],3,DBI202,DBI202-OLD,Mon hoc/DBI202-OLD - Database Systems.md
+BIT_SE_K19D_K20A,$[1].subjects[17].children[1],3,DBI202,DBI202-OLD,Mon hoc/DBI202-OLD - Database Systems.md
+BIT_SE_K20B,$[2].subjects[16].children[1],3,DBI202,DBI202-OLD,Mon hoc/DBI202-OLD - Database Systems.md
+BIT_SE_K21B,$[3].subjects[16].children[1],3,DBI202,DBI202-OLD,Mon hoc/DBI202-OLD - Database Systems.md
+BIT_SE_K19B,$[0].subjects[35].children[4],7,SE_COM*2,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K19B,$[0].subjects[36].children[4],7,SE_COM*3,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[4],7,SE_COM*2,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[4],7,SE_COM*3,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K20B,$[2].subjects[35].children[4],7,SE_COM*2,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K20B,$[2].subjects[36].children[4],7,SE_COM*3,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K21B,$[3].subjects[35].children[4],7,SE_COM*2,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K21B,$[3].subjects[36].children[4],7,SE_COM*3,DBM301,Mon hoc/DBM301 - Khai phá dữ liệu.md
+BIT_SE_K19B,$[0].subjects[35].children[8],7,SE_COM*2,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K19B,$[0].subjects[36].children[8],7,SE_COM*3,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[8],7,SE_COM*2,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[8],7,SE_COM*3,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K20B,$[2].subjects[35].children[8],7,SE_COM*2,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K20B,$[2].subjects[36].children[8],7,SE_COM*3,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K21B,$[3].subjects[35].children[8],7,SE_COM*2,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K21B,$[3].subjects[36].children[8],7,SE_COM*3,DCD301,Mon hoc/DCD301 - Thiết kế vi mạch số.md
+BIT_SE_K19B,$[0].subjects[35].children[12],7,SE_COM*2,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K19B,$[0].subjects[36].children[12],7,SE_COM*3,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[12],7,SE_COM*2,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[12],7,SE_COM*3,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K20B,$[2].subjects[35].children[12],7,SE_COM*2,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K20B,$[2].subjects[36].children[12],7,SE_COM*3,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K21B,$[3].subjects[35].children[12],7,SE_COM*2,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K21B,$[3].subjects[36].children[12],7,SE_COM*3,DHV301,Mon hoc/DHV301 - Xử lý và Trực quan hóa Dữ liệu.md
+BIT_SE_K19B,$[0].subjects[3].children[3],0,TMI_ELE,DNG103,Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[3],0,TMI_ELE,DNG103,Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md
+BIT_SE_K20B,$[2].subjects[3].children[3],0,TMI_ELE,DNG103,Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md
+BIT_SE_K21B,$[3].subjects[3].children[3],0,TMI_ELE,DNG103,Mon hoc/DNG103 - Nhạc cụ truyền thống-Đàn nguyệt.md
+BIT_SE_K19B,$[0].subjects[3].children[0],0,TMI_ELE,DNH103,Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[0],0,TMI_ELE,DNH103,Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md
+BIT_SE_K20B,$[2].subjects[3].children[0],0,TMI_ELE,DNH103,Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md
+BIT_SE_K21B,$[3].subjects[3].children[0],0,TMI_ELE,DNH103,Mon hoc/DNH103 - Nhạc cụ truyền thống- Đàn Nhị.md
+BIT_SE_K19B,$[0].subjects[3].children[4],0,TMI_ELE,DSA103,Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[4],0,TMI_ELE,DSA103,Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md
+BIT_SE_K20B,$[2].subjects[3].children[4],0,TMI_ELE,DSA103,Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md
+BIT_SE_K21B,$[3].subjects[3].children[4],0,TMI_ELE,DSA103,Mon hoc/DSA103 - Nhạc cụ truyền thống- Sáo trúc.md
+BIT_SE_K19B,$[0].subjects[3].children[2],0,TMI_ELE,DTB103,Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[2],0,TMI_ELE,DTB103,Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md
+BIT_SE_K20B,$[2].subjects[3].children[2],0,TMI_ELE,DTB103,Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md
+BIT_SE_K21B,$[3].subjects[3].children[2],0,TMI_ELE,DTB103,Mon hoc/DTB103 - Nhạc cụ truyền thống- Đàn Tỳ bà.md
+BIT_SE_K19B,$[0].subjects[3].children[6],0,TMI_ELE,DTR103,Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[6],0,TMI_ELE,DTR103,Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md
+BIT_SE_K20B,$[2].subjects[3].children[6],0,TMI_ELE,DTR103,Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md
+BIT_SE_K21B,$[3].subjects[3].children[6],0,TMI_ELE,DTR103,Mon hoc/DTR103 - Nhạc cụ truyền thống-Đàn Tranh.md
+BIT_SE_K19B,$[0].subjects[26].children[4],5,SE_COM*1,ECI101,Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[4],5,SE_COM*1,ECI101,Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md
+BIT_SE_K20B,$[2].subjects[26].children[4],5,SE_COM*1,ECI101,Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md
+BIT_SE_K21B,$[3].subjects[26].children[4],5,SE_COM*1,ECI101,Mon hoc/ECI101 - Nhập môn các linh kiện và mạch điện tử.md
+BIT_SE_K19B,$[0].subjects[31].children[0],6,ENW493c,ENW493c,Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md
+BIT_SE_K19D_K20A,$[1].subjects[31].children[0],6,ENW493c,ENW493c,Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md
+BIT_SE_K20B,$[2].subjects[31].children[0],6,ENW493c,ENW493c,Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md
+BIT_SE_K21B,$[3].subjects[31].children[0],6,ENW493c,ENW493c,Mon hoc/ENW493c - Phương pháp nghiên cứu và kỹ năng viết học thuật.md
+BIT_SE_K19B,$[0].subjects[33].children[0],7,EXE101,EXE101,Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md
+BIT_SE_K19D_K20A,$[1].subjects[33].children[0],7,EXE101,EXE101,Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md
+BIT_SE_K20B,$[2].subjects[33].children[0],7,EXE101,EXE101,Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md
+BIT_SE_K21B,$[3].subjects[33].children[0],7,EXE101,EXE101,Mon hoc/EXE101 - Experiential Entrepreneurship 1 - Trải nghiệm khởi nghiệp 1.md
+BIT_SE_K19B,$[0].subjects[38].children[0],8,EXE201,EXE201,Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md
+BIT_SE_K19D_K20A,$[1].subjects[38].children[0],8,EXE201,EXE201,Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md
+BIT_SE_K20B,$[2].subjects[38].children[0],8,EXE201,EXE201,Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md
+BIT_SE_K21B,$[3].subjects[38].children[0],8,EXE201,EXE201,Mon hoc/EXE201 - Experiential Entrepreneurship 2 - Trải nghiệm khởi nghiệp 2.md
+BIT_SE_K19B,$[0].subjects[46].children[2],9,SE_GRA_ELE,EXE402,Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md
+BIT_SE_K19D_K20A,$[1].subjects[46].children[2],9,SE_GRA_ELE,EXE402,Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md
+BIT_SE_K20B,$[2].subjects[46].children[2],9,SE_GRA_ELE,EXE402,Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md
+BIT_SE_K21B,$[3].subjects[46].children[2],9,SE_GRA_ELE,EXE402,Mon hoc/EXE402 - Dự án khởi nghiệp tốt nghiệp.md
+BIT_SE_K19B,$[0].subjects[26].children[3],5,SE_COM*1,FER202,Mon hoc/FER202 - Phát triển web Front-End với React.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[3],5,SE_COM*1,FER202,Mon hoc/FER202 - Phát triển web Front-End với React.md
+BIT_SE_K20B,$[2].subjects[26].children[3],5,SE_COM*1,FER202,Mon hoc/FER202 - Phát triển web Front-End với React.md
+BIT_SE_K21B,$[3].subjects[26].children[3],5,SE_COM*1,FER202,Mon hoc/FER202 - Phát triển web Front-End với React.md
+BIT_SE_K19B,$[0].subjects[26].children[7],5,SE_COM*1,FGU301,Mon hoc/FGU301 - Phát triển game cơ bản.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[7],5,SE_COM*1,FGU301,Mon hoc/FGU301 - Phát triển game cơ bản.md
+BIT_SE_K20B,$[2].subjects[26].children[6],5,SE_COM*1,FGU301,Mon hoc/FGU301 - Phát triển game cơ bản.md
+BIT_SE_K21B,$[3].subjects[26].children[6],5,SE_COM*1,FGU301,Mon hoc/FGU301 - Phát triển game cơ bản.md
+BIT_SE_K19B,$[0].subjects[35].children[10],7,SE_COM*2,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K19B,$[0].subjects[36].children[10],7,SE_COM*3,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[10],7,SE_COM*2,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[10],7,SE_COM*3,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K20B,$[2].subjects[35].children[10],7,SE_COM*2,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K20B,$[2].subjects[36].children[10],7,SE_COM*3,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K21B,$[3].subjects[35].children[10],7,SE_COM*2,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K21B,$[3].subjects[36].children[10],7,SE_COM*3,GDC301,Mon hoc/GDC301 - Thiết kế game cơ bản - Từ ý tưởng đến thực hiện.md
+BIT_SE_K19B,$[0].subjects[46].children[0],9,SE_GRA_ELE,GRC490,Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[46].children[0],9,SE_GRA_ELE,GRC490,Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md
+BIT_SE_K20B,$[2].subjects[46].children[0],9,SE_GRA_ELE,GRC490,Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md
+BIT_SE_K21B,$[3].subjects[46].children[0],9,SE_GRA_ELE,GRC490,Mon hoc/GRC490 - Khóa luận tốt nghiệp liên ngành Quản trị kinh doanh - Kỹ thuật phần mềm.md
+BIT_SE_K19B,$[0].subjects[44].children[0],9,HCM202,HCM202,Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md
+BIT_SE_K19D_K20A,$[1].subjects[44].children[0],9,HCM202,HCM202,Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md
+BIT_SE_K20B,$[2].subjects[44].children[0],9,HCM202,HCM202,Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md
+BIT_SE_K21B,$[3].subjects[44].children[0],9,HCM202,HCM202,Mon hoc/HCM202 - Ho Chi Minh Ideology - Tư tưởng Hồ Chí Minh.md
+BIT_SE_K19B,$[0].subjects[26].children[5],5,SE_COM*1,HSF302,Mon hoc/HSF302 - Làm việc với Spring Framework.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[5],5,SE_COM*1,HSF302,Mon hoc/HSF302 - Làm việc với Spring Framework.md
+BIT_SE_K20B,$[2].subjects[26].children[5],5,SE_COM*1,HSF302,Mon hoc/HSF302 - Làm việc với Spring Framework.md
+BIT_SE_K21B,$[3].subjects[26].children[5],5,SE_COM*1,HSF302,Mon hoc/HSF302 - Làm việc với Spring Framework.md
+BIT_SE_K19B,$[0].subjects[26].children[6],5,SE_COM*1,IAO201c,Mon hoc/IAO201c - Nhập môn an toàn thông tin.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[6],5,SE_COM*1,IAO201c,Mon hoc/IAO201c - Nhập môn an toàn thông tin.md
+BIT_SE_K19B,$[0].subjects[21].children[0],4,IOT102,IOT102,Mon hoc/IOT102 - Internet vạn vật.md
+BIT_SE_K19D_K20A,$[1].subjects[21].children[0],4,IOT102,IOT102,Mon hoc/IOT102 - Internet vạn vật.md
+BIT_SE_K20B,$[2].subjects[22].children[0],4,IOT102,IOT102,Mon hoc/IOT102 - Internet vạn vật.md
+BIT_SE_K21B,$[3].subjects[22].children[0],4,IOT102,IOT102,Mon hoc/IOT102 - Internet vạn vật.md
+BIT_SE_K19B,$[0].subjects[39].children[0],8,ITE302c,ITE302c,Mon hoc/ITE302c - Đạo đức trong CNTT.md
+BIT_SE_K19D_K20A,$[1].subjects[39].children[0],8,ITE302c,ITE302c,Mon hoc/ITE302c - Đạo đức trong CNTT.md
+BIT_SE_K20B,$[2].subjects[39].children[0],8,ITE302c,ITE302c,Mon hoc/ITE302c - Đạo đức trong CNTT.md
+BIT_SE_K21B,$[3].subjects[39].children[0],8,ITE302c,ITE302c,Mon hoc/ITE302c - Đạo đức trong CNTT.md
+BIT_SE_K19B,$[0].subjects[21].children[1],4,IOT102,IoT102t,Mon hoc/IoT102t - Internet vạn vật.md
+BIT_SE_K19D_K20A,$[1].subjects[21].children[1],4,IOT102,IoT102t,Mon hoc/IoT102t - Internet vạn vật.md
+BIT_SE_K20B,$[2].subjects[22].children[1],4,IOT102,IoT102t,Mon hoc/IoT102t - Internet vạn vật.md
+BIT_SE_K21B,$[3].subjects[22].children[1],4,IOT102,IoT102t,Mon hoc/IoT102t - Internet vạn vật.md
+BIT_SE_K19B,$[0].subjects[43].children[0],8,SE_COM*4_ELE,JIS401,Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[43].children[0],8,SE_COM*4_ELE,JIS401,Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md
+BIT_SE_K20B,$[2].subjects[43].children[0],8,SE_COM*4_ELE,JIS401,Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md
+BIT_SE_K21B,$[3].subjects[43].children[0],8,SE_COM*4_ELE,JIS401,Mon hoc/JIS401 - Tiếng Nhật CNTT trong ngành phần mềm.md
+BIT_SE_K19B,$[0].subjects[43].children[1],8,SE_COM*4_ELE,JIT401,Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md
+BIT_SE_K19D_K20A,$[1].subjects[43].children[1],8,SE_COM*4_ELE,JIT401,Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md
+BIT_SE_K20B,$[2].subjects[43].children[1],8,SE_COM*4_ELE,JIT401,Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md
+BIT_SE_K21B,$[3].subjects[43].children[1],8,SE_COM*4_ELE,JIT401,Mon hoc/JIT401 - Tiếng Nhật công nghệ thông tin.md
+BIT_SE_K19B,$[0].subjects[18].children[0],3,JPD113,JPD113,Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md
+BIT_SE_K19D_K20A,$[1].subjects[18].children[0],3,JPD113,JPD113,Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md
+BIT_SE_K20B,$[2].subjects[17].children[0],3,JPD113,JPD113,Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md
+BIT_SE_K21B,$[3].subjects[17].children[0],3,JPD113,JPD113,Mon hoc/JPD113 - Tiếng Nhật sơ cấp 1-A1.1.md
+BIT_SE_K19B,$[0].subjects[22].children[0],4,JPD123,JPD123,Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md
+BIT_SE_K19D_K20A,$[1].subjects[22].children[0],4,JPD123,JPD123,Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md
+BIT_SE_K20B,$[2].subjects[23].children[0],4,JPD123,JPD123,Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md
+BIT_SE_K21B,$[3].subjects[23].children[0],4,JPD123,JPD123,Mon hoc/JPD123 - Tiếng Nhật sơ cấp 1-A1.2.md
+BIT_SE_K19B,$[0].subjects[26].children[0],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K19B,$[0].subjects[26].children[1],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[0],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[1],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K20B,$[2].subjects[26].children[0],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K20B,$[2].subjects[26].children[1],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K21B,$[3].subjects[26].children[0],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K21B,$[3].subjects[26].children[1],5,SE_COM*1,JPD133,Mon hoc/JPD133 - Tiếng Nhật sơ cấp 1-A1 - A2.md
+BIT_SE_K19B,$[0].subjects[35].children[0],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19B,$[0].subjects[35].children[2],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19B,$[0].subjects[36].children[0],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19B,$[0].subjects[36].children[2],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[0],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[2],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[0],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[2],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K20B,$[2].subjects[35].children[0],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K20B,$[2].subjects[35].children[2],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K20B,$[2].subjects[36].children[0],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K20B,$[2].subjects[36].children[2],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K21B,$[3].subjects[35].children[0],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K21B,$[3].subjects[35].children[2],7,SE_COM*2,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K21B,$[3].subjects[36].children[0],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K21B,$[3].subjects[36].children[2],7,SE_COM*3,JPD316,Mon hoc/JPD316 - Tiếng Nhật trung cấp 1-B1 - B2.md
+BIT_SE_K19B,$[0].subjects[35].children[1],7,SE_COM*2,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K19B,$[0].subjects[36].children[1],7,SE_COM*3,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[1],7,SE_COM*2,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[1],7,SE_COM*3,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K20B,$[2].subjects[35].children[1],7,SE_COM*2,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K20B,$[2].subjects[36].children[1],7,SE_COM*3,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K21B,$[3].subjects[35].children[1],7,SE_COM*2,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K21B,$[3].subjects[36].children[1],7,SE_COM*3,KOR311,Mon hoc/KOR311 - Hàn ngữ trung cấp 1.md
+BIT_SE_K19B,$[0].subjects[19].children[0],3,LAB211,LAB211,Mon hoc/LAB211 - Thực hành OOP với Java.md
+BIT_SE_K19D_K20A,$[1].subjects[19].children[0],3,LAB211,LAB211,Mon hoc/LAB211 - Thực hành OOP với Java.md
+BIT_SE_K20B,$[2].subjects[18].children[0],3,LAB211,LAB211,Mon hoc/LAB211 - Thực hành OOP với Java.md
+BIT_SE_K21B,$[3].subjects[18].children[0],3,LAB211,LAB211,Mon hoc/LAB211 - Thực hành OOP với Java.md
+BIT_SE_K19B,$[0].subjects[10].children[0],2,MAD101,MAD101,Mon hoc/MAD101 - Toán rời rạc.md
+BIT_SE_K19D_K20A,$[1].subjects[10].children[0],2,MAD101,MAD101,Mon hoc/MAD101 - Toán rời rạc.md
+BIT_SE_K20B,$[2].subjects[10].children[0],2,MAD101,MAD101,Mon hoc/MAD101 - Toán rời rạc.md
+BIT_SE_K21B,$[3].subjects[10].children[0],2,MAD101,MAD101,Mon hoc/MAD101 - Toán rời rạc.md
+BIT_SE_K19B,$[0].subjects[6].children[0],1,MAE101,MAE101,Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md
+BIT_SE_K19D_K20A,$[1].subjects[6].children[0],1,MAE101,MAE101,Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md
+BIT_SE_K20B,$[2].subjects[6].children[0],1,MAE101,MAE101,Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md
+BIT_SE_K21B,$[3].subjects[6].children[0],1,MAE101,MAE101,Mon hoc/MAE101 - Toán cho ngành kỹ thuật.md
+BIT_SE_K19B,$[0].subjects[23].children[0],4,MAS291,MAS291,Mon hoc/MAS291 - Xác suất thống kê.md
+BIT_SE_K19D_K20A,$[1].subjects[20].children[0],3,MAS291,MAS291,Mon hoc/MAS291 - Xác suất thống kê.md
+BIT_SE_K20B,$[2].subjects[19].children[0],3,MAS291,MAS291,Mon hoc/MAS291 - Xác suất thống kê.md
+BIT_SE_K21B,$[3].subjects[19].children[0],3,MAS291,MAS291,Mon hoc/MAS291 - Xác suất thống kê.md
+BIT_SE_K19B,$[0].subjects[35].children[13],7,SE_COM*2,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K19B,$[0].subjects[36].children[13],7,SE_COM*3,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[13],7,SE_COM*2,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[13],7,SE_COM*3,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K20B,$[2].subjects[35].children[13],7,SE_COM*2,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K20B,$[2].subjects[36].children[13],7,SE_COM*3,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K21B,$[3].subjects[35].children[13],7,SE_COM*2,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K21B,$[3].subjects[36].children[13],7,SE_COM*3,MDS301,Mon hoc/MDS301 - Học máy trong khoa học dữ liệu.md
+BIT_SE_K19B,$[0].subjects[35].children[7],7,SE_COM*2,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K19B,$[0].subjects[36].children[7],7,SE_COM*3,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[7],7,SE_COM*2,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[7],7,SE_COM*3,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K20B,$[2].subjects[35].children[7],7,SE_COM*2,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K20B,$[2].subjects[36].children[7],7,SE_COM*3,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K21B,$[3].subjects[35].children[7],7,SE_COM*2,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K21B,$[3].subjects[36].children[7],7,SE_COM*3,MIP201,Mon hoc/MIP201 - Lập trình vi điều khiển.md
+BIT_SE_K19B,$[0].subjects[40].children[0],8,MLN111,MLN111,Mon hoc/MLN111 - Triết học Mác - Lê-nin.md
+BIT_SE_K19D_K20A,$[1].subjects[40].children[0],8,MLN111,MLN111,Mon hoc/MLN111 - Triết học Mác - Lê-nin.md
+BIT_SE_K20B,$[2].subjects[40].children[0],8,MLN111,MLN111,Mon hoc/MLN111 - Triết học Mác - Lê-nin.md
+BIT_SE_K21B,$[3].subjects[40].children[0],8,MLN111,MLN111,Mon hoc/MLN111 - Triết học Mác - Lê-nin.md
+BIT_SE_K19B,$[0].subjects[41].children[0],8,MLN122,MLN122,Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md
+BIT_SE_K19D_K20A,$[1].subjects[41].children[0],8,MLN122,MLN122,Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md
+BIT_SE_K20B,$[2].subjects[41].children[0],8,MLN122,MLN122,Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md
+BIT_SE_K21B,$[3].subjects[41].children[0],8,MLN122,MLN122,Mon hoc/MLN122 - Political economics of Marxism – Leninism - Kinh tế chính trị Mác - Lê-nin.md
+BIT_SE_K19B,$[0].subjects[45].children[0],9,MLN131,MLN131,Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md
+BIT_SE_K19D_K20A,$[1].subjects[45].children[0],9,MLN131,MLN131,Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md
+BIT_SE_K20B,$[2].subjects[45].children[0],9,MLN131,MLN131,Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md
+BIT_SE_K21B,$[3].subjects[45].children[0],9,MLN131,MLN131,Mon hoc/MLN131 - Scientific socialism - Chủ nghĩa xã hội khoa học.md
+BIT_SE_K19B,$[0].subjects[35].children[5],7,SE_COM*2,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K19B,$[0].subjects[36].children[5],7,SE_COM*3,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[5],7,SE_COM*2,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[5],7,SE_COM*3,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K20B,$[2].subjects[35].children[5],7,SE_COM*2,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K20B,$[2].subjects[36].children[5],7,SE_COM*3,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K21B,$[3].subjects[35].children[5],7,SE_COM*2,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K21B,$[3].subjects[36].children[5],7,SE_COM*3,MMA301,Mon hoc/MMA301 - Phát triển ứng dụng di động đa nền tảng.md
+BIT_SE_K19B,$[0].subjects[11].children[0],2,NWC204,NWC204,Mon hoc/NWC204 - Mạng máy tính.md
+BIT_SE_K19D_K20A,$[1].subjects[11].children[0],2,NWC204,NWC204,Mon hoc/NWC204 - Mạng máy tính.md
+BIT_SE_K20B,$[2].subjects[11].children[0],2,NWC204,NWC204,Mon hoc/NWC204 - Mạng máy tính.md
+BIT_SE_K21B,$[3].subjects[11].children[0],2,NWC204,NWC204,Mon hoc/NWC204 - Mạng máy tính.md
+BIT_SE_K19B,$[0].subjects[32].children[0],6,OJT202,OJT202,Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md
+BIT_SE_K19D_K20A,$[1].subjects[32].children[0],6,OJT202,OJT202,Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md
+BIT_SE_K20B,$[2].subjects[32].children[0],6,OJT202,OJT202,Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md
+BIT_SE_K21B,$[3].subjects[32].children[0],6,OJT202,OJT202,Mon hoc/OJT202 - Đào tạo trong môi trường thực tế.md
+BIT_SE_K19B,$[0].subjects[12].children[0],2,OSG202,OSG202,Mon hoc/OSG202 - Hệ điều hành.md
+BIT_SE_K19D_K20A,$[1].subjects[12].children[0],2,OSG202,OSG202,Mon hoc/OSG202 - Hệ điều hành.md
+BIT_SE_K20B,$[2].subjects[12].children[0],2,OSG202,OSG202,Mon hoc/OSG202 - Hệ điều hành.md
+BIT_SE_K21B,$[3].subjects[12].children[0],2,OSG202,OSG202,Mon hoc/OSG202 - Hệ điều hành.md
+BIT_SE_K19B,$[0].subjects[0].children[0],0,OTP101,OTP101,Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md
+BIT_SE_K19D_K20A,$[1].subjects[0].children[0],0,OTP101,OTP101,Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md
+BIT_SE_K20B,$[2].subjects[0].children[0],0,OTP101,OTP101,Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md
+BIT_SE_K21B,$[3].subjects[0].children[0],0,OTP101,OTP101,Mon hoc/OTP101 - Định hướng và Rèn luyện tập trung.md
+BIT_SE_K19B,$[0].subjects[26].children[8],5,SE_COM*1,PDS301m,Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[8],5,SE_COM*1,PDS301m,Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md
+BIT_SE_K20B,$[2].subjects[26].children[7],5,SE_COM*1,PDS301m,Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md
+BIT_SE_K21B,$[3].subjects[26].children[7],5,SE_COM*1,PDS301m,Mon hoc/PDS301m - Lập trình Python cho khoa học dữ liệu ứng dụng.md
+BIT_SE_K19B,$[0].subjects[1],0,PEN,PEN,Mon hoc/PEN - Tiếng Anh chuẩn bị.md
+BIT_SE_K19D_K20A,$[1].subjects[1],0,PEN,PEN,Mon hoc/PEN - Tiếng Anh chuẩn bị.md
+BIT_SE_K20B,$[2].subjects[1],0,PEN,PEN,Mon hoc/PEN - Tiếng Anh chuẩn bị.md
+BIT_SE_K21B,$[3].subjects[1],0,PEN,PEN,Mon hoc/PEN - Tiếng Anh chuẩn bị.md
+BIT_SE_K19B,$[0].subjects[46].children[1],9,SE_GRA_ELE,PIT490,Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md
+BIT_SE_K19D_K20A,$[1].subjects[46].children[1],9,SE_GRA_ELE,PIT490,Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md
+BIT_SE_K20B,$[2].subjects[46].children[1],9,SE_GRA_ELE,PIT490,Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md
+BIT_SE_K21B,$[3].subjects[46].children[1],9,SE_GRA_ELE,PIT490,Mon hoc/PIT490 - Đồ án tốt nghiệp liên chuyên ngành Công nghệ thông tin.md
+BIT_SE_K19B,$[0].subjects[34].children[0],7,PMG201c,PMG201c,Mon hoc/PMG201c - Quản trị dự án.md
+BIT_SE_K19D_K20A,$[1].subjects[34].children[0],7,PMG201c,PMG201c,Mon hoc/PMG201c - Quản trị dự án.md
+BIT_SE_K20B,$[2].subjects[34].children[0],7,PMG201c,PMG201c,Mon hoc/PMG201c - Quản trị dự án.md
+BIT_SE_K21B,$[3].subjects[34].children[0],7,PMG201c,PMG201c,Mon hoc/PMG201c - Quản trị dự án.md
+BIT_SE_K19B,$[0].subjects[8].children[0],1,PRF192,PRF192,Mon hoc/PRF192 - Cơ sở lập trình.md
+BIT_SE_K19D_K20A,$[1].subjects[8].children[0],1,PRF192,PRF192,Mon hoc/PRF192 - Cơ sở lập trình.md
+BIT_SE_K20B,$[2].subjects[8].children[0],1,PRF192,PRF192,Mon hoc/PRF192 - Cơ sở lập trình.md
+BIT_SE_K21B,$[3].subjects[8].children[0],1,PRF192,PRF192,Mon hoc/PRF192 - Cơ sở lập trình.md
+BIT_SE_K19B,$[0].subjects[24].children[0],4,PRJ301,PRJ301,Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md
+BIT_SE_K19D_K20A,$[1].subjects[23].children[0],4,PRJ301,PRJ301,Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md
+BIT_SE_K20B,$[2].subjects[24].children[0],4,PRJ301,PRJ301,Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md
+BIT_SE_K21B,$[3].subjects[24].children[0],4,PRJ301,PRJ301,Mon hoc/PRJ301 - Phát triển ứng dụng Java web.md
+BIT_SE_K19B,$[0].subjects[42].children[0],8,PRM393,PRM393,Mon hoc/PRM393 - Lập trình di động.md
+BIT_SE_K19D_K20A,$[1].subjects[42].children[0],8,PRM393,PRM393,Mon hoc/PRM393 - Lập trình di động.md
+BIT_SE_K20B,$[2].subjects[42].children[0],8,PRM393,PRM393,Mon hoc/PRM393 - Lập trình di động.md
+BIT_SE_K21B,$[3].subjects[42].children[0],8,PRM393,PRM393,Mon hoc/PRM393 - Lập trình di động.md
+BIT_SE_K19B,$[0].subjects[26].children[9],5,SE_COM*1,PRN212,Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[9],5,SE_COM*1,PRN212,Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md
+BIT_SE_K20B,$[2].subjects[26].children[8],5,SE_COM*1,PRN212,Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md
+BIT_SE_K21B,$[3].subjects[26].children[8],5,SE_COM*1,PRN212,Mon hoc/PRN212 - Lập trình ứng dụng đa nền tảng cơ bản với .NET.md
+BIT_SE_K19B,$[0].subjects[35].children[14],7,SE_COM*2,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K19B,$[0].subjects[36].children[14],7,SE_COM*3,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[14],7,SE_COM*2,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[14],7,SE_COM*3,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K20B,$[2].subjects[35].children[14],7,SE_COM*2,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K20B,$[2].subjects[36].children[14],7,SE_COM*3,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K21B,$[3].subjects[35].children[14],7,SE_COM*2,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K21B,$[3].subjects[36].children[14],7,SE_COM*3,PRN222,Mon hoc/PRN222 - Lập trình ứng dụng đa nền tảng nâng cao với .NET.md
+BIT_SE_K19B,$[0].subjects[14].children[1],2,PRO192,PRO192,Mon hoc/PRO192 - Lập trình hướng đối tượng.md
+BIT_SE_K19D_K20A,$[1].subjects[14].children[1],2,PRO192,PRO192,Mon hoc/PRO192 - Lập trình hướng đối tượng.md
+BIT_SE_K20B,$[2].subjects[14].children[1],2,PRO192,PRO192,Mon hoc/PRO192 - Lập trình hướng đối tượng.md
+BIT_SE_K21B,$[3].subjects[14].children[1],2,PRO192,PRO192,Mon hoc/PRO192 - Lập trình hướng đối tượng.md
+BIT_SE_K19B,$[0].subjects[14].children[0],2,PRO192,PRO192c,Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md
+BIT_SE_K19D_K20A,$[1].subjects[14].children[0],2,PRO192,PRO192c,Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md
+BIT_SE_K20B,$[2].subjects[14].children[0],2,PRO192,PRO192c,Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md
+BIT_SE_K21B,$[3].subjects[14].children[0],2,PRO192,PRO192c,Mon hoc/PRO192c - Lập trình hướng đối tượng với Java.md
+BIT_SE_K19B,$[0].subjects[26].children[2],5,SE_COM*1,PRP201c,Mon hoc/PRP201c - Lập trình Python.md
+BIT_SE_K19D_K20A,$[1].subjects[26].children[2],5,SE_COM*1,PRP201c,Mon hoc/PRP201c - Lập trình Python.md
+BIT_SE_K20B,$[2].subjects[26].children[2],5,SE_COM*1,PRP201c,Mon hoc/PRP201c - Lập trình Python.md
+BIT_SE_K21B,$[3].subjects[26].children[2],5,SE_COM*1,PRP201c,Mon hoc/PRP201c - Lập trình Python.md
+BIT_SE_K19B,$[0].subjects[35].children[15],7,SE_COM*2,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K19B,$[0].subjects[36].children[15],7,SE_COM*3,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[15],7,SE_COM*2,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[15],7,SE_COM*3,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K20B,$[2].subjects[35].children[15],7,SE_COM*2,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K20B,$[2].subjects[36].children[15],7,SE_COM*3,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K21B,$[3].subjects[35].children[15],7,SE_COM*2,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K21B,$[3].subjects[36].children[15],7,SE_COM*3,PRU213,Mon hoc/PRU213 - Lập trình Game với C Sharp.md
+BIT_SE_K19B,$[0].subjects[35].children[9],7,SE_COM*2,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K19B,$[0].subjects[36].children[9],7,SE_COM*3,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K19D_K20A,$[1].subjects[35].children[9],7,SE_COM*2,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K19D_K20A,$[1].subjects[36].children[9],7,SE_COM*3,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K20B,$[2].subjects[35].children[9],7,SE_COM*2,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K20B,$[2].subjects[36].children[9],7,SE_COM*3,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K21B,$[3].subjects[35].children[9],7,SE_COM*2,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K21B,$[3].subjects[36].children[9],7,SE_COM*3,SBA301,Mon hoc/SBA301 - Tích hợp ứng dụng trang đơn với Spring Boot.md
+BIT_SE_K19B,$[0].subjects[35].children[6],7,SE_COM*2,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K19B,$[0].subjects[36].children[6],7,SE_COM*3,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K19D_K20A,$[1].subjects[35].children[6],7,SE_COM*2,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K19D_K20A,$[1].subjects[36].children[6],7,SE_COM*3,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K20B,$[2].subjects[35].children[6],7,SE_COM*2,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K20B,$[2].subjects[36].children[6],7,SE_COM*3,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K21B,$[3].subjects[35].children[6],7,SE_COM*2,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K21B,$[3].subjects[36].children[6],7,SE_COM*3,SDN302,"Mon hoc/SDN302 - Phát triển Server-Side với NodeJS, Express và MongoDB.md"
+BIT_SE_K19B,$[0].subjects[46].children[4],9,SE_GRA_ELE,SEP490,Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md
+BIT_SE_K19D_K20A,$[1].subjects[46].children[4],9,SE_GRA_ELE,SEP490,Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md
+BIT_SE_K20B,$[2].subjects[46].children[4],9,SE_GRA_ELE,SEP490,Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md
+BIT_SE_K21B,$[3].subjects[46].children[4],9,SE_GRA_ELE,SEP490,Mon hoc/SEP490 - Đồ án tốt nghiệp KTPM.md
+BIT_SE_K19B,$[0].subjects[46].children[3],9,SE_GRA_ELE,SET490,Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[46].children[3],9,SE_GRA_ELE,SET490,Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md
+BIT_SE_K20B,$[2].subjects[46].children[3],9,SE_GRA_ELE,SET490,Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md
+BIT_SE_K21B,$[3].subjects[46].children[3],9,SE_GRA_ELE,SET490,Mon hoc/SET490 - Khóa luận tốt nghiệp Kỹ thuật phần mềm.md
+BIT_SE_K21B,$[3].subjects[9].children[0],1,SSA101,SSA101,Mon hoc/SSA101 - Kỹ năng học thuật.md
+BIT_SE_K19B,$[0].subjects[15].children[0],2,SSG104,SSG104,Mon hoc/SSG104 - Kỹ năng giao tiếp và cộng tác.md
+BIT_SE_K19D_K20A,$[1].subjects[24].children[0],4,SSG104,SSG104,Mon hoc/SSG104 - Kỹ năng giao tiếp và cộng tác.md
+BIT_SE_K20B,$[2].subjects[27].children[0],5,SSG105,SSG105,Mon hoc/SSG105 - Kỹ năng giao tiếp và cộng tác.md
+BIT_SE_K21B,$[3].subjects[27].children[0],5,SSG105,SSG105,Mon hoc/SSG105 - Kỹ năng giao tiếp và cộng tác.md
+BIT_SE_K19B,$[0].subjects[9].children[0],1,SSL101c,SSL101c,Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md
+BIT_SE_K19D_K20A,$[1].subjects[9].children[0],1,SSL101c,SSL101c,Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md
+BIT_SE_K20B,$[2].subjects[9].children[0],1,SSL101c,SSL101c,Mon hoc/SSL101c - Kỹ năng học tập ở Đại học.md
+BIT_SE_K19B,$[0].subjects[37].children[0],7,SWD392,SWD392,Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[37].children[0],7,SWD392,SWD392,Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md
+BIT_SE_K20B,$[2].subjects[37].children[0],7,SWD392,SWD392,Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md
+BIT_SE_K21B,$[3].subjects[37].children[0],7,SWD392,SWD392,Mon hoc/SWD392 - Kiến trúc và thiết kế phần mềm.md
+BIT_SE_K19B,$[0].subjects[25].children[0],4,SWE201c,SWE201c,Mon hoc/SWE201c - Nhập môn kỹ thuật phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[25].children[0],4,SWE202c,SWE202c,Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md
+BIT_SE_K20B,$[2].subjects[20].children[0],3,SWE202c,SWE202c,Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md
+BIT_SE_K21B,$[3].subjects[20].children[0],3,SWE202c,SWE202c,Mon hoc/SWE202c - Nhập môn kỹ thuật phần mềm.md
+BIT_SE_K19B,$[0].subjects[27].children[0],5,SWP391,SWP391,Mon hoc/SWP391 - Dự án phát triển phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[27].children[0],5,SWP391,SWP391,Mon hoc/SWP391 - Dự án phát triển phần mềm.md
+BIT_SE_K20B,$[2].subjects[28].children[0],5,SWP391,SWP391,Mon hoc/SWP391 - Dự án phát triển phần mềm.md
+BIT_SE_K21B,$[3].subjects[28].children[0],5,SWP391,SWP391,Mon hoc/SWP391 - Dự án phát triển phần mềm.md
+BIT_SE_K19B,$[0].subjects[28].children[0],5,SWR302,SWR302,Mon hoc/SWR302 - Yêu cầu phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[28].children[0],5,SWR302,SWR302,Mon hoc/SWR302 - Yêu cầu phần mềm.md
+BIT_SE_K20B,$[2].subjects[25].children[0],4,SWR302,SWR302,Mon hoc/SWR302 - Yêu cầu phần mềm.md
+BIT_SE_K21B,$[3].subjects[25].children[0],4,SWR302,SWR302,Mon hoc/SWR302 - Yêu cầu phần mềm.md
+BIT_SE_K19B,$[0].subjects[29].children[0],5,SWT301,SWT301,Mon hoc/SWT301 - Kiểm thử phần mềm.md
+BIT_SE_K19D_K20A,$[1].subjects[29].children[0],5,SWT301,SWT301,Mon hoc/SWT301 - Kiểm thử phần mềm.md
+BIT_SE_K20B,$[2].subjects[29].children[0],5,SWT301,SWT301,Mon hoc/SWT301 - Kiểm thử phần mềm.md
+BIT_SE_K21B,$[3].subjects[29].children[0],5,SWT301,SWT301,Mon hoc/SWT301 - Kiểm thử phần mềm.md
+BIT_SE_K19B,$[0].subjects[3].children[1],0,TMI_ELE,TRG103,Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md
+BIT_SE_K19D_K20A,$[1].subjects[3].children[1],0,TMI_ELE,TRG103,Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md
+BIT_SE_K20B,$[2].subjects[3].children[1],0,TMI_ELE,TRG103,Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md
+BIT_SE_K21B,$[3].subjects[3].children[1],0,TMI_ELE,TRG103,Mon hoc/TRG103 - Nhạc cụ truyền thống -Trống dân tộc.md
+BIT_SE_K19B,$[0].subjects[47].children[0],9,VNR202,VNR202,Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md
+BIT_SE_K19D_K20A,$[1].subjects[47].children[0],9,VNR202,VNR202,Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md
+BIT_SE_K20B,$[2].subjects[47].children[0],9,VNR202,VNR202,Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md
+BIT_SE_K21B,$[3].subjects[47].children[0],9,VNR202,VNR202,Mon hoc/VNR202 - History of the Communist Party of Viet Nam - Lịch sử Đảng Cộng sản Việt Nam.md
+BIT_SE_K19B,$[0].subjects[2].children[0],0,PHE_COM*1,VOV114,Mon hoc/VOV114 - Vovinam 1.md
+BIT_SE_K19D_K20A,$[1].subjects[2].children[0],0,PHE_COM*1,VOV114,Mon hoc/VOV114 - Vovinam 1.md
+BIT_SE_K20B,$[2].subjects[2].children[0],0,PHE_COM*1,VOV114,Mon hoc/VOV114 - Vovinam 1.md
+BIT_SE_K21B,$[3].subjects[2].children[0],0,PHE_COM*1,VOV114,Mon hoc/VOV114 - Vovinam 1.md
+BIT_SE_K19B,$[0].subjects[7].children[0],1,PHE_COM*2,VOV124,Mon hoc/VOV124 - Vovinam 2.md
+BIT_SE_K19D_K20A,$[1].subjects[7].children[0],1,PHE_COM*2,VOV124,Mon hoc/VOV124 - Vovinam 2.md
+BIT_SE_K20B,$[2].subjects[7].children[0],1,PHE_COM*2,VOV124,Mon hoc/VOV124 - Vovinam 2.md
+BIT_SE_K21B,$[3].subjects[7].children[0],1,PHE_COM*2,VOV124,Mon hoc/VOV124 - Vovinam 2.md
+BIT_SE_K19B,$[0].subjects[13].children[0],2,PHE_COM*3,VOV134,Mon hoc/VOV134 - Vovinam 3.md
+BIT_SE_K19D_K20A,$[1].subjects[13].children[0],2,PHE_COM*3,VOV134,Mon hoc/VOV134 - Vovinam 3.md
+BIT_SE_K20B,$[2].subjects[13].children[0],2,PHE_COM*3,VOV134,Mon hoc/VOV134 - Vovinam 3.md
+BIT_SE_K21B,$[3].subjects[13].children[0],2,PHE_COM*3,VOV134,Mon hoc/VOV134 - Vovinam 3.md
+BIT_SE_K19B,$[0].subjects[30].children[0],5,WDU203c,WDU203c,Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md
+BIT_SE_K19D_K20A,$[1].subjects[30].children[0],5,WDU203c,WDU203c,Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md
+BIT_SE_K20B,$[2].subjects[30].children[0],5,WDU203c,WDU203c,Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md
+BIT_SE_K21B,$[3].subjects[30].children[0],5,WDU203c,WDU203c,Mon hoc/WDU203c - Thiết kế trải nghiệm người dùng.md
+BIT_SE_K19B,$[0].subjects[20].children[0],3,WED201c,WED201c,Mon hoc/WED201c - Thiết kế web.md
+BIT_SE_K19D_K20A,$[1].subjects[15].children[0],2,WED201c,WED201c,Mon hoc/WED201c - Thiết kế web.md
+BIT_SE_K20B,$[2].subjects[15].children[0],2,WED201c,WED201c,Mon hoc/WED201c - Thiết kế web.md
+BIT_SE_K21B,$[3].subjects[15].children[0],2,WED201c,WED201c,Mon hoc/WED201c - Thiết kế web.md
